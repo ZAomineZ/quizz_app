@@ -1,0 +1,14 @@
+.form__with_label {
+  label {
+    display: inline-block !important;
+    padding: 0;
+    vertical-align: middle;
+    margin: 0;
+    width: 100%;
+    line-height: 1;
+  }
+
+  &.form__right_icon label {
+    width: calc(100% - 36px) !important;
+  }
+}
