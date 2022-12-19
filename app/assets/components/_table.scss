@@ -1,0 +1,20 @@
+.table {
+  width: 100%;
+  color: var(--color-dark);
+  margin-bottom: 1rem;
+
+  th, td {
+    padding: .75rem;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+  }
+
+  &.table__borderless th,
+  &.table__borderless td {
+    border: 0;
+  }
+}
+
+.table__capitalize {
+  text-transform: capitalize !important;
+}

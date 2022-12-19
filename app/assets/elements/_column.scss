@@ -37,6 +37,12 @@
   max-height: 100%;
 }
 
+.col_sticky_top {
+  position: sticky !important;
+  top: calc(70px + 2rem);
+  z-index: 1;
+}
+
 @media (min-width: 576px) {
   .col_sm_6 {
     flex: 0 0 50%;
@@ -49,6 +55,11 @@
     flex: 0 0 33.333333%;
     max-width: 33.333333%;
   }
+
+  .col_md_8 {
+    flex: 0 0 66.666667%;
+    max-width: 66.666667%;
+  }
 }
 
 @media (min-width: 1200px) {
@@ -60,5 +71,10 @@
   .col_xl_6 {
     flex: 0 0 50%;
     max-width: 50%;
+  }
+
+  .col_xl_9 {
+    flex: 0 0 75%;
+    max-width: 75%;
   }
 }
