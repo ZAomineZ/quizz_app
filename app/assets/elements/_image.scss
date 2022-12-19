@@ -1,0 +1,25 @@
+.img__wrap {
+  position: relative;
+  transition: .3s;
+
+  img {
+    display: block;
+    object-fit: cover;
+    width: 100%;
+    transition: .3s ease-in-out;
+  }
+}
+
+.img__fluid {
+  max-width: 100%;
+  height: auto;
+}
+
+.shadow__sm {
+  box-shadow: 0 .125rem .25rem rgba(0,0,0,.075) !important;
+}
+
+.img__fluid,
+.img__res {
+  border-radius: .5rem !important;
+}

@@ -15,6 +15,35 @@
   max-width: 41.666667%;
 }
 
+.col_6 {
+  flex: 0 0 50%;
+  max-width: 50%;
+}
+
+.col_12 {
+  flex: 0 0 100%;
+  max-width: 100%;
+}
+
+.col_auto {
+  flex: 0 0 auto;
+  width: auto;
+  max-width: 100%;
+}
+
+.col {
+  flex-basis: 0;
+  flex-grow: 1;
+  max-height: 100%;
+}
+
+@media (min-width: 768px) {
+  .col_md_4 {
+    flex: 0 0 33.333333%;
+    max-width: 33.333333%;
+  }
+}
+
 @media (min-width: 1200px) {
   .col_xl_3 {
     flex: 0 0 25%;

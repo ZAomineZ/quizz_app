@@ -1,0 +1,15 @@
+.navigation_sticky_top {
+  position: sticky !important;
+  top: calc(70px + 1rem);
+  z-index: 1;
+}
+
+.scrollbar_sidenav {
+  height: calc(100vh - 4rem);
+}
+
+.page__content {
+  width: 100%;
+  padding: 1rem;
+  min-height: calc(100vh - 70px);
+}

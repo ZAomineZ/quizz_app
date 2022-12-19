@@ -10,13 +10,26 @@
         <div class="col_5 col_xl_6">
           <SearchNavbar/>
         </div>
+        <div class="col_5 col_xl_3 my_auto">
+          <div class="row d_flex align_items_center justify_content_end pr_3">
+            <div class="col_auto px_1">
+              <ButtonSwitch/>
+            </div>
+            <div class="col_auto px_1">
+              <DropdownToggle/>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+    <div class="line bottom__grid"></div>
   </nav>
 </template>
 
 <script lang="ts" setup>
 import SearchNavbar from "~/layouts/SearchNavbar.vue";
+import ButtonSwitch from "~/components/Button/ButtonSwitch.vue";
+import DropdownToggle from "~/components/Dropdown/DropdownToggle.vue";
 </script>
 
 <style lang="scss" scoped>
