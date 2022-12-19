@@ -46,6 +46,10 @@
   width: 100%;
   margin: 0 auto;
 
+  &.form__container_submit_quiz {
+    max-width: 880px !important;
+  }
+
   form {
     margin: 0;
     padding: 0;

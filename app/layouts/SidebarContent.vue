@@ -4,7 +4,7 @@
       <div class="simplebar__wrapper">
         <div class="simplebar__mask">
           <div class="simplebar__offset">
-            <div class="simplebar__content_wrapper" style="height: 100%; overflow: hidden scroll">
+            <div class="simplebar__content_wrapper" style="height: 100%">
               <div class="simplebar__content">
                 <div class="sidebar_nav_container">
                   <div class="mb_4">

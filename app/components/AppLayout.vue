@@ -14,7 +14,7 @@
   <main class="pt_fixed">
     <div class="container__general">
       <div class="wrapper">
-        <SidebarContent />
+        <SidebarContent v-if="route.name !== 'login' && route.name !== 'register'"/>
         <slot />
       </div>
     </div>
@@ -27,6 +27,9 @@ import Navbar from "../layouts/Navbar";
 import SidebarContent from "~/layouts/SidebarContent";
 import Footer from "~/layouts/Footer";
 import "assets/index.scss";
+import { useRoute } from "nuxt/app";
+
+const route = useRoute()
 </script>
 
 <style scoped>
