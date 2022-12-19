@@ -15,11 +15,4 @@
   });
 </script>
 
-<style scoped>
-  .btn__custom {
-    color: #ffffff !important;
-    background-color: var(--color-red) !important;
-    border-color: var(--color-red) !important;
-    border-radius: 0.5rem !important;
-  }
-</style>
+<style scoped></style>

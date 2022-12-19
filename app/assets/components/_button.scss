@@ -14,6 +14,13 @@
   transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 }
 
+.btn__custom {
+  color: #ffffff !important;
+  background-color: var(--color-red) !important;
+  border-color: var(--color-red) !important;
+  border-radius: 0.5rem !important;
+}
+
 .btn_secondary {
   color: #ffffff;
   background-color: var(--color-secondary);
