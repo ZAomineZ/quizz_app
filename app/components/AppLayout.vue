@@ -13,12 +13,14 @@
         <slot/>
       </div>
     </div>
+    <Footer/>
   </main>
 </template>
 
 <script setup>
 import Navbar from "../layouts/Navbar";
 import SidebarContent from "~/layouts/SidebarContent";
+import Footer from "~/layouts/Footer";
 import 'assets/index.scss'
 </script>
 

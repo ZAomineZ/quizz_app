@@ -42,6 +42,11 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
   display: block;
 }
 
+footer {
+  background-color: #ffffff;
+  color: var(--color-dark);
+}
+
 button, input, optgroup, select, textarea {
   margin: 0;
   font-family: inherit;
@@ -92,6 +97,11 @@ ol, ul {
 h1, h2, h3, h4, h5, h6 {
   margin-top: 0;
   margin-bottom: 0.5rem;
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 1rem;
 }
 
 .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
@@ -229,6 +239,16 @@ h1, h2, h3, h4, h5, h6 {
 .pt_2,
 .py_2 {
   padding-top: 0.5rem !important;
+}
+
+.pb_3,
+.py_3 {
+  padding-bottom: 1rem !important;
+}
+
+.pt_3,
+.py_3 {
+  padding-top: 1rem !important;
 }
 
 .pr_1,

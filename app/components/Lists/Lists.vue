@@ -1,14 +1,19 @@
 <template>
   <ul class="lists my_4">
-    <li>
-      <div class="mb_3">
-
-      </div>
-    </li>
+    <ListItem/>
+    <ListItem/>
+    <ListItem/>
+    <ListItem/>
+    <ListItem/>
+    <ListItem/>
+    <ListItem/>
+    <ListItem/>
+    <ListItem/>
   </ul>
 </template>
 
 <script setup lang="ts">
+import ListItem from "~/components/Lists/ListItem.vue";
 </script>
 
 <style scoped>
