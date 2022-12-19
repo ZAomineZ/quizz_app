@@ -3,9 +3,9 @@
     <div class="navbar__position navbar__container container__fluid position__relative">
       <div class="row w_100 d_flex align_items_center mx_0">
         <div class="col_2 col_xl_3">
-          <a href="#" class="navbar__logo_left">
+          <NuxtLink to="/" class="navbar__logo_left">
             <img class="logo logo__loaded" src="https://demo.ramsthemes.com/projects/animace/wp-content/uploads/2021/11/a-logo-red.svg" alt="">
-          </a>
+          </NuxtLink>
         </div>
         <div class="col_5 col_xl_6">
           <SearchNavbar/>

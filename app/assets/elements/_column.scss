@@ -56,13 +56,30 @@
     max-width: 33.333333%;
   }
 
+  .col_md_6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+
   .col_md_8 {
     flex: 0 0 66.666667%;
     max-width: 66.666667%;
   }
 }
 
+@media (min-width: 992px) {
+  .col_lg_3 {
+    flex: 0 0 25%;
+    max-width: 25%;
+  }
+}
+
 @media (min-width: 1200px) {
+  .col_xl_2 {
+    flex: 0 0 16.666667%;
+    max-width: 16.666667%;
+  }
+
   .col_xl_3 {
     flex: 0 0 25%;
     max-width: 25%;

@@ -62,6 +62,11 @@ button, select {
   text-transform: none;
 }
 
+select {
+  word-wrap: normal;
+  border-radius: .5rem !important;
+}
+
 input {
   outline: none;
 }
@@ -217,9 +222,14 @@ th {
   margin-right: 0.5rem !important;
 }
 
+.mr_3,
+.mx_3 {
+  margin-right: 1rem !important;
+}
+
 .mb_2,
 .my_2 {
-  margin-right: 0.5rem !important;
+  margin-bottom: 0.5rem !important;
 }
 
 .ml_0,

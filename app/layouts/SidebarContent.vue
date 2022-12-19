@@ -11,22 +11,13 @@
                     <div>
                       <ul class="sidenav__menu">
                         <li class="sidenav__menu_item">
-                          <a href="#">All news</a>
+                          <NuxtLink to="/">Accueil</NuxtLink>
                         </li>
                         <li class="sidenav__menu_item">
-                          <a href="#">All news</a>
+                          <NuxtLink to="/quiz/search">Tout les quiz</NuxtLink>
                         </li>
                         <li class="sidenav__menu_item">
-                          <a href="#">All news</a>
-                        </li>
-                        <li class="sidenav__menu_item">
-                          <a href="#">All news</a>
-                        </li>
-                        <li class="sidenav__menu_item">
-                          <a href="#">All news</a>
-                        </li>
-                        <li class="sidenav__menu_item">
-                          <a href="#">All news</a>
+                          <NuxtLink href="/categories">Categories</NuxtLink>
                         </li>
                       </ul>
                     </div>

@@ -52,19 +52,6 @@
           </div>
         </div>
       </div>
-<!--      <div class="col">-->
-<!--        <div class="col_12 py-2">-->
-<!--          <div class="my_3">-->
-<!--            <div class="row">-->
-<!--              <div class="col_12">-->
-<!--                <div class="my_3 text_center">-->
-<!--                  <Pagination/>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
     </div>
   </AppLayout>
 </template>
