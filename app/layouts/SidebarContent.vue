@@ -19,6 +19,9 @@
                         <li class="sidenav__menu_item">
                           <NuxtLink href="/categories">Categories</NuxtLink>
                         </li>
+                        <li class="sidenav__menu_item">
+                          <NuxtLink href="/ranking">Classement</NuxtLink>
+                        </li>
                       </ul>
                     </div>
                   </div>

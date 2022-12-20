@@ -1,0 +1,100 @@
+@import "variables";
+
+body {
+  background-color: rgba(234, 243, 241, 0.278);
+  color: var(--color-body-gray);
+  font-size: 0.81568rem;
+  font-weight: 400;
+  font-family: Poppins, sans-serif;
+  line-height: 1.5;
+  margin: 0;
+  text-align: left;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-bottom: 0.5rem;
+  margin-top: 0;
+}
+
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 500;
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+}
+
+.h2,
+h2 {
+  font-size: 1.75rem;
+}
+
+.h6,
+h6 {
+  font-size: 0.875rem;
+}
+
+label {
+  display: inline-block;
+  margin-bottom: 0.5rem;
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  margin: 0;
+}
+
+button,
+input {
+  overflow: visible;
+}
+
+button,
+select {
+  text-transform: none;
+}
+
+[type="button"],
+[type="reset"],
+[type="submit"],
+button {
+  -webkit-appearance: button;
+}
+
+.btn:not(:disabled):not(.disabled) {
+  cursor: pointer;
+}
+
+@media (min-width: 1200px) {
+  .h2,
+  h2 {
+    font-size: 2rem;
+  }
+}
+
+@import "elements/colors";
+@import "elements/content";
+@import "elements/column";
+@import "components/card";
+@import "components/form";
+@import "components/button";

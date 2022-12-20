@@ -1,0 +1,27 @@
+.btn {
+  display: inline-block;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  background-color: transparent;
+  color: var(--color-body-gray);
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.5;
+  padding: 0.5rem 0.78rem;
+  text-align: center;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  user-select: none;
+  vertical-align: middle;
+}
+
+.btn_primary {
+  background-color: var(--primary-bg-color);
+  border-color: var(--primary-bg-color);
+  color: #ffffff;
+}
+
+.btn_block {
+  display: block;
+  width: 100%;
+}
