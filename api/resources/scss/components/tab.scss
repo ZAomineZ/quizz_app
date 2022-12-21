@@ -1,0 +1,55 @@
+.tab_menu_heading {
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  padding: 0;
+
+  ul {
+    font-size: 15px !important;
+    font-weight: 400 !important;
+    padding: 0;
+  }
+}
+
+.nav_tabs {
+  .nav_item {
+    margin-bottom: -1px;
+  }
+
+  .nav_link.active {
+    color: #323251;
+    font-weight: 500;
+    letter-spacing: -0.1px;
+  }
+
+  li.nav_item button {
+    display: block;
+    background: #ffffff;
+    border: 1px solid #ededf5;
+    margin: 0 3px 3px 0;
+    padding: 10px 20px;
+    text-align: center;
+    border-radius: 5px;
+    color: #4a4a69;
+  }
+
+  li.nav_item button.active {
+    background: var(--primary-bg-color) !important;
+    color: #ffffff !important;
+  }
+}
+
+.tab_content {
+  overflow: hidden;
+}
+
+.tab_body {
+  margin-top: 20px;
+}
+
+.tab_content > .tab_pane {
+  display: none;
+}
+
+.tab_content > .active {
+  display: block;
+}

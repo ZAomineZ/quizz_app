@@ -107,6 +107,11 @@
 }
 
 @media (min-width: 768px) {
+  .col_md_4 {
+    flex: 0 0 33.33333%;
+    max-width: 33.33333%;
+  }
+
   .col_md_6 {
     flex: 0 0 50%;
     max-width: 50%;

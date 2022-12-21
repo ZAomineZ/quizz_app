@@ -97,6 +97,16 @@
   margin-bottom: 0.5rem;
 }
 
+.mb_3,
+.my_3 {
+  margin-bottom: 1rem !important;
+}
+
+.mt_3,
+.my_3 {
+  margin-top: 1rem !important;
+}
+
 .mb_4,
 .my_4 {
   margin-bottom: 1.5rem !important;
@@ -190,6 +200,10 @@
   display: block !important;
 }
 
+.p_relative {
+  position: relative !important;
+}
+
 .border_end {
   border-right: 1px solid #ededf5 !important;
 }
@@ -220,6 +234,10 @@
 
 .tx_18 {
   font-size: 18px !important;
+}
+
+.fade {
+  transition: opacity 0.15s linear;
 }
 
 .main_body {

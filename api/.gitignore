@@ -5,6 +5,6 @@ coverage
 .DS_STORE
 .env
 tmp
-.idea
+/.idea
 public/assets
 .env.test

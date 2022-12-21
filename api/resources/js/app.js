@@ -1,1 +1,1 @@
-// app entrypoint
+import tab from "./components/tab.js";

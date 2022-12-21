@@ -65,32 +65,35 @@
                         <ul class="side_menu">
                             <li class="side_item side_item_category">Main</li>
                             <li class="slide">
-                                <a href="#" class="side_menu__item is_expanded active">
+                                <a href="{{ route('dashboard') }}" class="side_menu__item is_expanded active">
                                     @include('../icons/home-icon.edge')
                                     <span class="side_menu__label">Dashboard</span>
-                                    <i class="fa fa-light fa-chevron-right angle"></i>
                                 </a>
                             </li>
-                            <li class="side_item side_item_category">Main</li>
+                            <li class="side_item side_item_category">Quiz</li>
                             <li class="slide">
-                                <a href="#" class="side_menu__item is_expanded">
-                                    @include('../icons/home-icon.edge')
-                                    <span class="side_menu__label">Dashboard</span>
-                                    <i class="fa fa-light fa-chevron-right angle"></i>
-                                </a>
-                            </li>
-                            <li class="slide">
-                                <a href="#" class="side_menu__item is_expanded">
-                                    @include('../icons/home-icon.edge')
-                                    <span class="side_menu__label">Dashboard</span>
-                                    <i class="fa fa-light fa-chevron-right angle"></i>
+                                <a href="{{ route('quiz.index') }}" class="side_menu__item is_expanded">
+                                    @include('../icons/list-icon.edge')
+                                    <span class="side_menu__label">Listing</span>
                                 </a>
                             </li>
                             <li class="slide">
-                                <a href="#" class="side_menu__item is_expanded">
-                                    @include('../icons/home-icon.edge')
-                                    <span class="side_menu__label">Dashboard</span>
-                                    <i class="fa fa-light fa-chevron-right angle"></i>
+                                <a href="{{ route('quiz.create') }}" class="side_menu__item is_expanded">
+                                    @include('../icons/pencil-solid-icon.edge')
+                                    <span class="side_menu__label">Create</span>
+                                </a>
+                            </li>
+                            <li class="side_item side_item_category">Category</li>
+                            <li class="slide">
+                                <a href="{{ route('category.index') }}" class="side_menu__item is_expanded">
+                                    @include('../icons/list-icon.edge')
+                                    <span class="side_menu__label">Listing</span>
+                                </a>
+                            </li>
+                            <li class="slide">
+                                <a href="{{ route('category.create') }}" class="side_menu__item is_expanded">
+                                    @include('../icons/pencil-solid-icon.edge')
+                                    <span class="side_menu__label">Create</span>
                                 </a>
                             </li>
                         </ul>
@@ -107,5 +110,6 @@
             </div>
         </div>
     </div>
+    @!section('scripts')
 </body>
 </html>
