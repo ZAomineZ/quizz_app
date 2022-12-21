@@ -1,0 +1,19 @@
+.circle_icon {
+  position: absolute;
+  height: 40px;
+  width: 40px;
+  right: 40px;
+  top: 40px;
+  border-radius: 4px;
+}
+
+#stats .circle_icon {
+  position: static;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+}
+
+#stats .circle_icon i {
+  line-height: 2.2 !important;
+}

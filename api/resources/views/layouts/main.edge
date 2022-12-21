@@ -1,1 +1,111 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Quiz - Admin Dashboard</title>
+     <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- SCRIPTS -->
+    @entryPointScripts('app')
+    <!-- LINKS -->
+    @entryPointStyles('app_css')
+</head>
+<body class="main_body sidebar_mini">
+    <div class="page no_center">
+        <div id="header">
+            <nav class="main_header side_header nav navbar navbar_expand">
+                <div class="main_container container_fluid">
+                    <div class="main_header_left">
+                        <div class="sidebar__toggle">
+                            <a href="#">
+                                <i class="header_icon fa fa-align-left"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="main_header_right">
+                        <div class="mb_0 p_0 navbar_expand_lg navbar navbar_responsive">
+                            <div class="collapse navbar_collapse">
+                                <ul class="nav nav_with_icons">
+                                    <li class="dropdown nav_item">
+                                        <a href="#" class="nav_link">
+                                            <div class="dark_layout">
+                                                @include('../icons/moon-icon')
+                                            </div>
+                                            <div class="light_layout"></div>
+                                        </a>
+                                    </li>
+                                    <div class="dropdown nav_item d_flex">
+                                        <button type="button" class="nav_link btn">
+                                            @include('../icons/bell-icon.edge')
+                                            <span class="pulse"></span>
+                                        </button>
+                                    </div>
+                                    <div class="main_profile_menu nav nav_item ps_lg_2 dropdown">
+                                        <button type="button" class="nav_link d_flex profile_user btn">
+                                            <img src="https://react.spruko.com/nowa-ts/preview/static/media/2.3aeb713efd50cdbaf860.jpg" alt="">
+                                        </button>
+                                    </div>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <div class="sticky">
+                <aside class="sidebar">
+                    <div class="main_sidebar_header active">
+                        <a href="#" class="header_logo active"></a>
+                    </div>
+                    <div class="main_sidebar_menu">
+                        <ul class="side_menu">
+                            <li class="side_item side_item_category">Main</li>
+                            <li class="slide">
+                                <a href="#" class="side_menu__item is_expanded active">
+                                    @include('../icons/home-icon.edge')
+                                    <span class="side_menu__label">Dashboard</span>
+                                    <i class="fa fa-light fa-chevron-right angle"></i>
+                                </a>
+                            </li>
+                            <li class="side_item side_item_category">Main</li>
+                            <li class="slide">
+                                <a href="#" class="side_menu__item is_expanded">
+                                    @include('../icons/home-icon.edge')
+                                    <span class="side_menu__label">Dashboard</span>
+                                    <i class="fa fa-light fa-chevron-right angle"></i>
+                                </a>
+                            </li>
+                            <li class="slide">
+                                <a href="#" class="side_menu__item is_expanded">
+                                    @include('../icons/home-icon.edge')
+                                    <span class="side_menu__label">Dashboard</span>
+                                    <i class="fa fa-light fa-chevron-right angle"></i>
+                                </a>
+                            </li>
+                            <li class="slide">
+                                <a href="#" class="side_menu__item is_expanded">
+                                    @include('../icons/home-icon.edge')
+                                    <span class="side_menu__label">Dashboard</span>
+                                    <i class="fa fa-light fa-chevron-right angle"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </aside>
+            </div>
+        </div>
+        @!section('body')
+        <div class="main_footer">
+            <div class="text_center col_md_12 col_sm_12">
+                <div class="container_fluid pt_0 h_100">
+                    Copyright © 2022
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

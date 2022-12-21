@@ -1,0 +1,18 @@
+.badge {
+  display: inline-block;
+  font-size: 75%;
+  font-weight: 400;
+  border-radius: 3px;
+  line-height: 1.1;
+  padding: 4px 6px;
+  text-align: center;
+  vertical-align: initial;
+  white-space: nowrap;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.badge__success_transparent {
+  background-color: rgba(36, 213, 184, 0.15) !important;
+  color: #24d5b8;
+}

@@ -1,5 +1,11 @@
 @import "variables";
 
+*,
+:after,
+:before {
+  box-sizing: border-box;
+}
+
 body {
   background-color: rgba(234, 243, 241, 0.278);
   color: var(--color-body-gray);
@@ -85,6 +91,63 @@ button {
   cursor: pointer;
 }
 
+a {
+  background-color: transparent;
+}
+
+a,
+a:hover {
+  color: #4a4a69;
+  text-decoration: none;
+}
+
+img {
+  border-style: none;
+  max-width: 100%;
+}
+
+img,
+svg {
+  vertical-align: middle;
+}
+
+ol,
+ul {
+  padding-left: 2rem;
+}
+
+address,
+dl,
+ol,
+ul {
+  margin-bottom: 1rem;
+}
+
+dl,
+ol,
+ul {
+  margin-top: 0;
+}
+
+table {
+  border-collapse: collapse;
+  caption-side: bottom;
+}
+
+tbody,
+td,
+tfoot,
+th,
+thead,
+tr {
+  border: 0 #ededf5;
+}
+
+b,
+strong {
+  font-weight: bolder;
+}
+
 @media (min-width: 1200px) {
   .h2,
   h2 {
@@ -95,6 +158,12 @@ button {
 @import "elements/colors";
 @import "elements/content";
 @import "elements/column";
+@import "elements/header";
+@import "elements/footer";
 @import "components/card";
 @import "components/form";
+@import "components/table";
 @import "components/button";
+@import "components/badge";
+@import "components/dropdown";
+@import "components/icon";

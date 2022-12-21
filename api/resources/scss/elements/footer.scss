@@ -1,0 +1,22 @@
+.main_footer {
+  background-color: #ffffff;
+  border-top: 1px solid #ededf5;
+  margin-top: auto;
+}
+
+.main_footer .container,
+.main_footer .container_fluid {
+  font-size: 14px;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  padding: 38px 20px 0;
+  text-align: center;
+}
+
+@media (min-width: 992px) {
+  .main_footer {
+    display: block;
+    padding: 0.9rem 1rem 0.9rem 250px !important;
+  }
+}

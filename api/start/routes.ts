@@ -18,6 +18,8 @@
 |
 */
 
-import Route from '@ioc:Adonis/Core/Route'
+import Route from "@ioc:Adonis/Core/Route";
 
-Route.get('/', 'AuthController.logInView')
+Route.get("/", "AuthController.logInView");
+
+Route.get("/dashboard", "DashboardController.index");
