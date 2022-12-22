@@ -8,6 +8,8 @@ export default class DashboardController {
     const quizzes = await Quiz.query().orderBy("created_at").limit(10);
     const categories = await Category.query().orderBy("created_at").limit(10);
 
+    // Count stats
+
     return view.render("dashboard/index", { quizzes, categories });
   }
 }

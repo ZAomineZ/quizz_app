@@ -108,49 +108,35 @@
                         <div class="col_12 col_sm_12">
                             <div class="card">
                                 <div class="card_header">
-                                    <h4 class="card_title">Quiz</h4>
+                                    <h4 class="card_title">Quizzes</h4>
                                 </div>
                                 <div class="card_body pt_0">
                                     <div class="table_responsive">
-                                        <div class="d_flex">
-                                            <select class="mb_4 mr_1 border">
-                                                <option value="10">Show 10</option>
-                                                <option value="25">Show 25</option>
-                                                <option value="50">Show 50</option>
-                                            </select>
-                                            <span class="d_flex ml_auto">
-                                                <input type="text" placeholder="Search..." class="form_control mb_4">
-                                            </span>
-                                        </div>
                                         <table role="table" class="table table_bordered text_nowrap mb_0">
                                             <thead>
                                                 <tr role="row">
                                                     <th colspan="1" role="columnheader" class="text_center">
-                                                        <span>Purchase Date</span>
+                                                        <span>Quiz ID</span>
                                                         <span></span>
                                                     </th>
                                                     <th colspan="1" role="columnheader" class="text_center">
-                                                        <span>Client Name</span>
+                                                        <span>Quiz Title</span>
                                                         <span></span>
                                                     </th>
                                                     <th colspan="1" role="columnheader" class="text_center">
-                                                        <span>Product ID</span>
+                                                        <span>Quiz Slug</span>
                                                         <span></span>
                                                     </th>
                                                     <th colspan="1" role="columnheader" class="text_center">
-                                                        <span>Product</span>
+                                                        <span>Quiz Description</span>
                                                         <span></span>
                                                     </th>
                                                     <th colspan="1" role="columnheader" class="text_center">
-                                                        <span>Product Cost</span>
+                                                        <span>Quiz Difficulty</span>
                                                         <span></span>
                                                     </th>
                                                     <th colspan="1" role="columnheader" class="text_center">
-                                                        <span>Payment Mode</span>
-                                                        <span></span>
-                                                    </th>
-                                                    <th colspan="1" role="columnheader" class="text_center">
-                                                        <span>Status</span>
+                                                        <span>Quiz Category</span>
                                                         <span></span>
                                                     </th>
                                                     <th colspan="1" role="columnheader" class="text_center">
@@ -187,16 +173,67 @@
                                                 </tr>
                                             </tbody>
                                         </table>
-                                        <div class="d_block d_sm_flex mt_4">
-                                            <span>
-                                                Page
-                                                <strong>1 of 1</strong>
-                                            </span>
-                                            <span class="ml_sm_auto">
-                                                <button type="button" disabled class="btn btn_default mr_2 table_button d_sm_inline d_block my_1">Previous</button>
-                                                <button type="button" disabled class="btn btn_default mr_2 table_button d_sm_inline d_block my_1">Next</button>
-                                            </span>
-                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col_12 col_sm_12">
+                            <div class="card">
+                                <div class="card_header">
+                                    <h4 class="card_title">Categories</h4>
+                                </div>
+                                <div class="card_body pt_0">
+                                    <div class="table_responsive">
+                                        <table role="table" class="table table_bordered text_nowrap mb_0">
+                                            <thead>
+                                                <tr role="row">
+                                                    <th colspan="1" role="columnheader" class="text_center">
+                                                        <span>Category ID</span>
+                                                        <span></span>
+                                                    </th>
+                                                    <th colspan="1" role="columnheader" class="text_center">
+                                                        <span>Category Name</span>
+                                                        <span></span>
+                                                    </th>
+                                                    <th colspan="1" role="columnheader" class="text_center">
+                                                        <span>Category Slug</span>
+                                                        <span></span>
+                                                    </th>
+                                                    <th colspan="1" role="columnheader" class="text_center">
+                                                        <span>Category Description</span>
+                                                        <span></span>
+                                                    </th>
+                                                    <th colspan="1" role="columnheader" class="text_center">
+                                                        <span>Action</span>
+                                                        <span></span>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody role="rowgroup">
+                                                @each(category in categories)
+                                                    <tr class="text_center" role="row">
+                                                        <td role="cell">#{{ category.id }}</td>
+                                                        <td role="cell">{{ category.name }}</td>
+                                                        <td role="cell">{{ category.slug }}</td>
+                                                        <td role="cell">{{ category.description }}</td>
+                                                        <td role="cell">
+                                                            <span>
+                                                                <a href="{{ route('category.edit', {id: category.id}) }}" class="btn btn_primary btn_sm mr_2">
+                                                                    <i>
+                                                                        @include('../icons/pencil-icon.edge')
+                                                                    </i>
+                                                                </a>
+                                                                <a href="#" class="btn btn_danger btn_sm">
+                                                                    <i>
+                                                                        @include('../icons/trash-icon')
+                                                                    </i>
+                                                                </a>
+                                                            </span>
+                                                        </td>
+                                                </tr>
+                                                @end
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
