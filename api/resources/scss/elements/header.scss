@@ -308,6 +308,26 @@
     padding-right: 0;
   }
 
+  .main_img_user {
+    display: inline-block;
+    position: relative;
+    height: 36px;
+    width: 36px;
+    text-align: center;
+    border-radius: 100%;
+
+    img {
+      border-radius: 100%;
+      object-fit: cover;
+      height: 100% !important;
+      width: 100% !important;
+    }
+  }
+
+  .menu_header_content {
+    padding: 1.2rem;
+  }
+
   .navbar_expand_lg {
     justify-content: flex-start;
   }

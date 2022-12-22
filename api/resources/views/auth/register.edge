@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quizz - Admin</title>
+  <!-- FONTS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <!-- SCRIPTS -->
+  @entryPointScripts('app')
+  <!-- LINKS -->
+  @entryPointStyles('app_css')
+</head>
+<body class=bg_primary>
+  <div class="page">
+    <div class="page__single">
+      <div class="container">
+        <div class="row">
+          <div class="mx_auto my_auto py_4 justify_content_center col_xl_5 col_lg_6 col_md_8 col_sm_8 col_10">
+            <div class="card__login">
+              <div>
+                <div class="main_card_login">
+                  <div class="w_100">
+                    <div>
+                      <div class="main_login_header">
+                        <h2>Welcome back !</h2>
+                        <h6 class="mb_4 font_semibold">Please sign in to continue.</h6>
+                        <div class="mb_2">
+                          <form action="{{ route('register') }}" class="was_validated needs__validation" method="POST">
+                            <div class="form_group">
+                              <label for="#" class="form_label">Username</label>
+                              <input type="text" name="username" required placeholder="Enter your username" class="form_control {{ flashMessages.has('errors.username') ? 'is_invalid' : '' }}" value="{{ flashMessages.get('username') ?? '' }}">
+                              @if (flashMessages.has('errors.username'))
+                                  <div class="invalid_feedback">{{ flashMessages.get('errors.username') }}</div>
+                              @endif
+                            </div>
+                            <div class="form_group">
+                              <label for="#" class="form_label">Email</label>
+                              <input type="email" name="email" required placeholder="Enter your email" class="form_control {{ flashMessages.has('errors.email') ? 'is_invalid' : '' }}" value="{{ flashMessages.get('email') ?? '' }}">
+                              @if (flashMessages.has('errors.email'))
+                                <div class="invalid_feedback">{{ flashMessages.get('errors.email') }}</div>
+                              @endif
+                            </div>
+                            <div class="form_group">
+                              <label for="#" class="form_label">First Name</label>
+                              <input type="text" name="first_name" required placeholder="Enter your first name" class="form_control {{ flashMessages.has('errors.first_name') ? 'is_invalid' : '' }}" value="{{ flashMessages.get('first_name') ?? '' }}">
+                              @if (flashMessages.has('errors.first_name'))
+                                <div class="invalid_feedback">{{ flashMessages.get('errors.first_name') }}</div>
+                              @endif
+                            </div>
+                            <div class="form_group">
+                              <label for="#" class="form_label">Last Name</label>
+                              <input type="text" name="last_name" required placeholder="Enter your last name" class="form_control {{ flashMessages.has('errors.last_name') ? 'is_invalid' : '' }}" value="{{ flashMessages.get('last_name') ?? '' }}">
+                              @if (flashMessages.has('errors.last_name'))
+                                <div class="invalid_feedback">{{ flashMessages.get('errors.last_name') }}</div>
+                              @endif
+                            </div>
+                            <div class="form_group">
+                              <label for="#" class="form_label">Password</label>
+                              <input type="password" name="password" required placeholder="Enter your password" class="form_control {{ flashMessages.has('errors.password') ? 'is_invalid' : '' }}">
+                              @if (flashMessages.has('errors.password'))
+                                <div class="invalid_feedback">{{ flashMessages.get('errors.password') }}</div>
+                              @endif
+                            </div>
+                            <button type="button" class="btn btn_primary btn_block">Sign In</button>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

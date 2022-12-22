@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  postgres:
+    container_name: postgres
+    image: postgres:13
+    volumes:
+      - postgres_volume:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: '${PG_USER}'
+      POSTGRES_PASSWORD: '${PG_PASSWORD}'
+      POSTGRES_DB: '${PG_DB_NAME}'
+    ports:
+      - "5345:5432"
+
+volumes:
+  postgres_volume:

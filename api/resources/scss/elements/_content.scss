@@ -107,6 +107,11 @@
   margin-top: 1rem !important;
 }
 
+.ml_3,
+.mx_3 {
+  margin-left: 1rem !important;
+}
+
 .mb_4,
 .my_4 {
   margin-bottom: 1.5rem !important;
@@ -188,6 +193,10 @@
   height: 100%;
 }
 
+.op_6 {
+  opacity: 0.6;
+}
+
 .font_semibold {
   font-weight: 500 !important;
 }
@@ -206,6 +215,10 @@
 
 .border_end {
   border-right: 1px solid #ededf5 !important;
+}
+
+.border_bottom {
+  border-bottom: 1px solid #ededf5 !important;
 }
 
 .border {

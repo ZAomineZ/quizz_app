@@ -20,11 +20,15 @@
 
 import Route from "@ioc:Adonis/Core/Route";
 
+// Route register
+Route.get("/register", "AuthController.registerView").as("registerView");
+Route.post("/register", "AuthController.register").as("register");
 // Route login
-Route.get("/", "AuthController.logInView").as('home');
+Route.get("/login", "AuthController.logInView").as("loginView");
+Route.post("/login", "AuthController.logIn").as("login");
 // Routes Dashboard
-Route.get("/dashboard", "Admin/DashboardController.index").as('dashboard');
+Route.get("/dashboard", "Admin/DashboardController.index").as("dashboard");
 // Routes quiz
-Route.resource("quiz", "Admin/QuizzesController").as('quiz');
+Route.resource("quiz", "Admin/QuizzesController").as("quiz");
 // Routes category
-Route.resource("category", "Admin/CategoriesController").as('category');
+Route.resource("category", "Admin/CategoriesController").as("category");
