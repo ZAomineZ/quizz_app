@@ -26,6 +26,8 @@ Route.post("/register", "AuthController.register").as("register");
 // Route login
 Route.get("/login", "AuthController.logInView").as("loginView");
 Route.post("/login", "AuthController.logIn").as("login");
+// Routes settings
+Route.get('/settings', "SettingsController.index").as('settings')
 // Routes Dashboard
 Route.get("/dashboard", "Admin/DashboardController.index").as("dashboard");
 // Routes quiz

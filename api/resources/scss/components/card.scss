@@ -64,6 +64,16 @@
     border-radius: 11px 11px 0 0;
   }
 
+  .card_footer {
+    background-color: #ffffff;
+    border-top: 1px solid rgba(0, 0, 0, 0.125);
+    padding: 1.25rem;
+  }
+
+  .card_footer:last-child {
+    border-radius: 0 0 2px 2px;
+  }
+
   .card_title {
     font-size: 14px;
     font-weight: 600;

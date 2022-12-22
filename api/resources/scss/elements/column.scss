@@ -107,6 +107,11 @@
 }
 
 @media (min-width: 768px) {
+  .col_md_3 {
+    flex: 0 0 25%;
+    max-width: 25%;
+  }
+
   .col_md_4 {
     flex: 0 0 33.33333%;
     max-width: 33.33333%;
@@ -122,6 +127,11 @@
     max-width: 66.66667%;
   }
 
+  .col_md_9 {
+    flex: 0 0 75%;
+    max-width: 75%;
+  }
+
   .col_md_12 {
     flex: 0 0 100%;
     max-width: 100%;
@@ -129,9 +139,19 @@
 }
 
 @media (min-width: 992px) {
+  .col_lg_4 {
+    flex: 0 0 33.33333%;
+    max-width: 33.33333%;
+  }
+
   .col_lg_6 {
     flex: 0 0 50%;
     max-width: 50%;
+  }
+
+  .col_lg_8 {
+    flex: 0 0 66.66667%;
+    max-width: 66.66667%;
   }
 
   .col_lg_12 {
@@ -141,6 +161,11 @@
 }
 
 @media (min-width: 1200px) {
+  .col_xl_3 {
+    flex: 0 0 25%;
+    max-width: 25%;
+  }
+
   .col_xl_5 {
     flex: 0 0 41.66667%;
     max-width: 41.66667%;
@@ -149,6 +174,11 @@
   .col_xl_6 {
     flex: 0 0 50%;
     max-width: 50%;
+  }
+
+  .col_xl_9 {
+    flex: 0 0 75%;
+    max-width: 75%;
   }
 
   .col_xl_12 {

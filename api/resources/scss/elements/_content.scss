@@ -26,6 +26,16 @@
   margin-top: 0;
 }
 
+.row_sm {
+  margin-left: -10px;
+  margin-right: -10px;
+}
+
+.row_sm > div {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
 .justify_content_center {
   justify-content: center !important;
 }
@@ -122,6 +132,10 @@
   margin-top: 1.5rem !important;
 }
 
+.mb_20 {
+  margin-bottom: 20px !important;
+}
+
 .p_0 {
   padding: 0 !important;
 }
@@ -201,12 +215,20 @@
   font-weight: 500 !important;
 }
 
+.float_end {
+  float: right !important;
+}
+
 .d_flex {
   display: flex !important;
 }
 
 .d_block {
   display: block !important;
+}
+
+.d_none {
+  display: none !important;
 }
 
 .p_relative {
@@ -308,6 +330,71 @@
     margin-bottom: 20px;
     text-indent: -1px;
   }
+
+  .main_content_left {
+    position: relative;
+    width: 100%;
+    flex-shrink: 0;
+  }
+
+  .main_content_left.main_content_left_setting.card_body {
+    padding: 1.25rem;
+  }
+
+  .main_content_left.main_content_left_setting .btn_compose {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 500;
+    height: 38px;
+    width: 100%;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    padding: 0 20px;
+    text-transform: uppercase;
+  }
+
+  .main_menu {
+    position: relative;
+    padding-right: 0;
+  }
+
+  .main_content_label {
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    line-height: 1;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+
+  .main_content_label_sm {
+    font-size: 10px;
+    font-weight: 600;
+    color: #949eb7;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  .main_nav_column {
+    flex-direction: column;
+
+    .nav_link {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      color: var(--icon-gray);
+      height: 38px;
+      padding: 7px 14px;
+    }
+
+    .nav_link.active {
+      position: relative;
+      border-radius: 5px;
+      background: var(--primary-color);
+      color: var(--primary-bg-color);
+    }
+  }
 }
 
 .content {
@@ -380,6 +467,23 @@
 
     .main_content_title {
       margin-bottom: 40px;
+    }
+
+    .main_content_left {
+      display: block;
+      padding: 0;
+    }
+
+    .main_content_left .btn_compose {
+      margin-right: 0;
+    }
+
+    .main_menu {
+      padding-right: 0;
+    }
+
+    .main_menu .nav_link {
+      font-size: 13.5px;
     }
   }
 }
