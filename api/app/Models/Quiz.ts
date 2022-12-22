@@ -1,10 +1,9 @@
-import { BaseModel } from "@adonisjs/lucid/build/src/Orm/BaseModel";
-import { belongsTo, BelongsTo, column } from "@ioc:Adonis/Lucid/Orm";
+import { belongsTo, BelongsTo, column, BaseModel } from "@ioc:Adonis/Lucid/Orm";
 import { QuizDifficulty } from "../enums/Quiz";
 import Category from "./Category";
 import { DateTime } from "luxon";
 
-export class Quiz extends BaseModel {
+export default class Quiz extends BaseModel {
   @column({ isPrimary: true })
   public id: number;
 

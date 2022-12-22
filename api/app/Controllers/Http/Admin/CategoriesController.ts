@@ -4,7 +4,9 @@ import Category from "../../../Models/Category";
 
 export default class CategoriesController {
   public async index({ view }: HttpContextContract) {
-    return view.render("category.index");
+    const categories = await Category.query().orderBy("created_at");
+
+    return view.render("category.index", { categories });
   }
 
   public async create({ view }: HttpContextContract) {
@@ -21,9 +23,33 @@ export default class CategoriesController {
 
   public async show({}: HttpContextContract) {}
 
-  public async edit({}: HttpContextContract) {}
+  public async edit({ params, view }: HttpContextContract) {
+    let id = params?.id;
 
-  public async update({}: HttpContextContract) {}
+    let category = await Category.findOrFail(id);
 
-  public async destroy({}: HttpContextContract) {}
+    return view.render("category.edit", { category });
+  }
+
+  public async update({ params, request, response }: HttpContextContract) {
+    const id = params?.id;
+
+    let category = await Category.findOrFail(id);
+
+    const payload = await request.validate(CategoryValidator);
+    // Update category
+    await category.merge(payload);
+    await category.save();
+
+    return response.redirect(`/category/${id}/edit`);
+  }
+
+  public async destroy({ params, response }: HttpContextContract) {
+    let id = params?.id;
+
+    let category = await Category.findOrFail(id);
+    await category.delete();
+
+    return response.redirect("/category");
+  }
 }

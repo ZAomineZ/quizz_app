@@ -1,0 +1,54 @@
+@layout('layouts/main')
+
+@section('body')
+    <div class="main_content">
+        <div class="content">
+            <div class="container_fluid">
+                <div>
+                    <div class="justify_content_between ">
+                        <div class="left_content">
+                            <span class="main_content_title mb_0">Create category</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col_lg_12 col_md_12">
+                            <div class="card">
+                                <div class="card_header">
+                                    <h3 class="card_title">Category</h3>
+                                </div>
+                                <div class="card_body">
+                                    <form action="{{ route('category.update', {id: category.id}, {qs: {_method: 'PUT'}}) }}" class="row was_validated needs__validation" method="POST">
+                                        <div class="col_md_6">
+                                            <label for="#" class="form_label">Name</label>
+                                            <input type="text" class="form_control {{ flashMessages.has('errors.name') ? 'is_invalid' : '' }}" required placeholder="Your name..." name="name" value="{{ flashMessages.get('errors.name') ?? category.name }}">
+                                            @if (flashMessages.has('errors.name'))
+                                                <div class="valid_feedback">{{ flashMessages.get('errors.name') }}</div>
+                                            @endif
+                                        </div>
+                                        <div class="col_md_6">
+                                            <label for="#" class="form_label">Slug</label>
+                                            <input type="text" class="form_control {{ flashMessages.has('error.slug') ? 'is_invalid' : '' }}" required placeholder="Your slug..." name="slug" value="{{ flashMessages.get('errors.slug') ?? category.slug }}">
+                                            @if (flashMessages.has('errors.slug'))
+                                                <div class="valid_feedback">{{ flashMessages.get('errors.slug') }}</div>
+                                            @endif
+                                        </div>
+                                        <div class="col_md_12">
+                                            <label for="#" class="form_label">Description</label>
+                                            <textarea required class="form_control {{ flashMessages.has('errors.description') ? 'in_invalid' : '' }}" placeholder="Your description..." name="description">{{ flashMessages.get('errors.slug') ?? category.description }}</textarea>
+                                            @if (flashMessages.has('errors.description'))
+                                                <div class="valid_feedback">{{ flashMessages.get('errors.description') }}</div>
+                                            @endif
+                                        </div>
+                                        <div class="col_md_12 mt_3">
+                                            <button type="submit" class="btn btn_primary mt_0 mb_0">Submit</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@end
