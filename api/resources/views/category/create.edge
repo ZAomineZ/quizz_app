@@ -17,10 +17,10 @@
                                     <h3 class="card_title">Category</h3>
                                 </div>
                                 <div class="card_body">
-                                    <form action="#" class="row was_validated needs__validation">
+                                    <form action="{{ route('category.store') }}" class="row was_validated needs__validation" method="POST">
                                         <div class="col_md_6">
                                             <label for="#" class="form_label">Title</label>
-                                            <input type="text" class="form_control" required placeholder="Your title..." name="title">
+                                            <input type="text" class="form_control" required placeholder="Your name..." name="name">
                                             <div class="valid_feedback">Looks good !</div>
                                         </div>
                                         <div class="col_md_6">
