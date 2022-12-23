@@ -12,101 +12,59 @@
                     </div>
                     <div class="row">
                         <div class="col_lg_12 col_md_12">
-                            <div class="tab_menu_heading mb_3">
-                                <div class="tabs_menu">
-                                    <ul class="nav nav_tabs">
-                                        <li class="nav_item">
-                                            <button type="button" data-tab="quiz_tab" role="tab" class="nav_link active">Quiz</button>
-                                        </li>
-                                        <li class="nav_item">
-                                            <button type="button" data-tab="question_tab" role="tab" class="nav_link">Questions</button>
-                                        </li>
-                                    </ul>
-                                    <div class="tab_content">
-                                        <div id="quiz_tab" role="tabpanel" class="fade show active tab_body tab_pane">
-                                            <div class="card">
-                                                <div class="card_header">
-                                                    <h3 class="card_title">Quiz</h3>
-                                                </div>
-                                                <div class="card_body">
-                                                    <form action="#" class="row was_validated needs__validation">
-                                                        <div class="col_md_6">
-                                                            <label for="#" class="form_label">Title</label>
-                                                            <input type="text" class="form_control" required placeholder="Your title..." name="title">
-                                                            <div class="valid_feedback">Looks good !</div>
-                                                        </div>
-                                                        <div class="col_md_6">
-                                                            <label for="#" class="form_label">Slug</label>
-                                                            <input type="text" class="form_control" required placeholder="Your slug..." name="slug">
-                                                            <div class="valid_feedback">Looks good !</div>
-                                                        </div>
-                                                        <div class="col_md_12">
-                                                            <label for="#" class="form_label">Description</label>
-                                                            <textarea required class="form_control" placeholder="Your description..." name="description"></textarea>
-                                                            <div class="invalid_feedback">Please enter an message in the description</div>
-                                                        </div>
-                                                        <div class="col_md_6 mb_2">
-                                                            <label for="#" class="form_label">Choose difficulty</label>
-                                                            <select class="form_control" name="difficulty">
-                                                                <option value="facile">Facile</option>
-                                                                <option value="moyen">Moyen</option>
-                                                                <option value="difficile">Difficile</option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="col_md_6 mb_2">
-                                                            <label for="#" class="form_label">Category</label>
-                                                            <select class="form_control" name="category">
-                                                                <option value="facile">Facile</option>
-                                                                <option value="moyen">Moyen</option>
-                                                                <option value="difficile">Difficile</option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="col_md_12">
-                                                            <button type="submit" class="btn btn_primary mt_0 mb_0">Submit</button>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
+                            <div class="card">
+                                <div class="card_header">
+                                    <h3 class="card_title">Quiz</h3>
+                                </div>
+                                <div class="card_body">
+                                    <form action="{{ route('quiz.store') }}" method="POST" class="row was_validated needs__validation">
+                                        <div class="col_md_6">
+                                            <label for="#" class="form_label">Title</label>
+                                            <input type="text" class="form_control" required placeholder="Your title..." name="title" value="{{ flashMessages.get('errors.title') ?? '' }}">
+                                            @if (flashMessages.has('errors.title'))
+                                                <div class="valid_feedback">{{ flashMessages.get('errors.title') }}</div>
+                                            @endif
                                         </div>
-                                        <div id="question_tab" role="tabpanel" class="fade show tab_body tab_pane">
-                                            <div class="card">
-                                                <div class="card_header">
-                                                    <h3 class="card_title">Questions</h3>
-                                                </div>
-                                                <div class="card_body">
-                                                    <form action="#" class="row was_validated needs__validation">
-                                                        <div class="col_md_12">
-                                                            <label for="#" class="form_label">Question</label>
-                                                            <input type="text" class="form_control" required placeholder="Your question..." name="question">
-                                                            <div class="valid_feedback">Looks good !</div>
-                                                        </div>
-                                                        <div class="col_md_6">
-                                                            <label for="#" class="form_label">Good Answer</label>
-                                                            <input type="text" class="form_control" required placeholder="Your good answer..." name="good_answer">
-                                                            <div class="valid_feedback">Looks good !</div>
-                                                        </div>
-                                                        <div class="col_md_6">
-                                                            <label for="#" class="form_label">Bad Answer (1)</label>
-                                                            <input type="text" class="form_control" required placeholder="Your bad answer 1..." name="bad_answer_1">
-                                                            <div class="invalid_feedback">Please enter an message in the description</div>
-                                                        </div>
-                                                        <div class="col_md_6 mb_2">
-                                                            <label for="#" class="form_label">Bad Answer (2)</label>
-                                                            <input type="text" class="form_control" required placeholder="Your bad answer 2..." name="bad_answer_2">
-                                                        </div>
-                                                        <div class="col_md_6 mb_2">
-                                                            <label for="#" class="form_label">Bad Answer (3)</label>
-                                                            <input type="text" class="form_control" required placeholder="Your bad answer 3..." name="bad_answer_3">
-                                                        </div>
-                                                        <div class="col_md_12">
-                                                            <button type="submit" class="btn btn_primary mt_0 mb_0">Submit</button>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                            <button id="add_new_question" type="button" class="btn btn_info mt_0 mb_0">Add new question</button>
+                                        <div class="col_md_6">
+                                            <label for="#" class="form_label">Slug</label>
+                                            <input type="text" class="form_control" required placeholder="Your slug..." name="slug" value="{{ flashMessages.get('errors.slug') ?? '' }}">
+                                            @if (flashMessages.has('errors.slug'))
+                                                <div class="valid_feedback">{{ flashMessages.get('errors.slug') }}</div>
+                                            @endif
                                         </div>
-                                    </div>
+                                        <div class="col_md_12">
+                                            <label for="#" class="form_label">Description</label>
+                                            <textarea required class="form_control" placeholder="Your description..." name="description">{{ flashMessages.get('errors.description') ?? '' }}</textarea>
+                                            @if (flashMessages.has('errors.description'))
+                                                <div class="valid_feedback">{{ flashMessages.get('errors.description') }}</div>
+                                            @endif
+                                        </div>
+                                        <div class="col_md_6 mb_2">
+                                            <label for="#" class="form_label">Choose difficulty</label>
+                                            <select class="form_control" name="difficulty">
+                                                <option value="Facile" selected="{{ flashMessages.get('errors.difficulty') === "facile" }}">Facile</option>
+                                                <option value="Moyen" selected="{{ flashMessages.get('errors.difficulty') === "moyen" }}">Moyen</option>
+                                                <option value="Difficile" selected="{{ flashMessages.get('errors.difficulty') === "difficile" }}">Difficile</option>
+                                            </select>
+                                            @if (flashMessages.has('errors.difficulty'))
+                                                <div class="valid_feedback">{{ flashMessages.get('errors.difficulty') }}</div>
+                                            @endif
+                                        </div>
+                                        <div class="col_md_6 mb_2">
+                                            <label for="#" class="form_label">Category</label>
+                                            <select class="form_control" name="category">
+                                                @each(category in categories)
+                                                    <option value="{{ category.slug }}" selected="{{ flashMessages.get('errors.category') === category.slug }}">{{ category.name }}</option>
+                                                @end
+                                            </select>
+                                            @if (flashMessages.has('errors.category'))
+                                                <div class="valid_feedback">{{ flashMessages.get('errors.category') }}</div>
+                                            @endif
+                                        </div>
+                                        <div class="col_md_12">
+                                            <button type="submit" class="btn btn_primary mt_0 mb_0">Submit</button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>

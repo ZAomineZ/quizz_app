@@ -27,10 +27,15 @@ Route.post("/register", "AuthController.register").as("register");
 Route.get("/login", "AuthController.logInView").as("loginView");
 Route.post("/login", "AuthController.logIn").as("login");
 // Routes settings
-Route.get('/settings', "SettingsController.index").as('settings')
+Route.get("/settings", "SettingsController.index").as("settings");
 // Routes Dashboard
 Route.get("/dashboard", "Admin/DashboardController.index").as("dashboard");
 // Routes quiz
 Route.resource("quiz", "Admin/QuizzesController").as("quiz");
 // Routes category
 Route.resource("category", "Admin/CategoriesController").as("category");
+
+// API ROUTES
+Route.put("/api/:id/question", "Admin/QuestionController").as(
+  "question.update"
+);

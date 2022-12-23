@@ -1,5 +1,5 @@
 import { BaseModel, BelongsTo, belongsTo, column } from "@ioc:Adonis/Lucid/Orm";
-import { Quiz } from "./Quiz";
+import Quiz from "./Quiz";
 import { DateTime } from "luxon";
 
 export class Question extends BaseModel {

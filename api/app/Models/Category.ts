@@ -1,6 +1,5 @@
-import { BaseModel } from "@adonisjs/lucid/build/src/Orm/BaseModel";
 import { DateTime } from "luxon";
-import { column } from "@ioc:Adonis/Lucid/Orm";
+import { column, BaseModel } from "@ioc:Adonis/Lucid/Orm";
 
 export default class Category extends BaseModel {
   @column({ isPrimary: true })

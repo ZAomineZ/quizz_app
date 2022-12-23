@@ -1,7 +1,15 @@
-import { belongsTo, BelongsTo, column, BaseModel } from "@ioc:Adonis/Lucid/Orm";
+import {
+  belongsTo,
+  BelongsTo,
+  column,
+  BaseModel,
+  HasMany
+} from "@ioc:Adonis/Lucid/Orm";
 import { QuizDifficulty } from "../enums/Quiz";
 import Category from "./Category";
 import { DateTime } from "luxon";
+import { Question } from "./Question";
+import { hasMany } from "@adonisjs/lucid/build/src/Orm/Decorators";
 
 export default class Quiz extends BaseModel {
   @column({ isPrimary: true })
@@ -24,6 +32,9 @@ export default class Quiz extends BaseModel {
 
   @belongsTo(() => Category)
   public category: BelongsTo<typeof Category>;
+
+  @hasMany(() => Question)
+  public questions: HasMany<typeof Question>;
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime;
