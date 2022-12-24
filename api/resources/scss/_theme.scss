@@ -1,0 +1,169 @@
+body.dark_theme {
+  background: #383d52;
+  color: #eaecf3;
+}
+
+.dark_theme {
+  a {
+    color: #faf9fa !important;
+  }
+
+  .dark_layout {
+    display: none;
+  }
+
+  .light_layout {
+    display: block;
+  }
+
+  .header_icon {
+    color: #a9abbd;
+  }
+
+  .main_content_title {
+    color: #ffffff;
+  }
+
+  .main_header {
+    background: #2a2e3f;
+    border-bottom: 1px solid #484863;
+    box-shadow: none;
+  }
+
+  .nav_item .nav_link {
+    background: transparent;
+  }
+
+  .header_icon_svg {
+    fill: #a9abbd;
+  }
+
+  .main_profile_menu .profile_user img {
+    background: #141432;
+    box-shadow: 0 1px 6px 0 #3b3b3b;
+  }
+
+  .sidebar {
+    background: #2a2e3f;
+    border-right: 1px solid #484863;
+    border-top: 0;
+    box-shadow: 0 0 10px rgb(20 28 43 / 80%);
+  }
+
+  .main_sidebar_header {
+    background: #2a2e3f;
+    border-bottom: 1px solid #484863;
+    border-right: 1px solid #484863;
+  }
+
+  .sidebar .side_item.side_item_category {
+    color: #c5cfcd;
+  }
+
+  .side_menu .slide .side_menu__item.active {
+    background-color: transparent;
+  }
+
+  .side_menu .slide .side_menu__item .side_menu__label {
+    fill: #a9abbd;
+    color: #a9abbd;
+  }
+
+  .side_menu .slide .side_menu__item.active .side_menu__label {
+    color: #eaecf3 !important;
+  }
+
+  .side_menu .side_menu__icon {
+    fill: #bfc8de;
+    color: #bfc8de;
+  }
+
+  .card {
+    background-color: #2a2e3f !important;
+    box-shadow: 0 0 10px rgb(28 39 60 / 10%);
+  }
+
+  .card_header,
+  .card_footer {
+    position: relative;
+    border-color: #484863;
+  }
+
+  .card_header {
+    background-color: #2a2e3f;
+    border-bottom: 0;
+  }
+
+  .border_end {
+    border-right: 1px solid #3c3c60 !important;
+  }
+
+  .border {
+    border: 1px solid rgba(234, 236, 241, 0.1) !important;
+  }
+
+  .table {
+    border: 1px solid #3c3f50;
+    color: hsla(0, 0%, 100%, 0.7);
+  }
+
+  .table_bordered {
+    border: 1px solid rgba(234, 236, 241, 0.1) !important;
+  }
+
+  .table_bordered td,
+  .table_bordered th {
+    border: 1px solid rgba(234, 236, 241, 0.1);
+    background-color: #2a2e3f;
+  }
+
+  .table thead th {
+    border-bottom: 1px solid #484863;
+    border-top: 0 !important;
+    color: #ffffff;
+  }
+
+  .table td,
+  .table th {
+    border-top: 1px solid #484863;
+  }
+
+  .table > :not(:last-child) > :last-child > * {
+    border-bottom-color: #3c3f50;
+  }
+
+  .table tbody tr {
+    background-color: #2a2e3f;
+  }
+
+  .table_responsive select {
+    color: #ffffff;
+    border-radius: 5px;
+    background: #383d52;
+  }
+
+  .form_control {
+    background-color: #2a2e3f;
+    border: 1px solid #484863;
+    color: #c0c2c7;
+  }
+
+  .table_responsive span input {
+    border: 1px solid #555c6e !important;
+  }
+
+  .main_footer {
+    background-color: #2a2e3f;
+    border-top: 1px solid #484863;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .dark_theme {
+    .main_header {
+      background: #2a2e3f;
+      border-bottom: 1px solid #484863;
+      box-shadow: none;
+    }
+  }
+}

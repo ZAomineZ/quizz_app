@@ -204,8 +204,16 @@
                     })
                     if (response.status === 200) {
                         const json = await response.json()
-
-                        console.log(json)
+                        
+                        // Add messages flash
+                        Toastify({
+                            text: json.message,
+                            backgroundColor: "#07bc0c",
+                            duration: 2000,
+                            close: true,
+                            gravity: "top",
+                            position: "right"
+                        }).showToast()
                     }
                 })
              })
