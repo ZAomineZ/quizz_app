@@ -138,13 +138,20 @@
         let lightLayout = document.querySelector('.light_layout')
         let body = document.querySelector('body')
 
+        // Default theme
+        if (localStorage.getItem('isDarkMode') === "true") {
+            body.classList.add('dark_theme')
+        }
+
         // Active dark mode
         darkLayout.addEventListener('click', () => {
             body.classList.add('dark_theme')
+            localStorage.setItem('isDarkMode', "true")
         })
         // Active light mode
         lightLayout.addEventListener('click', () => {
             body.classList.remove('dark_theme')
+            localStorage.removeItem('isDarkMode')
         })
     </script>
     @!section('scripts')

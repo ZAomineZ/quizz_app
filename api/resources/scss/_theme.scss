@@ -94,6 +94,10 @@ body.dark_theme {
     border-bottom: 0;
   }
 
+  .card_title {
+    color: #bfc1d4;
+  }
+
   .border_end {
     border-right: 1px solid #3c3c60 !important;
   }
@@ -144,8 +148,12 @@ body.dark_theme {
 
   .form_control {
     background-color: #2a2e3f;
-    border: 1px solid #484863;
+    border: 1px solid #484863 !important;
     color: #c0c2c7;
+  }
+
+  .form_label {
+    color: #cfdaec;
   }
 
   .table_responsive span input {
