@@ -146,31 +146,30 @@
                                                 </tr>
                                             </thead>
                                             <tbody role="rowgroup">
-                                                <tr class="text_center" role="row">
-                                                    <td role="cell">#01</td>
-                                                    <td role="cell">John Doe</td>
-                                                    <td role="cell">PRO</td>
-                                                    <td role="cell">Mi LED Smart TV 4A 80</td>
-                                                    <td role="cell">$320,800</td>
-                                                    <td role="cell">Online Payment</td>
-                                                    <td role="cell">
-                                                        <span class="badge badge__success_transparent">OK</span>
-                                                    </td>
-                                                    <td role="cell">
-                                                        <span>
-                                                            <a href="#" class="btn btn_primary btn_sm mr_2">
-                                                                <i>
-                                                                    @include('../icons/pencil-icon.edge')
-                                                                </i>
-                                                            </a>
-                                                            <a href="#" class="btn btn_danger btn_sm">
-                                                                <i>
-                                                                    @include('../icons/trash-icon')
-                                                                </i>
-                                                            </a>
-                                                        </span>
-                                                    </td>
-                                                </tr>
+                                                @each(quiz in quizzes)
+                                                    <tr class="text_center" role="row">
+                                                        <td role="cell">#{{ quiz.id }}</td>
+                                                        <td role="cell">{{ quiz.title }}</td>
+                                                        <td role="cell">{{ quiz.slug }}</td>
+                                                        <td role="cell">{{ quiz.description }}</td>
+                                                        <td role="cell">{{ quiz.difficulty }}</td>
+                                                        <td role="cell">{{ quiz.category?.name }}</td>
+                                                        <td role="cell">
+                                                            <span>
+                                                                <a href="{{ route('quiz.edit', {id: quiz.id}) }}" class="btn btn_primary btn_sm mr_2">
+                                                                    <i>
+                                                                        @include('../icons/pencil-icon.edge')
+                                                                    </i>
+                                                                </a>
+                                                                <a href="#" class="btn btn_danger btn_sm">
+                                                                    <i>
+                                                                        @include('../icons/trash-icon')
+                                                                    </i>
+                                                                </a>
+                                                            </span>
+                                                        </td>
+                                                    </tr>
+                                                @end
                                             </tbody>
                                         </table>
                                     </div>

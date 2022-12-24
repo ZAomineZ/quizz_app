@@ -81,41 +81,43 @@
                                             </div>
                                         </div>
                                         <div id="question_tab" role="tabpanel" class="fade show tab_body tab_pane">
-                                            <div class="card">
-                                                <div class="card_header">
-                                                    <h3 class="card_title">Questions</h3>
+                                            @each(question in questions)
+                                                <div class="card">
+                                                    <div class="card_header">
+                                                        <h3 class="card_title">Questions</h3>
+                                                    </div>
+                                                    <div class="card_body">
+                                                        <form action="#" class="row was_validated needs__validation" data-question-id="{{ question.id }}" id="form_question">
+                                                            <div class="col_md_12">
+                                                                <label for="#" class="form_label">Question</label>
+                                                                <input type="text" class="form_control" required placeholder="Your question..." name="question" value="{{ question.question }}">
+                                                                <div class="valid_feedback">Looks good !</div>
+                                                            </div>
+                                                            <div class="col_md_6">
+                                                                <label for="#" class="form_label">Good Answer</label>
+                                                                <input type="text" class="form_control" required placeholder="Your good answer..." name="good_answer" value="{{ question.good_answer }}">
+                                                                <div class="valid_feedback">Looks good !</div>
+                                                            </div>
+                                                            <div class="col_md_6">
+                                                                <label for="#" class="form_label">Bad Answer (1)</label>
+                                                                <input type="text" class="form_control" required placeholder="Your bad answer 1..." name="bad_answer_1" value="{{ question.bad_answer_1 }}">
+                                                                <div class="invalid_feedback">Please enter an message in the description</div>
+                                                            </div>
+                                                            <div class="col_md_6 mb_2">
+                                                                <label for="#" class="form_label">Bad Answer (2)</label>
+                                                                <input type="text" class="form_control" required placeholder="Your bad answer 2..." name="bad_answer_2" value="{{ question.bad_answer_2 }}">
+                                                            </div>
+                                                            <div class="col_md_6 mb_2">
+                                                                <label for="#" class="form_label">Bad Answer (3)</label>
+                                                                <input type="text" class="form_control" required placeholder="Your bad answer 3..." name="bad_answer_3" value="{{ question.bad_answer_3 }}">
+                                                            </div>
+                                                            <div class="col_md_12">
+                                                                <button type="button" class="btn btn_primary mt_0 mb_0" id="submit_question">Submit</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
                                                 </div>
-                                                <div class="card_body">
-                                                    <form action="#" class="row was_validated needs__validation">
-                                                        <div class="col_md_12">
-                                                            <label for="#" class="form_label">Question</label>
-                                                            <input type="text" class="form_control" required placeholder="Your question..." name="question">
-                                                            <div class="valid_feedback">Looks good !</div>
-                                                        </div>
-                                                        <div class="col_md_6">
-                                                            <label for="#" class="form_label">Good Answer</label>
-                                                            <input type="text" class="form_control" required placeholder="Your good answer..." name="good_answer">
-                                                            <div class="valid_feedback">Looks good !</div>
-                                                        </div>
-                                                        <div class="col_md_6">
-                                                            <label for="#" class="form_label">Bad Answer (1)</label>
-                                                            <input type="text" class="form_control" required placeholder="Your bad answer 1..." name="bad_answer_1">
-                                                            <div class="invalid_feedback">Please enter an message in the description</div>
-                                                        </div>
-                                                        <div class="col_md_6 mb_2">
-                                                            <label for="#" class="form_label">Bad Answer (2)</label>
-                                                            <input type="text" class="form_control" required placeholder="Your bad answer 2..." name="bad_answer_2">
-                                                        </div>
-                                                        <div class="col_md_6 mb_2">
-                                                            <label for="#" class="form_label">Bad Answer (3)</label>
-                                                            <input type="text" class="form_control" required placeholder="Your bad answer 3..." name="bad_answer_3">
-                                                        </div>
-                                                        <div class="col_md_12">
-                                                            <button type="submit" class="btn btn_primary mt_0 mb_0">Submit</button>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
+                                            @end
                                             <button id="add_new_question" type="button" class="btn btn_info mt_0 mb_0">Add new question</button>
                                         </div>
                                     </div>
@@ -133,12 +135,80 @@
     <script lang="js">
         let addNewQuestionButton = document.querySelector("#add_new_question")
 
-        addNewQuestionButton?.addEventListener('click', () => {
+        addNewQuestionButton?.addEventListener('click', async () => {
             const questionTab = document.querySelector('#question_tab')
             const questionCards = questionTab.querySelectorAll('.card')
-            let lastCardQuestionCopy = questionCards[questionCards.length - 1]
-            // Insert new question after last card element
-            lastCardQuestionCopy?.insertAdjacentHTML('afterEnd', lastCardQuestionCopy.outerHTML)
+            let lastCardQuestion = questionCards[questionCards.length - 1]
+            let lastCardQuestionCopy = null
+            questionCards.forEach(questionCard => {
+                lastCardQuestionCopy = questionCard.cloneNode(true)
+            })
+
+            // Fetch api
+            let quizID = {{ quiz.id }}
+            const response = await fetch(`/api/question/${quizID}/create`, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            })
+            if (response.status === 201) {
+                let json = await response.json()
+                
+                if (json.success) {
+                    let question = json.question
+
+                    // Change form values
+                    lastCardQuestionCopy.querySelector('form input[name="question"]').setAttribute('value', question.question)
+                    lastCardQuestionCopy.querySelector('form input[name="good_answer"]').setAttribute('value', question.good_answer)
+                    lastCardQuestionCopy.querySelector('form input[name="bad_answer_1"]').setAttribute('value', question.bad_answer_1)
+                    lastCardQuestionCopy.querySelector('form input[name="bad_answer_2"]').setAttribute('value', question.bad_answer_2)
+                    lastCardQuestionCopy.querySelector('form input[name="bad_answer_3"]').setAttribute('value', question.bad_answer_3)
+                    lastCardQuestionCopy.querySelector('form').dataset.questionId = question.id
+
+                    // Insert new question after last card element
+                    lastCardQuestion?.insertAdjacentHTML('afterEnd', lastCardQuestionCopy.outerHTML)
+                    submissionQuestion()
+                }
+            }
         })
+
+        // Submission questions
+        submissionQuestion()
+
+        function submissionQuestion()
+        {
+            const formsQuestion = document.querySelectorAll('#form_question')
+            formsQuestion.forEach(form => {
+                let submitQuestion = form.querySelector('#submit_question')
+                submitQuestion.addEventListener('click', async (e) => {
+                    e.preventDefault()
+                    let questionID = form.dataset.questionId
+
+                    // Api edit question
+                    let body = {
+                        question: form.querySelector('input[name="question"]').value,
+                        good_answer: form.querySelector('input[name="good_answer"]').value,
+                        bad_answer_1: form.querySelector('input[name="bad_answer_1"]').value,
+                        bad_answer_2: form.querySelector('input[name="bad_answer_2"]').value,
+                        bad_answer_3: form.querySelector('input[name="bad_answer_3"]').value,
+                    }
+                    const response = await fetch(`/api/${questionID}/question`, {
+                        method: 'PUT',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(body)
+                    })
+                    if (response.status === 200) {
+                        const json = await response.json()
+
+                        console.log(json)
+                    }
+                })
+             })
+        }
     </script>
 @end

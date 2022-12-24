@@ -22,21 +22,21 @@
                                             <label for="#" class="form_label">Title</label>
                                             <input type="text" class="form_control" required placeholder="Your title..." name="title" value="{{ flashMessages.get('errors.title') ?? '' }}">
                                             @if (flashMessages.has('errors.title'))
-                                                <div class="valid_feedback">{{ flashMessages.get('errors.title') }}</div>
+                                                <div class="invalid_feedback">{{ flashMessages.get('errors.title') }}</div>
                                             @endif
                                         </div>
                                         <div class="col_md_6">
                                             <label for="#" class="form_label">Slug</label>
                                             <input type="text" class="form_control" required placeholder="Your slug..." name="slug" value="{{ flashMessages.get('errors.slug') ?? '' }}">
                                             @if (flashMessages.has('errors.slug'))
-                                                <div class="valid_feedback">{{ flashMessages.get('errors.slug') }}</div>
+                                                <div class="invalid_feedback">{{ flashMessages.get('errors.slug') }}</div>
                                             @endif
                                         </div>
                                         <div class="col_md_12">
                                             <label for="#" class="form_label">Description</label>
                                             <textarea required class="form_control" placeholder="Your description..." name="description">{{ flashMessages.get('errors.description') ?? '' }}</textarea>
                                             @if (flashMessages.has('errors.description'))
-                                                <div class="valid_feedback">{{ flashMessages.get('errors.description') }}</div>
+                                                <div class="invalid_feedback">{{ flashMessages.get('errors.description') }}</div>
                                             @endif
                                         </div>
                                         <div class="col_md_6 mb_2">
@@ -47,7 +47,7 @@
                                                 <option value="Difficile" selected="{{ flashMessages.get('errors.difficulty') === "difficile" }}">Difficile</option>
                                             </select>
                                             @if (flashMessages.has('errors.difficulty'))
-                                                <div class="valid_feedback">{{ flashMessages.get('errors.difficulty') }}</div>
+                                                <div class="invalid_feedback">{{ flashMessages.get('errors.difficulty') }}</div>
                                             @endif
                                         </div>
                                         <div class="col_md_6 mb_2">
@@ -58,7 +58,7 @@
                                                 @end
                                             </select>
                                             @if (flashMessages.has('errors.category'))
-                                                <div class="valid_feedback">{{ flashMessages.get('errors.category') }}</div>
+                                                <div class="invalid_feedback">{{ flashMessages.get('errors.category') }}</div>
                                             @endif
                                         </div>
                                         <div class="col_md_12">

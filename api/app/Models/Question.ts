@@ -31,5 +31,5 @@ export class Question extends BaseModel {
   public createdAt: DateTime;
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
-  public updatedA: DateTime;
+  public updatedAt: DateTime;
 }

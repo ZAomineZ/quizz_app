@@ -36,6 +36,10 @@ Route.resource("quiz", "Admin/QuizzesController").as("quiz");
 Route.resource("category", "Admin/CategoriesController").as("category");
 
 // API ROUTES
-Route.put("/api/:id/question", "Admin/QuestionController").as(
+Route.post(
+  "/api/question/:quizID/create",
+  "Admin/QuestionsController.create"
+).as("question.create");
+Route.put("/api/:id/question", "Admin/QuestionsController.update").as(
   "question.update"
 );

@@ -6,7 +6,7 @@ export default class QuizValidator {
   constructor(protected ctx: HttpContextContract) {}
 
   public refs = schema.refs({
-    id: this.ctx.params.id
+    id: this.ctx.params.id ?? null
   });
 
   public schema = schema.create({
@@ -15,7 +15,7 @@ export default class QuizValidator {
         table: "quizzes",
         column: "title",
         caseInsensitive: true,
-        whereNot: { id: this.refs.id }
+        whereNot: { id: this.refs?.id !== undefined ? this.refs?.id : null }
       }),
       rules.maxLength(255)
     ]),
@@ -24,7 +24,7 @@ export default class QuizValidator {
         table: "quizzes",
         column: "slug",
         caseInsensitive: true,
-        whereNot: { id: this.refs.id }
+        whereNot: { id: this.refs?.id !== undefined ? this.refs?.id : null }
       }),
       rules.maxLength(255)
     ]),
