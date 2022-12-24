@@ -43,3 +43,5 @@ Route.post(
 Route.put("/api/:id/question", "Admin/QuestionsController.update").as(
   "question.update"
 );
+// ROUTES API QUIZ
+Route.get("/api/quiz/latest", "Api/QuizController.latest");
