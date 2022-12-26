@@ -1,17 +1,28 @@
 <template>
   <li>
     <div class="mb_3">
-      <a href="#" class="list__item">
+      <NuxtLink :to="`/category/${props.category?.slug}`" class="list__item">
         <div class="list__item_left">
-          <img class="img__res shadow__sm" src="https://demo.ramsthemes.com/projects/animace/wp-content/uploads/2022/06/Aina-Suzuki-150x150.jpg" alt="">
+          <img
+            class="img__res shadow__sm"
+            src="https://demo.ramsthemes.com/projects/animace/wp-content/uploads/2022/06/Aina-Suzuki-150x150.jpg"
+            alt=""
+          />
         </div>
-        <div class="list__item_right">Aina Suzuki</div>
-      </a>
+        <div class="list__item_right">{{ props.category?.name }}</div>
+      </NuxtLink>
     </div>
   </li>
 </template>
 
 <script setup lang="ts">
+import { Category } from "~/types/Category";
+
+interface Props {
+  category: Category;
+}
+
+const props = withDefaults(defineProps<Props>(), {});
 </script>
 
 <style scoped lang="scss">
