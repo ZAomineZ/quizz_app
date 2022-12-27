@@ -1,21 +1,24 @@
 import Quiz from "../../../Models/Quiz";
 import { ModelQueryBuilderContract } from "@ioc:Adonis/Lucid/Orm";
 import { QuizDifficulty } from "../../../enums/Quiz";
+import { HttpContextContract } from "@ioc:Adonis/Core/HttpContext";
 
 export default class QuizSortController {
-  public async index({ response, params }) {
-    let search = params?.s ?? "";
-    let categoryID = params?.categoryId ?? null;
-    let sort = params?.sort ?? null;
-    let difficulty = params?.difficulty ?? (null as QuizDifficulty | null);
-    let year = params?.year ?? null;
-    let limit = params?.limit ?? 18;
-    let page = params?.page ?? 1;
+  public async index({ response, request }: HttpContextContract) {
+    const qs = request.qs();
+
+    let search = qs?.s ?? "";
+    let categoryID = qs?.categoryId ?? null;
+    let sort = qs?.sort ?? null;
+    let difficulty = qs?.difficulty ?? (null as QuizDifficulty | null);
+    let year = qs?.year ?? null;
+    let limit = qs?.limit ?? 18;
+    let page = qs?.page ?? 1;
 
     let query = Quiz.query() as ModelQueryBuilderContract<typeof Quiz, Quiz>;
 
     if (search.length !== 0) {
-      query = Quiz.query().whereRaw("title like %?%", [search]);
+      query = query?.whereRaw(`LOWER(title) LIKE ?`, [`%${search}%`]);
     }
 
     if (categoryID) {
@@ -23,11 +26,7 @@ export default class QuizSortController {
     }
 
     if (sort) {
-      // @ts-ignore
-      query = await this.sort<ModelQueryBuilderContract<typeof Quiz, Quiz>>(
-        sort,
-        query
-      );
+      query = this.sort(sort, query);
     }
 
     if (difficulty) {
@@ -35,21 +34,25 @@ export default class QuizSortController {
     }
 
     if (year) {
-      query = query.whereRaw(`YEAR(created_at) = ?`, [year]);
+      query = query.whereRaw(`extract(year from created_at) = ?`, [year]);
     }
 
-    let quizzes = query.paginate(page, limit);
+    let quizzes = await query.paginate(page, limit);
+
+    let years = await Quiz.query().select("created_at").groupBy("created_at");
+    years = years.map((row) => row.createdAt.toFormat("yyyy"));
 
     return response.json({
       success: true,
+      years: years,
       quizzes
     });
   }
 
-  private async sort<T extends ModelQueryBuilderContract<typeof Quiz, Quiz>>(
+  private sort<T extends ModelQueryBuilderContract<typeof Quiz, Quiz>>(
     sort: string,
     query: T
-  ): Promise<T> {
+  ): T {
     if (sort === "title_a_z") {
       query = query.orderBy("title", "asc");
     }

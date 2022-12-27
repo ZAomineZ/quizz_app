@@ -12,8 +12,10 @@ export default class Quiz {
     return await getAPI(`${this.runtimeConfig.public.apiURL}/api/quiz/latest`);
   }
 
-  public async sort() {
-    return await getAPI(`${this.runtimeConfig.public.apiURL}/api/quiz/sort`);
+  public async sort(query: string) {
+    return await getAPI(
+      `${this.runtimeConfig.public.apiURL}/api/quiz/sort?${query}`
+    );
   }
 
   public async show(slug: string) {

@@ -8,7 +8,7 @@
       <div class="col">
         <div class="row">
           <div class="col_12 mb_3">
-            <Lists/>
+            <Lists :categories="categories" />
           </div>
         </div>
       </div>
@@ -30,8 +30,20 @@
 </template>
 
 <script lang="ts" setup>
-import Lists from '~/components/Lists/Lists.vue'
+import Lists from "~/components/Lists/Lists.vue";
+import { onMounted, ref } from "vue";
+import { Category as CategoryType } from "~/types/Category";
+import Category from "~/utils/api/Category/Category";
+
+const categoryAPI = new Category();
+
+const categories = ref<CategoryType[]>([]);
+
+onMounted(async () => {
+  const categoriesList = await categoryAPI.list();
+
+  categories.value = categoriesList.categories;
+});
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

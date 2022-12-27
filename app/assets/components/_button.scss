@@ -27,6 +27,12 @@
   border-color: var(--color-secondary);
 }
 
+.btn_primary {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #ffffff;
+}
+
 .btn_sm {
   padding: .25rem .5rem;
   font-size: .875rem;

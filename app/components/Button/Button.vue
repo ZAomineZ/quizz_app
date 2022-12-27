@@ -1,19 +1,19 @@
 <template>
-  <button :class="`btn btn_sm ${className}`">{{ label }}</button>
+  <button :class="`btn btn_sm ${className}`">
+    {{ label }}
+  </button>
 </template>
 
 <script setup lang="ts">
-  interface Props {
-    label: string
-    className?: string
-  }
+interface Props {
+  label: string;
+  className?: string;
+}
 
-  const props = withDefaults(defineProps<Props>(), {
-    className: "",
-    label: ""
-  });
+const props = withDefaults(defineProps<Props>(), {
+  className: "",
+  label: ""
+});
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
