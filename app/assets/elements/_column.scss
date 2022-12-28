@@ -75,6 +75,11 @@
     flex: 0 0 66.666667%;
     max-width: 66.666667%;
   }
+
+  .col_md_12 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
 }
 
 @media (min-width: 992px) {

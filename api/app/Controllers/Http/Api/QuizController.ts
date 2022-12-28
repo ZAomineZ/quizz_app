@@ -19,7 +19,31 @@ export default class QuizController {
       .where("slug", "=", slug)
       .with("category", (builder) => {
         builder.select("*");
-      });
+      })
+      .firstOrFail();
+
+    return response.json({
+      success: true,
+      quiz
+    });
+  }
+
+  public async questions({ response, params }: HttpContextContract) {
+    let slug = params?.slug ?? null;
+
+    let quiz = await Quiz.query()
+      .select("id", "title")
+      .where("slug", "=", slug)
+      .preload("questions", (builder) => {
+        builder.select([
+          "question",
+          "good_answer",
+          "bad_answer_1",
+          "bad_answer_2",
+          "bad_answer_3"
+        ]);
+      })
+      .firstOrFail();
 
     return response.json({
       success: true,

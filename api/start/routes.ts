@@ -47,5 +47,6 @@ Route.put("/api/:id/question", "Admin/QuestionsController.update").as(
 Route.get("/api/quiz/latest", "Api/QuizController.latest");
 Route.get("/api/quiz/sort", "Api/QuizSortController.index");
 Route.get("/api/quiz/:slug", "Api/QuizController.show");
+Route.get("/api/quiz/:slug/questions", "Api/QuizController.questions");
 // ROUTES
 Route.get("/api/category", "Api/CategoryController.list");

@@ -22,7 +22,7 @@ export class Question extends BaseModel {
   public bad_answer_3: string;
 
   @column()
-  public quizId: number;
+  public quiz_id: number;
 
   @belongsTo(() => Quiz)
   public quiz: BelongsTo<typeof Quiz>;

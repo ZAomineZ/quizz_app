@@ -21,4 +21,10 @@ export default class Quiz {
   public async show(slug: string) {
     return await getAPI(`${this.runtimeConfig.public.apiURL}/api/quiz/${slug}`);
   }
+
+  public async withQuestions(slug: string) {
+    return await getAPI(
+      `${this.runtimeConfig.public.apiURL}/api/quiz/${slug}/questions`
+    );
+  }
 }

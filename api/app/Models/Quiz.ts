@@ -33,7 +33,9 @@ export default class Quiz extends BaseModel {
   @belongsTo(() => Category)
   public category: BelongsTo<typeof Category>;
 
-  @hasMany(() => Question)
+  @hasMany(() => Question, {
+    foreignKey: "quiz_id"
+  })
   public questions: HasMany<typeof Question>;
 
   @column.dateTime({ autoCreate: true })

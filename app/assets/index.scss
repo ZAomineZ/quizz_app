@@ -247,6 +247,11 @@ th {
   margin-bottom: auto !important;
 }
 
+.mx_auto {
+  margin-right: auto !important;
+  margin-left: auto !important;
+}
+
 .mt_3,
 .my_3 {
   margin-top: 1rem !important;
@@ -337,6 +342,10 @@ th {
 
 .w_100 {
   width: 100% !important;
+}
+
+.d_none {
+  display: none !important;
 }
 
 @import "elements/background";

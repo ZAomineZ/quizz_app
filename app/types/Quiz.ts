@@ -1,3 +1,5 @@
+import { Question } from "~/types/Question";
+
 export enum QuizDifficulty {
   Easy = "Facile",
   Medium = "Moyen",
@@ -10,4 +12,5 @@ export interface Quiz {
   slug: string;
   difficulty: QuizDifficulty;
   description: string;
+  questions?: Question[];
 }
