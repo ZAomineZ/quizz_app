@@ -15,7 +15,7 @@
                 class="img__fluid w_100 shadow"
                 width="600"
                 height="900"
-                src="https://demo.ramsthemes.com/projects/animace/wp-content/uploads/2022/01/Vagabond_-_Volume_1-600x900.jpg"
+                :src="`${runtimeConfig.public.apiURL}${quiz?.image}`"
                 alt=""
               />
             </div>
@@ -112,6 +112,7 @@
 import Card from "../Card/Card.vue";
 import { Quiz } from "~/types/Quiz";
 import { useRoute } from "nuxt/app";
+import { useRuntimeConfig } from "#app";
 
 interface Props {
   quiz?: Quiz;
@@ -120,6 +121,8 @@ interface Props {
 const route = useRoute();
 
 const props = withDefaults(defineProps<Props>(), {});
+
+const runtimeConfig = useRuntimeConfig();
 </script>
 
 <style scoped>

@@ -5,7 +5,7 @@
         class="img__fluid shadow__sm"
         width="500"
         height="347"
-        src="https://demo.ramsthemes.com/projects/animace/wp-content/uploads/2022/03/action-500x347.jpg"
+        :src="`${runtimeConfig.public.apiURL}${quiz?.image}`"
         alt=""
       />
     </NuxtLink>
@@ -21,12 +21,15 @@
 
 <script setup lang="ts">
 import { Quiz } from "~/types/Quiz";
+import { useRuntimeConfig } from "#app";
 
 interface Props {
   quiz: Quiz;
 }
 
 const props = withDefaults(defineProps<Props>(), {});
+
+const runtimeConfig = useRuntimeConfig();
 </script>
 
 <style scoped></style>

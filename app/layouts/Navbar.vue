@@ -1,22 +1,33 @@
 <template>
   <nav class="navbar navbar__height bg__navbar fixed__header">
-    <div class="navbar__position navbar__container container__fluid position__relative">
+    <div
+      class="navbar__position navbar__container container__fluid position__relative"
+    >
       <div class="row w_100 d_flex align_items_center mx_0">
         <div class="col_2 col_xl_3">
           <NuxtLink to="/" class="navbar__logo_left">
-            <img class="logo logo__loaded" src="https://demo.ramsthemes.com/projects/animace/wp-content/uploads/2021/11/a-logo-red.svg" alt="">
+            <img
+              class="logo logo__loaded logo__light"
+              src="https://demo.ramsthemes.com/projects/animace/wp-content/uploads/2021/11/a-logo-red.svg"
+              alt=""
+            />
+            <img
+              class="logo logo__loaded logo__dark"
+              src="https://demo.ramsthemes.com/projects/animace/wp-content/uploads/2021/11/a-logo-red-w.svg"
+              alt=""
+            />
           </NuxtLink>
         </div>
         <div class="col_5 col_xl_6">
-          <SearchNavbar/>
+          <SearchNavbar />
         </div>
         <div class="col_5 col_xl_3 my_auto">
           <div class="row d_flex align_items_center justify_content_end pr_3">
             <div class="col_auto px_1">
-              <ButtonSwitch/>
+              <ButtonSwitch @clickButton="handleModeDark" />
             </div>
             <div class="col_auto px_1">
-              <DropdownToggle/>
+              <DropdownToggle />
             </div>
           </div>
         </div>
@@ -30,6 +41,12 @@
 import SearchNavbar from "~/layouts/SearchNavbar.vue";
 import ButtonSwitch from "~/components/Button/ButtonSwitch.vue";
 import DropdownToggle from "~/components/Dropdown/DropdownToggle.vue";
+
+// Methods
+const handleModeDark = () => {
+  let body = document.querySelector("body");
+  body?.classList.toggle("is_dark");
+};
 </script>
 
 <style lang="scss" scoped>
@@ -39,7 +56,7 @@ import DropdownToggle from "~/components/Dropdown/DropdownToggle.vue";
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  padding: .5rem 1rem;
+  padding: 0.5rem 1rem;
 
   .navbar__container {
     display: flex;
@@ -75,11 +92,15 @@ import DropdownToggle from "~/components/Dropdown/DropdownToggle.vue";
 
   .logo {
     height: 50px;
-    transition: .3s;
+    transition: 0.3s;
   }
 
   .logo__loaded {
     display: block;
+  }
+
+  .logo__loaded.logo__dark {
+    display: none;
   }
 }
 

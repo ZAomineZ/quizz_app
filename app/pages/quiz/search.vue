@@ -65,7 +65,7 @@
                   <div>
                     <h6>Sort</h6>
                     <div class="input_group_search">
-                      <Select v-model="sortField">
+                      <Select class="form_control" v-model="sortField">
                         <option value="">Sort by</option>
                         <option value="title_a_z">Title (A-Z)</option>
                         <option value="title_z_a">Title (Z-A)</option>
@@ -81,7 +81,7 @@
                   <div>
                     <h6>Difficulty</h6>
                     <div class="input_group_search">
-                      <Select v-model="difficultyField">
+                      <Select class="form_control" v-model="difficultyField">
                         <option value="">Sort by</option>
                         <option :value="QuizDifficulty.Easy">
                           {{ QuizDifficulty.Easy }}
@@ -100,7 +100,7 @@
                   <div>
                     <h6>Years</h6>
                     <div class="input_group_search">
-                      <Select v-model="yearField">
+                      <Select class="form_control" v-model="yearField">
                         <option value="">Sort by</option>
                         <option :value="year" v-for="year in years">
                           {{ year }}

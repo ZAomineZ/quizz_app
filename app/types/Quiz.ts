@@ -12,5 +12,6 @@ export interface Quiz {
   slug: string;
   difficulty: QuizDifficulty;
   description: string;
+  image: string;
   questions?: Question[];
 }
