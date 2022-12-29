@@ -66,8 +66,8 @@
                                         <div class="col_md_6 mb_2">
                                             <label for="#" class="form_label">Image</label>
                                             <input type="file" name="image_upload" class="form_control">
-                                            @if (flashMessages.has('errors.image'))
-                                                <div class="invalid_feedback">{{ flashMessages.get('errors.image') }}</div>
+                                            @if (flashMessages.has('errors.image_upload'))
+                                                <div class="invalid_feedback">{{ flashMessages.get('errors.image_upload') }}</div>
                                             @endif
                                         </div>
                                         <div class="col_md_12">

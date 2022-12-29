@@ -68,4 +68,19 @@ body.is_dark {
   .quiz__bg_color {
     background: linear-gradient(0deg, rgba(35,35,35,1) 0%, rgba(48,48,48,1) 50%, rgba(35,35,35,1) 100%) !important;
   }
+
+  .form__wrapper .form__wrapper_headline {
+    color: #444;
+  }
+
+  .form__wrapper .form_field_input input {
+    font-size: 14px;
+    border-color: #dbdbdb;
+    background-color: #ffffff !important;
+    color: #69717a;
+  }
+
+  .form__bottom_links a {
+    color: #ffffff !important;
+  }
 }

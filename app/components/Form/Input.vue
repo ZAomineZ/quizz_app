@@ -15,6 +15,7 @@ interface Props {
   className?: string;
   placeholder?: string;
   modelValue?: string;
+  defaultValue?: string;
 }
 
 interface Events {
@@ -27,12 +28,13 @@ const props = withDefaults(defineProps<Props>(), {
   type: "text",
   className: "",
   placeholder: "",
-  modelValue: ""
+  modelValue: "",
+  defaultValue: ""
 });
 
 const value = computed({
   get() {
-    return props.modelValue;
+    return props.defaultValue ?? props.modelValue;
   },
   set(value) {
     emit("update:modelValue", value);

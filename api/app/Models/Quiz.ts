@@ -1,8 +1,8 @@
 import {
-  belongsTo,
-  BelongsTo,
-  column,
   BaseModel,
+  BelongsTo,
+  belongsTo,
+  column,
   HasMany
 } from "@ioc:Adonis/Lucid/Orm";
 import { QuizDifficulty } from "../enums/Quiz";
@@ -46,4 +46,11 @@ export default class Quiz extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime;
+
+  public nameImage(): string {
+    let image = this.image;
+    let imageParts = image.split("/");
+
+    return imageParts[imageParts.length - 1] ?? "";
+  }
 }
