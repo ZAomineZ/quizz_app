@@ -17,7 +17,9 @@
                                     <h3 class="card_title">Quiz</h3>
                                 </div>
                                 <div class="card_body">
-                                    <form action="{{ route('quiz.store') }}" method="POST" class="row was_validated needs__validation">
+                                    <form action="{{ route('quiz.store') }}" method="POST" class="row was_validated needs__validation" enctype="multipart/form-data">
+                                        {{ csrfField() }}
+
                                         <div class="col_md_6">
                                             <label for="#" class="form_label">Title</label>
                                             <input type="text" class="form_control" required placeholder="Your title..." name="title" value="{{ flashMessages.get('errors.title') ?? '' }}">
@@ -59,6 +61,13 @@
                                             </select>
                                             @if (flashMessages.has('errors.category'))
                                                 <div class="invalid_feedback">{{ flashMessages.get('errors.category') }}</div>
+                                            @endif
+                                        </div>
+                                        <div class="col_md_6 mb_2">
+                                            <label for="#" class="form_label">Image</label>
+                                            <input type="file" name="image_upload" class="form_control">
+                                            @if (flashMessages.has('errors.image'))
+                                                <div class="invalid_feedback">{{ flashMessages.get('errors.image') }}</div>
                                             @endif
                                         </div>
                                         <div class="col_md_12">

@@ -1,0 +1,39 @@
+.file_image {
+  display: inline-table;
+  position: relative;
+  border: 1px solid #ededf5;
+  border-radius: 5px;
+  height: 100px;
+  width: 100px;
+  margin: 20px;
+
+  img {
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100px;
+    width: 100px;
+  }
+
+  .file_name {
+    position: absolute;
+    font-size: 12px;
+    font-weight: 500;
+    left: 0;
+    right: 0;
+    text-align: center;
+    margin-bottom: 10px;
+    margin-top: 10px;
+  }
+}
+
+.file_image_lg {
+  height: 200px;
+  width: 200px;
+
+  img {
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 200px;
+    width: 200px;
+  }
+}

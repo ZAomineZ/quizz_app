@@ -1,18 +1,20 @@
 <template>
-  <a href="#" class="btn btn__custom btn_sm mr_2 mb_2">
-    <slot/>
+  <NuxtLink :to="link" class="btn btn__custom btn_sm mr_2 mb_2">
+    <slot />
     {{ label }}
-  </a>
+  </NuxtLink>
 </template>
 
 <script setup lang="ts">
-  interface Props {
-    label?: string
-  }
+interface Props {
+  label?: string;
+  link?: string;
+}
 
-  const props = withDefaults(defineProps<Props>(), {
-    label: ""
-  });
+const props = withDefaults(defineProps<Props>(), {
+  label: "",
+  link: ""
+});
 </script>
 
 <style scoped></style>

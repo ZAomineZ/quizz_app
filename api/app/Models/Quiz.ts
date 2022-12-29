@@ -30,6 +30,9 @@ export default class Quiz extends BaseModel {
   @column()
   public categoryId: number;
 
+  @column()
+  public image: string;
+
   @belongsTo(() => Category)
   public category: BelongsTo<typeof Category>;
 

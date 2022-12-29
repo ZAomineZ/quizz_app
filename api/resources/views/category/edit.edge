@@ -18,6 +18,8 @@
                                 </div>
                                 <div class="card_body">
                                     <form action="{{ route('category.update', {id: category.id}, {qs: {_method: 'PUT'}}) }}" class="row was_validated needs__validation" method="POST">
+                                        {{ csrfField() }}
+
                                         <div class="col_md_6">
                                             <label for="#" class="form_label">Name</label>
                                             <input type="text" class="form_control {{ flashMessages.has('errors.name') ? 'is_invalid' : '' }}" required placeholder="Your name..." name="name" value="{{ flashMessages.get('errors.name') ?? category.name }}">

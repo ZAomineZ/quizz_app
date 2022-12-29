@@ -161,11 +161,14 @@
                                                                         @include('../icons/pencil-icon.edge')
                                                                     </i>
                                                                 </a>
-                                                                <a href="#" class="btn btn_danger btn_sm">
-                                                                    <i>
-                                                                        @include('../icons/trash-icon')
-                                                                    </i>
-                                                                </a>
+                                                                <form action="{{ route('quiz.destroy', {id: quiz.id}, {qs: {_method: 'DELETE'}}) }}" method="POST" class="d_inline_block">
+                                                                    {{ csrfField() }}
+                                                                    <button type="submit" class="btn btn_danger btn_sm">
+                                                                        <i>
+                                                                            @include('../icons/trash-icon')
+                                                                        </i>
+                                                                    </a>
+                                                                </form>
                                                             </span>
                                                         </td>
                                                     </tr>
@@ -222,11 +225,14 @@
                                                                         @include('../icons/pencil-icon.edge')
                                                                     </i>
                                                                 </a>
-                                                                <a href="#" class="btn btn_danger btn_sm">
-                                                                    <i>
-                                                                        @include('../icons/trash-icon')
-                                                                    </i>
-                                                                </a>
+                                                                <form action="{{ route('category.destroy', {id: category.id}, {qs: {_method: 'DELETE'}}) }}" method="POST" class="d_inline_block">
+                                                                    {{ csrfField() }}
+                                                                    <button type="submit" class="btn btn_danger btn_sm">
+                                                                        <i>
+                                                                            @include('../icons/trash-icon')
+                                                                        </i>
+                                                                    </a>
+                                                                </form>
                                                             </span>
                                                         </td>
                                                 </tr>

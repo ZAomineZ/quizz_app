@@ -23,7 +23,10 @@
           <div class="col_12 col_md_8">
             <div class="my_auto">
               <div class="d_inline_block">
-                <ButtonBadge label="Commencer le quiz" />
+                <ButtonBadge
+                  label="Commencer le quiz"
+                  :link="`/quiz/${route.params?.id}/start`"
+                />
               </div>
             </div>
             <div class="row my_3">
@@ -108,10 +111,13 @@
 <script lang="ts" setup>
 import Card from "../Card/Card.vue";
 import { Quiz } from "~/types/Quiz";
+import { useRoute } from "nuxt/app";
 
 interface Props {
   quiz?: Quiz;
 }
+
+const route = useRoute();
 
 const props = withDefaults(defineProps<Props>(), {});
 </script>

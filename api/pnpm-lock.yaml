@@ -4,6 +4,7 @@ specifiers:
   '@adonisjs/assembler': ^5.9.5
   '@adonisjs/auth': ^8.2.3
   '@adonisjs/core': ^5.9.0
+  '@adonisjs/fold': ^8.2.0
   '@adonisjs/lucid': ^18.3.0
   '@adonisjs/repl': ^3.1.11
   '@adonisjs/session': ^6.4.0
@@ -29,6 +30,7 @@ specifiers:
   source-map-support: ^0.5.21
   toastify-js: ^1.12.0
   typescript: ~4.6.4
+  uuid: ^9.0.0
   webpack: ^5.75.0
   webpack-cli: ^4.10.0
   youch: ^3.2.2
@@ -37,6 +39,7 @@ specifiers:
 dependencies:
   '@adonisjs/auth': 8.2.3_lcevclddtf5pbfzmskqqerewrm
   '@adonisjs/core': 5.9.0
+  '@adonisjs/fold': 8.2.0
   '@adonisjs/lucid': 18.3.0_mpf4jt7vo2fjf6ni4jsazswo5u
   '@adonisjs/repl': 3.1.11_@adonisjs+core@5.9.0
   '@adonisjs/session': 6.4.0_@adonisjs+core@5.9.0
@@ -51,6 +54,7 @@ dependencies:
   sass-loader: 13.2.0_sass@1.57.1+webpack@5.75.0
   source-map-support: 0.5.21
   toastify-js: 1.12.0
+  uuid: 9.0.0
 
 devDependencies:
   '@adonisjs/assembler': 5.9.5_@adonisjs+core@5.9.0
@@ -7985,6 +7989,11 @@ packages:
     resolution: {integrity: sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==}
     hasBin: true
     dev: true
+
+  /uuid/9.0.0:
+    resolution: {integrity: sha512-MXcSTerfPa4uqyzStbRoTgt5XIe3x5+42+q1sDuy3R5MDk66URdLMOZe5aPX/SQd+kuYAh0FdP/pO28IkQyTeg==}
+    hasBin: true
+    dev: false
 
   /valid-url/1.0.9:
     resolution: {integrity: sha512-QQDsV8OnSf5Uc30CKSwG9lnhMPe6exHtTXLRYX8uMwKENy640pU+2BgBL0LRbDh/eYRahNCS7aewCx0wf3NYVA==}

@@ -18,6 +18,8 @@
                                 </div>
                                 <div class="card_body">
                                     <form action="{{ route('category.store') }}" class="row was_validated needs__validation" method="POST">
+                                        {{ csrfField() }}
+
                                         <div class="col_md_6">
                                             <label for="#" class="form_label">Title</label>
                                             <input type="text" class="form_control" required placeholder="Your name..." name="name">

@@ -32,7 +32,11 @@ export default class QuizValidator {
     difficulty: schema.enum(Object.values(QuizDifficulty)),
     category: schema.string({ trim: true }, [
       rules.exists({ table: "categories", column: "slug" })
-    ])
+    ]),
+    image_upload: schema.file({
+      size: "2mb",
+      extnames: ["jpg", "png"]
+    })
   });
 
   public messages: CustomMessages = {};
