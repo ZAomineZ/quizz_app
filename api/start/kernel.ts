@@ -43,4 +43,7 @@ Server.middleware.register([
 | Route.get('dashboard', 'UserController.dashboard').middleware('auth')
 |
 */
-Server.middleware.registerNamed({});
+Server.middleware.registerNamed({
+  // @ts-ignore
+  auth: () => import("App/Middleware/Auth")
+});

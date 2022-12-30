@@ -4,12 +4,18 @@
       <div class="row">
         <div class="col_12 col_lg_5 col_xl_4 order_2 order_lg_1 my_auto">
           <div class="d_flex align_items_center my_3">
-            <FormLogin/>
+            <FormLogin />
           </div>
         </div>
         <div class="col_12 col_lg_7 col_xl_8 order_1 order_lg_2 my_auto">
           <div class="d_flex align_items_center my_3">
-            <img class="img__fluid w_100" width="1024" height="650" src="https://demo.ramsthemes.com/projects/animace/wp-content/uploads/2021/11/matt-popovich-0FZrPECK5cg-unsplash-1024x650.jpg" alt="">
+            <img
+              class="img__fluid w_100"
+              width="1024"
+              height="650"
+              src="https://demo.ramsthemes.com/projects/animace/wp-content/uploads/2021/11/matt-popovich-0FZrPECK5cg-unsplash-1024x650.jpg"
+              alt=""
+            />
           </div>
         </div>
       </div>
@@ -18,9 +24,12 @@
 </template>
 
 <script lang="ts" setup>
-import FormLogin from '~/components/Auth/FormLogin.vue'
+import FormLogin from "~/components/Auth/FormLogin.vue";
+import { definePageMeta } from "#imports";
+
+definePageMeta({
+  middleware: ["guest"]
+});
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

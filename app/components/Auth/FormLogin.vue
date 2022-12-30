@@ -1,16 +1,35 @@
 <template>
   <div class="form__container">
-    <form action="#" method="POST" enctype="multipart/form-data">
+    <Alert :message="messageError" v-if="messageError" />
+    <form
+      action="#"
+      method="POST"
+      enctype="multipart/form-data"
+      @submit="handleSubmit"
+    >
       <div class="form__wrapper">
         <div class="form__wrapper_headline">Sign in to Your Account</div>
         <div class="form__field_wrap">
           <div class="form_field_input">
             <Input
               type="text"
-              placeholder="Username or Email"
-              class="form_control form__field"
+              placeholder="Email"
+              :class="`form_control form__field${
+                errorsValidation.find((error) => error.field === 'email')
+                  ? ' form_invalid'
+                  : ''
+              }`"
+              v-model="credentials.email"
             />
             <i class="fa fa-regular fa-face-smile"></i>
+          </div>
+          <div
+            class="invalid_feedback"
+            v-if="errorsValidation.find((error) => error.field === 'email')"
+          >
+            {{
+              errorsValidation.find((error) => error.field === "email").message
+            }}
           </div>
         </div>
         <div class="form__field_wrap">
@@ -18,9 +37,23 @@
             <Input
               type="password"
               placeholder="Password"
-              class="form_control form__field"
+              :class="`form_control form__field${
+                errorsValidation.find((error) => error.field === 'password')
+                  ? ' form_invalid'
+                  : ''
+              }`"
+              v-model="credentials.password"
             />
             <i class="fa fa-solid fa-eye"></i>
+          </div>
+          <div
+            class="invalid_feedback"
+            v-if="errorsValidation.find((error) => error.field === 'password')"
+          >
+            {{
+              errorsValidation.find((error) => error.field === "password")
+                .message
+            }}
           </div>
         </div>
         <div class="form__field_button_wrap">
@@ -40,6 +73,40 @@
 
 <script setup lang="ts">
 import Input from "~/components/Form/Input.vue";
+import { reactive, ref } from "vue";
+import { useRouter } from "nuxt/app";
+import { useAuth } from "~/composables/auth/useAuth";
+import Alert from "~/components/Message/Alert.vue";
+import { IValidationError } from "~/types/Error";
+import { navigateTo } from "#app";
+
+const router = useRouter();
+const { login } = useAuth();
+
+const credentials = reactive({
+  email: "",
+  password: ""
+});
+const messageError = ref<string | null>(null);
+const errorsValidation = ref<IValidationError[]>([]);
+
+// Methods
+const handleSubmit = async (e: SubmitEvent) => {
+  e.preventDefault();
+
+  const response = await login(credentials.email, credentials.password, false);
+  if (response.errors) {
+    // ERRORS VALIDATION
+    errorsValidation.value = response.errors;
+    return;
+  }
+  if (response.message) {
+    // MESSAGE ERROR
+    messageError.value = response.message;
+    return;
+  }
+  await navigateTo("/");
+};
 </script>
 
 <style scoped></style>

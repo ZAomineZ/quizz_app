@@ -27,7 +27,24 @@
               <ButtonSwitch @clickButton="handleModeDark" />
             </div>
             <div class="col_auto px_1">
-              <DropdownToggle />
+              <DropdownToggle>
+                <DropdownItem href="/register" v-if="!currentUser">
+                  <i class="fas fa-user-plus mr_2"></i>
+                  Register
+                </DropdownItem>
+                <DropdownItem href="/login" v-if="!currentUser">
+                  <i class="fas fa-sign-in-alt mr_2"></i>
+                  Login
+                </DropdownItem>
+                <DropdownItem
+                  href="/logout"
+                  v-if="currentUser"
+                  @click.prevent="handleLogout"
+                >
+                  <i class="fa fa-solid fa-right-from-bracket"></i>
+                  Logout
+                </DropdownItem>
+              </DropdownToggle>
             </div>
           </div>
         </div>
@@ -41,11 +58,23 @@
 import SearchNavbar from "~/layouts/SearchNavbar.vue";
 import ButtonSwitch from "~/components/Button/ButtonSwitch.vue";
 import DropdownToggle from "~/components/Dropdown/DropdownToggle.vue";
+import DropdownItem from "~/components/Dropdown/DropdownItem.vue";
+import { useAuth, useAuthUser } from "~/composables/auth";
+import { useRouter } from "nuxt/app";
+
+const router = useRouter();
+const currentUser = useAuthUser();
+const { logout } = useAuth();
 
 // Methods
 const handleModeDark = () => {
   let body = document.querySelector("body");
   body?.classList.toggle("is_dark");
+};
+
+const handleLogout = async () => {
+  await logout();
+  await router.push("/login");
 };
 </script>
 

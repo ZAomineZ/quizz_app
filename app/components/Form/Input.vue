@@ -34,7 +34,9 @@ const props = withDefaults(defineProps<Props>(), {
 
 const value = computed({
   get() {
-    return props.defaultValue ?? props.modelValue;
+    return props.defaultValue.length !== 0
+      ? props.defaultValue
+      : props.modelValue;
   },
   set(value) {
     emit("update:modelValue", value);

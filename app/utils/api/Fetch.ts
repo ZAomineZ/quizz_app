@@ -2,6 +2,7 @@ export async function getAPI(url: string, bearerToken: string | null = null) {
   let headers = new Headers();
   headers.append("Content-type", "application/json");
   if (bearerToken) {
+    console.log(bearerToken);
     headers.append("Authorization", `Bearer ${bearerToken}`);
   }
 
@@ -25,12 +26,7 @@ export async function postAPI(
     headers.delete("Content-type");
   }
   if (bearerToken) {
-    let bearerCSRFToken = document
-      ?.querySelector("meta[name='csrf-token']")
-      ?.getAttribute("content");
-
     headers.append("Authorization", `Bearer ${bearerToken}`);
-    if (bearerCSRFToken) headers.append("X-CSRF-TOKEN", bearerCSRFToken);
   }
 
   return await fetch(url, {

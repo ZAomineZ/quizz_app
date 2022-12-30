@@ -43,10 +43,15 @@ Route.post(
 Route.put("/api/:id/question", "Admin/QuestionsController.update").as(
   "question.update"
 );
+// ROUTES API AUTH
+Route.post("/api/register", "Api/AuthController.register");
+Route.post("/api/login", "Api/AuthController.login");
+Route.post("/api/logout", "Api/AuthController.logout");
+Route.get("/api/me", "Api/AuthController.me").middleware("auth:api");
 // ROUTES API QUIZ
 Route.get("/api/quiz/latest", "Api/QuizController.latest");
 Route.get("/api/quiz/sort", "Api/QuizSortController.index");
 Route.get("/api/quiz/:slug", "Api/QuizController.show");
 Route.get("/api/quiz/:slug/questions", "Api/QuizController.questions");
-// ROUTES
+// ROUTES API CATEGORY
 Route.get("/api/category", "Api/CategoryController.list");
