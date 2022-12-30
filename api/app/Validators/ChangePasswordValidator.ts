@@ -1,8 +1,12 @@
-import { schema, rules, CustomMessages } from "@ioc:Adonis/Core/Validator";
+import { CustomMessages, rules, schema } from "@ioc:Adonis/Core/Validator";
 import type { HttpContextContract } from "@ioc:Adonis/Core/HttpContext";
 
-export default class RegisterValidator {
+export default class ChangePasswordValidator {
   constructor(protected ctx: HttpContextContract) {}
+
+  public refs = schema.refs({
+    id: this.ctx.auth.user?.id ?? null
+  });
 
   /*
    * Define schema to validate the "shape", "type", "formatting" and "integrity" of data.
@@ -24,26 +28,19 @@ export default class RegisterValidator {
    *    ```
    */
   public schema = schema.create({
-    username: schema.string({ trim: true }, [
-      rules.unique({
-        table: "users",
-        column: "username",
-        caseInsensitive: true
-      }),
-      rules.maxLength(255)
+    password_current: schema.string({}, [
+      rules.minLength(8),
+      rules.maxLength(180)
     ]),
-    email: schema.string({ trim: true }, [
-      rules.email(),
-      rules.unique({
-        table: "users",
-        column: "email",
-        caseInsensitive: true
-      }),
-      rules.maxLength(255)
+    new_password: schema.string({}, [
+      rules.minLength(8),
+      rules.maxLength(180),
+      rules.confirmed("new_password_confirmation")
     ]),
-    first_name: schema.string({ trim: true }, [rules.maxLength(255)]),
-    last_name: schema.string({ trim: true }, [rules.maxLength(255)]),
-    password: schema.string({}, [rules.minLength(8), rules.maxLength(180)])
+    new_password_confirmation: schema.string({}, [
+      rules.minLength(8),
+      rules.maxLength(180)
+    ])
   });
 
   /**

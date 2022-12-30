@@ -89,6 +89,10 @@ body.dark_theme {
     border-color: #484863;
   }
 
+  .card_footer {
+    background-color: #2a2e3f;
+  }
+
   .card_header {
     background-color: #2a2e3f;
     border-bottom: 0;
@@ -191,6 +195,10 @@ body.dark_theme {
 
   .main_profile_menu .dropdown_item + .dropdown_item {
     border-top: 1px solid rgba(226, 234, 249, 0.2);
+  }
+
+  .main_nav_column .nav_item {
+    color: var(--primary-bg-color) !important;
   }
 }
 

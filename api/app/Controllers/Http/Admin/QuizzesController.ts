@@ -76,7 +76,6 @@ export default class QuizzesController {
     let quiz = await Quiz?.findOrFail(id);
 
     const payload = await request.validate(QuizValidator);
-    console.log(payload);
     // New upload image
     await this.uploadQuizService.delete(quiz.image);
     payload["image"] = await this.uploadQuizService.upload(payload);

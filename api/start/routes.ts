@@ -32,10 +32,27 @@ Route.get("/login", "AuthController.logInView")
   .as("loginView")
   .middleware("guest");
 Route.post("/login", "AuthController.logIn").as("login").middleware("guest");
-Route.post('/logout', "AuthController.logout").as('logout').middleware('auth:web');
+Route.post("/logout", "AuthController.logout")
+  .as("logout")
+  .middleware("auth:web");
 // Routes settings
-Route.get("/settings", "SettingsController.index")
-  .as("settings")
+Route.get(
+  "/settings/change-credentials",
+  "SettingsController.changeCredentialsView"
+)
+  .as("settings.changeCredentialsView")
+  .middleware(["auth:web", "adminRole"]);
+Route.get("/settings/change-password", "SettingsController.changePasswordView")
+  .as("settings.changePasswordView")
+  .middleware(["auth:web", "adminRole"]);
+Route.post(
+  "/settings/change-credentials",
+  "SettingsController.changeCredentials"
+)
+  .as("settings.changeCredentials")
+  .middleware(["auth:web", "adminRole"]);
+Route.post("/settings/change-password", "SettingsController.changePassword")
+  .as("settings.changePassword")
   .middleware(["auth:web", "adminRole"]);
 // Routes Dashboard
 Route.get("/dashboard", "Admin/DashboardController.index")

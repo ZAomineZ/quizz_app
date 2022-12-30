@@ -1,0 +1,34 @@
+<div class="main_content">
+    <div class="content">
+        <div class="container_fluid">
+            <div>
+                <div class="justify_content_between ">
+                    <div class="left_content">
+                        <span class="main_content_title mb_0">Settings</span>
+                    </div>
+                </div>
+                <div class="row_sm row">
+                    <div class="col_xl_3 col_lg_4 col_md_12 col_sm_12">
+                        <div class="mb_20 card">
+                            <div class="main_content_left main_content_left_setting card_body">
+                                <button type="button" id="btnSetting" class="btn btn_primary btn_compose">Settings</button>
+                                <div class="main_menu">
+                                    <label for="#" class="main_content_label main_content_label_sm form_label">Settings</label>
+                                    <div class="nav main_nav_column">
+                                        <div class="nav_item">
+                                            <a href="{{ route('settings.changeCredentialsView') }}" role="button" class="nav_link active">Email Settings</a>
+                                        </div>
+                                        <div class="nav_item">
+                                            <a href="{{ route('settings.changePasswordView') }}" role="button" class="nav_link">Password Settings</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{{ await $slots.main() }}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
