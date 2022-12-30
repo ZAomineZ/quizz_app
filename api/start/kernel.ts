@@ -45,5 +45,7 @@ Server.middleware.register([
 */
 Server.middleware.registerNamed({
   // @ts-ignore
-  auth: () => import("App/Middleware/Auth")
+  auth: () => import("App/Middleware/Auth"),
+  // @ts-ignore
+  guest: () => import("App/Middleware/Guest")
 });

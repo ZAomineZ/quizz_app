@@ -21,20 +21,33 @@
 import Route from "@ioc:Adonis/Core/Route";
 
 // Route register
-Route.get("/register", "AuthController.registerView").as("registerView");
-Route.post("/register", "AuthController.register").as("register");
+Route.get("/register", "AuthController.registerView")
+  .as("registerView")
+  .middleware("guest");
+Route.post("/register", "AuthController.register")
+  .as("register")
+  .middleware("guest");
 // Route login
-Route.get("/login", "AuthController.logInView").as("loginView");
-Route.post("/login", "AuthController.logIn").as("login");
+Route.get("/login", "AuthController.logInView")
+  .as("loginView")
+  .middleware("guest");
+Route.post("/login", "AuthController.logIn").as("login").middleware("guest");
 // Routes settings
-Route.get("/settings", "SettingsController.index").as("settings");
+Route.get("/settings", "SettingsController.index")
+  .as("settings")
+  .middleware("auth:web");
 // Routes Dashboard
-Route.get("/dashboard", "Admin/DashboardController.index").as("dashboard");
+Route.get("/dashboard", "Admin/DashboardController.index")
+  .as("dashboard")
+  .middleware("auth:web");
 // Routes quiz
-Route.resource("quiz", "Admin/QuizzesController").as("quiz");
+Route.resource("quiz", "Admin/QuizzesController")
+  .as("quiz")
+  .middleware({ "*": ["auth"] });
 // Routes category
-Route.resource("category", "Admin/CategoriesController").as("category");
-
+Route.resource("category", "Admin/CategoriesController")
+  .as("category")
+  .middleware({ "*": ["auth"] });
 // API ROUTES
 Route.post(
   "/api/question/:quizID/create",
@@ -53,5 +66,8 @@ Route.get("/api/quiz/latest", "Api/QuizController.latest");
 Route.get("/api/quiz/sort", "Api/QuizSortController.index");
 Route.get("/api/quiz/:slug", "Api/QuizController.show");
 Route.get("/api/quiz/:slug/questions", "Api/QuizController.questions");
+Route.post("/api/quiz/submit", "Api/QuizController.submit").middleware(
+  "auth:api"
+);
 // ROUTES API CATEGORY
 Route.get("/api/category", "Api/CategoryController.list");

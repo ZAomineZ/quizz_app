@@ -10,6 +10,7 @@ import Category from "./Category";
 import { DateTime } from "luxon";
 import { Question } from "./Question";
 import { hasMany } from "@adonisjs/lucid/build/src/Orm/Decorators";
+import User from "./User";
 
 export default class Quiz extends BaseModel {
   @column({ isPrimary: true })
@@ -31,10 +32,16 @@ export default class Quiz extends BaseModel {
   public categoryId: number;
 
   @column()
+  public user_id: number;
+
+  @column()
   public image: string;
 
   @belongsTo(() => Category)
   public category: BelongsTo<typeof Category>;
+
+  @belongsTo(() => User)
+  public user: BelongsTo<typeof User>;
 
   @hasMany(() => Question, {
     foreignKey: "quiz_id"

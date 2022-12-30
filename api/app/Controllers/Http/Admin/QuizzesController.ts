@@ -11,7 +11,9 @@ export default class QuizzesController {
   public constructor(protected uploadQuizService: UploadQuizImage) {}
 
   public async index({ view }: HttpContextContract) {
-    const quizzes = await Quiz.query().orderBy("created_at");
+    const quizzes = await Quiz.query()
+      .preload("category")
+      .orderBy("created_at");
 
     return view.render("quiz/index", { quizzes });
   }
@@ -22,14 +24,26 @@ export default class QuizzesController {
     return view.render("quiz/create", { categories });
   }
 
-  public async store({ request, response }: HttpContextContract) {
+  public async store({ request, response, auth }: HttpContextContract) {
     const payload = await request.validate(QuizValidator);
+
+    const category = await Category.query()
+      .where("slug", "=", payload.category)
+      .first();
+
+    if (!category) {
+      return response.redirect().back();
+    }
 
     // Image upload
     payload["image"] = await this.uploadQuizService.upload(payload);
     // @ts-ignore
     delete payload["image_upload"];
-    let quiz = await Quiz.create(payload);
+    let quiz = await Quiz.create({
+      ...payload,
+      user_id: auth.user?.id,
+      categoryId: category.id
+    });
 
     // Create one default question
     await Question.create({

@@ -3,12 +3,15 @@ import type { HttpContextContract } from "@ioc:Adonis/Core/HttpContext";
 import Category from "../../../Models/Category";
 import Quiz from "../../../Models/Quiz";
 import Database from "@ioc:Adonis/Lucid/Database";
-import User from '../../../Models/User';
-import { Question } from '../../../Models/Question';
+import User from "../../../Models/User";
+import { Question } from "../../../Models/Question";
 
 export default class DashboardController {
   public async index({ view }: HttpContextContract) {
-    const quizzes = await Quiz.query().orderBy("created_at").limit(10);
+    const quizzes = await Quiz.query()
+      .preload("category")
+      .orderBy("created_at")
+      .limit(10);
     const categories = await Category.query().orderBy("created_at").limit(10);
 
     // Count stats
@@ -20,10 +23,10 @@ export default class DashboardController {
     );
     let questionsCount = await Question.query().select(
       Database.raw("COUNT(*) as count")
-    )
+    );
     let usersCount = await User.query().select(
       Database.raw("COUNT(*) as count")
-    )
+    );
 
     return view.render("dashboard/index", {
       quizzes,

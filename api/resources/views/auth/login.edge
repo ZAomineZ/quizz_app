@@ -29,6 +29,8 @@
                         <h6 class="mb_4 font_semibold">Please sign in to continue.</h6>
                         <div class="mb_2">
                           <form action="{{ route('login') }}" method="POST">
+                            {{ csrfField() }}
+
                             <div class="form_group">
                               <label for="#" class="form_label">Email</label>
                               <input type="email" name="email" required placeholder="Enter your email" class="form_control" value="{{ flashMessages.get('email') ?? '' }}">
@@ -43,7 +45,7 @@
                                   <div class="invalid_feedback">{{ flashMessages.get('errors.password') }}</div>
                               @endif
                             </div>
-                            <button type="button" class="btn btn_primary btn_block">Sign In</button>
+                            <button type="submit" class="btn btn_primary btn_block">Sign In</button>
                           </form>
                         </div>
                       </div>
