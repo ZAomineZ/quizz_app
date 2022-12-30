@@ -47,8 +47,8 @@
                                             <span class="pulse"></span>
                                         </button>
                                     </div>
-                                    <div class="main_profile_menu nav nav_item ps_lg_2 dropdown">
-                                        <button type="button" class="nav_link d_flex profile_user btn">
+                                    <div class="main_profile_menu nav nav_item ps_lg_2 dropdown dropdown__items">
+                                        <button type="button" class="nav_link d_flex profile_user dropdown_toggle btn">
                                             <img src="https://react.spruko.com/nowa-ts/preview/static/media/2.3aeb713efd50cdbaf860.jpg" alt="">
                                         </button>
                                         <div class="dropdown_menu">
@@ -63,14 +63,17 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <a href="#" class="dropdown_item">
+                                            <a href="{{ route('settings') }}" class="dropdown_item">
                                                 <i class="far fa-sun"></i>
                                                 Settings
                                             </a>
-                                            <a href="#" role="button" class="dropdown_item">
-                                                <i class="far fa-arrow-alt-circle-left"></i>
-                                                Sign Out
-                                            </a>
+                                            <form action="{{ route('logout') }}" method="POST">
+                                                {{ csrfField() }}
+                                                <button role="button" class="dropdown_item">
+                                                    <i class="far fa-arrow-alt-circle-left"></i>
+                                                    Sign Out
+                                                </a>
+                                            </form>
                                         </div>
                                     </div>
                                 </ul>

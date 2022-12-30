@@ -49,6 +49,10 @@
   clear: both;
 }
 
+button.dropdown_item {
+  cursor: pointer;
+}
+
 .main_profile_menu .dropdown_item {
   display: flex;
   position: relative;

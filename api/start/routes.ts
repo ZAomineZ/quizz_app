@@ -32,30 +32,31 @@ Route.get("/login", "AuthController.logInView")
   .as("loginView")
   .middleware("guest");
 Route.post("/login", "AuthController.logIn").as("login").middleware("guest");
+Route.post('/logout', "AuthController.logout").as('logout').middleware('auth:web');
 // Routes settings
 Route.get("/settings", "SettingsController.index")
   .as("settings")
-  .middleware("auth:web");
+  .middleware(["auth:web", "adminRole"]);
 // Routes Dashboard
 Route.get("/dashboard", "Admin/DashboardController.index")
   .as("dashboard")
-  .middleware("auth:web");
+  .middleware(["auth:web", "adminRole"]);
+Route.get("/", "HomeController.index").as("home").middleware(["auth:web"]);
 // Routes quiz
 Route.resource("quiz", "Admin/QuizzesController")
   .as("quiz")
-  .middleware({ "*": ["auth"] });
+  .middleware({ "*": ["auth", "adminRole"] });
 // Routes category
 Route.resource("category", "Admin/CategoriesController")
   .as("category")
-  .middleware({ "*": ["auth"] });
+  .middleware({ "*": ["auth", "adminRole"] });
 // API ROUTES
-Route.post(
-  "/api/question/:quizID/create",
-  "Admin/QuestionsController.create"
-).as("question.create");
-Route.put("/api/:id/question", "Admin/QuestionsController.update").as(
-  "question.update"
-);
+Route.post("/api/question/:quizID/create", "Admin/QuestionsController.create")
+  .as("question.create")
+  .middleware(["auth:web", "adminRole"]);
+Route.put("/api/:id/question", "Admin/QuestionsController.update")
+  .as("question.update")
+  .middleware(["auth:web", "adminRole"]);
 // ROUTES API AUTH
 Route.post("/api/register", "Api/AuthController.register");
 Route.post("/api/login", "Api/AuthController.login");

@@ -102,6 +102,10 @@ body.dark_theme {
     border-right: 1px solid #3c3c60 !important;
   }
 
+  .border_bottom {
+    border-bottom: 1px solid rgba(234, 236, 241, 0.1) !important;
+  }
+
   .border {
     border: 1px solid rgba(234, 236, 241, 0.1) !important;
   }
@@ -167,6 +171,26 @@ body.dark_theme {
 
   .file_image {
     border: 1px solid #484863;
+  }
+
+  .dropdown_menu {
+    background-color: #272738;
+    color: #ffffff;
+    border: 1px solid #484863 !important;
+  }
+
+  .dropdown_item {
+    color: #ffffff !important;
+  }
+
+  .dropdown_menu:before {
+    background: #272738;
+    border-left: 1px solid #484863;
+    border-top: 1px solid #484863;
+  }
+
+  .main_profile_menu .dropdown_item + .dropdown_item {
+    border-top: 1px solid rgba(226, 234, 249, 0.2);
   }
 }
 
