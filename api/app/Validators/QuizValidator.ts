@@ -33,10 +33,17 @@ export default class QuizValidator {
     category: schema.string({ trim: true }, [
       rules.exists({ table: "categories", column: "slug" })
     ]),
-    image_upload: schema.file({
-      size: "2mb",
-      extnames: ["jpg", "png"]
-    })
+    is_public: schema.string.optional(),
+    image_upload:
+      this.refs?.id !== undefined
+        ? schema.file.optional({
+            size: "2mb",
+            extnames: ["jpg", "png"]
+          })
+        : schema.file({
+            size: "2mb",
+            extnames: ["jpg", "png"]
+          })
   });
 
   public messages: CustomMessages = {};

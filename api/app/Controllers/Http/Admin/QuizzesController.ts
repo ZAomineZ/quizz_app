@@ -42,7 +42,8 @@ export default class QuizzesController {
     let quiz = await Quiz.create({
       ...payload,
       user_id: auth.user?.id,
-      categoryId: category.id
+      categoryId: category.id,
+      is_public: payload.is_public === "on"
     });
 
     // Create one default question
@@ -77,12 +78,14 @@ export default class QuizzesController {
 
     const payload = await request.validate(QuizValidator);
     // New upload image
-    await this.uploadQuizService.delete(quiz.image);
-    payload["image"] = await this.uploadQuizService.upload(payload);
+    if (payload.image_upload) {
+      await this.uploadQuizService.delete(quiz.image);
+      payload["image"] = await this.uploadQuizService.upload(payload);
+    }
     // @ts-ignore
     delete payload["image_upload"];
     // Update quiz
-    await quiz.merge(payload);
+    await quiz.merge({ ...payload, is_public: payload.is_public === "on" });
     await quiz.save();
 
     return response.redirect(`/quiz/${id}/edit`);

@@ -10,6 +10,7 @@ import Category from "./Category";
 import { DateTime } from "luxon";
 import { Question } from "./Question";
 import { hasMany } from "@adonisjs/lucid/build/src/Orm/Decorators";
+import { slugify } from "@ioc:Adonis/Addons/LucidSlugify";
 import User from "./User";
 
 export default class Quiz extends BaseModel {
@@ -20,6 +21,11 @@ export default class Quiz extends BaseModel {
   public title: string;
 
   @column()
+  @slugify({
+    strategy: "dbIncrement",
+    fields: ["title"],
+    allowUpdates: true
+  })
   public slug: string;
 
   @column()
@@ -36,6 +42,9 @@ export default class Quiz extends BaseModel {
 
   @column()
   public image: string;
+
+  @column()
+  public is_public: boolean;
 
   @belongsTo(() => Category)
   public category: BelongsTo<typeof Category>;
@@ -56,7 +65,7 @@ export default class Quiz extends BaseModel {
 
   public nameImage(): string {
     let image = this.image;
-    let imageParts = image.split("/");
+    let imageParts = image?.split("/") ?? [];
 
     return imageParts[imageParts.length - 1] ?? "";
   }

@@ -15,7 +15,7 @@ export default class QuestionsController {
       bad_answer_1: "",
       bad_answer_2: "",
       bad_answer_3: "",
-      quizId: quiz.id
+      quiz_id: quiz.id
     });
 
     return response?.status(201).json({

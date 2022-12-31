@@ -29,6 +29,7 @@
                                                     <h3 class="card_title">Quiz</h3>
                                                 </div>
                                                 <div class="card_body">
+                                                    {{ flashMessages }}
                                                     <form action="{{ route('quiz.update', {id: quiz.id}, {qs: {_method: 'PUT'}}) }}" class="row was_validated needs__validation" method="POST" enctype="multipart/form-data">
                                                         {{ csrfField() }}
 
@@ -82,15 +83,30 @@
                                                                 <div class="invalid_feedback">{{ flashMessages.get('errors.image_upload') }}</div>
                                                             @endif
                                                         </div>
-                                                        <div class="col_md_6 mb_2">
-                                                            <div class="file_image file_image_lg">
-                                                                <div>
-                                                                    <a href="{{ quiz.image }}" target="_blank">
-                                                                        <img src="{{ quiz.image }}" alt="" class="br_5">
-                                                                    </a>
+                                                        @if (quiz.image)
+                                                            <div class="col_md_6 mb_2">
+                                                                <div class="file_image file_image_lg">
+                                                                    <div>
+                                                                        <a href="{{ quiz.image }}" target="_blank">
+                                                                            <img src="{{ quiz.image }}" alt="" class="br_5">
+                                                                        </a>
+                                                                    </div>
+                                                                    <span class="file_name">{{ quiz.nameImage() }}</span>
                                                                 </div>
-                                                                <span class="file_name">{{ quiz.nameImage() }}</span>
                                                             </div>
+                                                        @endif
+                                                        <div class="col_md_12 mb_2">
+                                                            <div class="checkbox">
+                                                                <div class="custom__control">
+                                                                    <input id="is_public" type="checkbox" class="custom__control_input form_control" name="is_public" {{ quiz?.is_public ? "checked" : "" }}>
+                                                                    <label for="is_public" class="custom__control_label mt_1 form_label">
+                                                                        is Public ?
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                            @if (flashMessages.has('errors.is_public'))
+                                                                <div class="invalid_feedback">{{ flashMessages.get('errors.is_public') }}</div>
+                                                            @endif
                                                         </div>
                                                         <div class="col_md_12">
                                                             <button type="submit" class="btn btn_primary mt_0 mb_0">Submit</button>
@@ -169,7 +185,8 @@
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
                 }
             })
             if (response.status === 201) {
@@ -218,6 +235,7 @@
                         headers: {
                             'Accept': 'application/json',
                             'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
                         },
                         body: JSON.stringify(body)
                     })

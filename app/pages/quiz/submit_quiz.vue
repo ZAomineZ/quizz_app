@@ -9,6 +9,9 @@
         <div class="d_flex align_items_center my_3">
           <QuizSubmitForm :categories="categories" />
         </div>
+        <div class="d_flex align_items_center my_3">
+          <QuizSubmitQuestion />
+        </div>
       </div>
     </div>
   </AppLayout>

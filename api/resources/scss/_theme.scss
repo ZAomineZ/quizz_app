@@ -200,6 +200,17 @@ body.dark_theme {
   .main_nav_column .nav_item {
     color: var(--primary-bg-color) !important;
   }
+
+  .custom__control_label:before {
+    background-color: #141524;
+    border: 1px solid #3c4358;
+  }
+
+  .custom__control_input:checked ~ .custom__control_label:before {
+    background-color: var(--primary-bg-color);
+    border-color: var(--primary-bg-color);
+    color: #ffffff;
+  }
 }
 
 @media only screen and (min-width: 992px) {

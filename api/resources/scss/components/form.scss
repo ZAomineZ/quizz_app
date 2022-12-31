@@ -64,6 +64,53 @@ textarea.form_control {
   height: auto;
 }
 
+.custom__control {
+  display: block;
+  position: relative;
+  min-height: 1.3125rem;
+  padding-left: 1.5rem;
+
+  .custom__control_input {
+    position: absolute;
+    opacity: 0;
+    z-index: -1;
+  }
+
+  .custom__control_label {
+    position: relative;
+    margin-bottom: 0;
+    vertical-align: top;
+  }
+
+  .custom__control_label:before {
+    background-color: #ffffff;
+    border: 1px solid #cdd4e2;
+    pointer-events: none;
+    border-radius: 3px;
+    transition: background-color 0.15s ease-in-out,
+      border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  }
+
+  .custom__control_label:after,
+  .custom__control_label:before {
+    content: "";
+    position: absolute;
+    display: block;
+    height: 1rem;
+    width: 1rem;
+    left: -1.5rem;
+    top: 0;
+  }
+
+  .custom__control_label:after {
+    background: no-repeat 50%/50% 50%;
+  }
+
+  .custom__control_input:checked ~ .custom__control_label:after {
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpath fill='%23fff' d='m6.564.75-3.59 3.612-1.538-1.55L0 4.26l2.974 2.99L8 2.193z'/%3E%3C/svg%3E");
+  }
+}
+
 .form_control.is_invalid {
   background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23fa5c7c' viewBox='-2 -2 7 7'%3E%3Cpath stroke='%23fa5c7c' d='m0 0 3 3m0-3L0 3'/%3E%3Ccircle r='.5'/%3E%3Ccircle cx='3' r='.5'/%3E%3Ccircle cy='3' r='.5'/%3E%3Ccircle cx='3' cy='3' r='.5'/%3E%3C/svg%3E");
   background-position: center right calc(0.375em + 0.1875rem);
