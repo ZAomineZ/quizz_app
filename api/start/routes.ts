@@ -84,8 +84,12 @@ Route.get("/api/quiz/latest", "Api/QuizController.latest");
 Route.get("/api/quiz/sort", "Api/QuizSortController.index");
 Route.get("/api/quiz/:slug", "Api/QuizController.show");
 Route.get("/api/quiz/:slug/questions", "Api/QuizController.questions");
-Route.post("/api/quiz/submit", "Api/QuizController.submit").middleware(
+Route.post("/api/quiz/submit", "Api/QuizSubmitController.submit").middleware(
   "auth:api"
 );
+Route.post(
+  "/api/quiz/:id/submit-question",
+  "Api/QuizSubmitController.submitQuestion"
+).middleware("auth:api");
 // ROUTES API CATEGORY
 Route.get("/api/category", "Api/CategoryController.list");

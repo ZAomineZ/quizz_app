@@ -90,6 +90,8 @@ interface Props {
 
 const props = withDefaults(defineProps<Props>(), {});
 
+const emit = defineEmits(["afterQuizSubmit"]);
+
 const quizSubmitAPI = new QuizSubmit();
 
 const credentials = reactive({
@@ -119,6 +121,7 @@ const handleSubmit = async () => {
 
   if (response.success) {
     message.value = response.message;
+    emit("afterQuizSubmit", response?.quizID);
   } else {
     messageError.value = response.message;
   }

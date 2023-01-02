@@ -18,4 +18,14 @@ export default class QuizSubmit {
       true
     );
   }
+
+  public async submitQuestion(quizID: number, body: object) {
+    const { token } = useAuth();
+
+    return await postAPI(
+      `${this.runtimeConfig.public.apiURL}/api/quiz/${quizID}/submit-question`,
+      body,
+      token.value
+    );
+  }
 }
