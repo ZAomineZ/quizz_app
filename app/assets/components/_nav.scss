@@ -1,0 +1,29 @@
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
+}
+
+.nav_link {
+  display: block;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem !important;
+
+  &.active {
+    color: #ffffff !important;
+    background-color: #dd3333 !important;
+    border-color: #dd3333 !important;
+    border-radius: .5rem !important;
+    font-weight: bold;
+  }
+}
+
+.nav_pills {
+  .nav_link {
+    background: #F1F1F1;
+    margin-right: 0.5rem;
+    border-radius: 0.25rem;
+  }
+}

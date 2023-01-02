@@ -136,7 +136,14 @@
             <div class="row">
               <div class="col_12">
                 <div class="my_3 text_center">
-                  <Pagination />
+                  <Pagination
+                    :totalPages="pagination?.last_page"
+                    :currentPage="pagination?.current_page"
+                    :handle-page="handlePage"
+                    :next-page="nextPage"
+                    :prev-page="prevPage"
+                    v-if="pagination?.last_page !== 1"
+                  />
                 </div>
               </div>
             </div>
@@ -200,16 +207,16 @@ const handleCategory = (category: string) => {
   else categoryField.value = category;
 };
 
-const sort = async () => {
+const sort = async (page = 1) => {
   queries.value = [];
   let query = queryData();
-  const quizzesSort = await quiz.sort(query);
+  const quizzesSort = await quiz.sort(query, page);
 
   quizzes.value = quizzesSort.quizzes.data;
   if (years.value.length === 0) {
     years.value = quizzesSort.years;
   }
-  pagination.value = quizzesSort.quizzes.pagination;
+  pagination.value = quizzesSort.quizzes.meta;
 };
 
 const queryData = () => {
@@ -242,6 +249,18 @@ const queryData = () => {
   });
 
   return resultQuery;
+};
+
+const handlePage = async (page: number) => {
+  await sort(page);
+};
+
+const nextPage = async (page: number) => {
+  await sort(page);
+};
+
+const prevPage = async (page: number) => {
+  await sort(page);
 };
 </script>
 

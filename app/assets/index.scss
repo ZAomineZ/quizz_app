@@ -348,6 +348,14 @@ th {
   display: none !important;
 }
 
+.fade {
+  transition: opacity .15s linear;
+
+  &:not(.show) {
+    opacity: 0;
+  }
+}
+
 @import "elements/background";
 @import "elements/column";
 @import "elements/content";
@@ -355,4 +363,6 @@ th {
 @import "components/form";
 @import "components/button";
 @import "components/table";
+@import "components/nav";
+@import "components/tab";
 @import "theme";

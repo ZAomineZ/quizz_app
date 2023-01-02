@@ -1,6 +1,8 @@
 // COMPONENTS
 import tab from "./components/tab.js";
 import dropdown from "./components/dropdown.js";
+// Modules
+import ToggleSideNav from "./modules/ToggleSideNav.js";
 
 // LIBS JS
 import Toastify from "toastify-js";

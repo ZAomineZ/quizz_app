@@ -12,10 +12,14 @@ export default class Quiz {
     return await getAPI(`${this.runtimeConfig.public.apiURL}/api/quiz/latest`);
   }
 
-  public async sort(query: string) {
-    return await getAPI(
-      `${this.runtimeConfig.public.apiURL}/api/quiz/sort?${query}`
-    );
+  public async sort(query: string, page: number = 1) {
+    let uri = `${this.runtimeConfig.public.apiURL}/api/quiz/sort?`;
+    if (page !== 1) {
+      uri += `page=${page}&`;
+    }
+    uri += `${query}`;
+
+    return await getAPI(uri);
   }
 
   public async show(slug: string) {

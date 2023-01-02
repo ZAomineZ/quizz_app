@@ -18,3 +18,17 @@
 .table__capitalize {
   text-transform: capitalize !important;
 }
+
+.table_responsive {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+}
+
+.table_bordered {
+  border: unset;
+
+  td, th {
+    border: 1px solid #dee2e6;
+  }
+}

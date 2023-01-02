@@ -1,12 +1,43 @@
 <template>
-  <span aria-current="page" class="page__numbers current">1</span>
-  <a href="#" class="page__numbers">2</a>
-  <a href="#" class="page__numbers">
+  <a
+    class="page__numbers"
+    v-if="currentPage !== 1"
+    @click="prevPage(currentPage - 1)"
+  >
+    <i class="fas fa-angle-left"></i>
+  </a>
+  <a
+    class="page__numbers"
+    v-for="page in totalPages"
+    v-if="page !== currentPage"
+    @click="handlePage(page)"
+    >{{ page }}</a
+  >
+  <span aria-current="page" class="page__numbers current" v-else>{{
+    currentPage
+  }}</span>
+  <a
+    class="page__numbers"
+    v-if="currentPage !== totalPages"
+    @click="nextPage(currentPage + 1)"
+  >
     <i class="fas fa-angle-right"></i>
   </a>
 </template>
 
 <script setup lang="ts">
+interface Props {
+  totalPages: number;
+  currentPage: number;
+  handlePage: (page: number) => void;
+  nextPage: (page: number) => void;
+  prevPage: (page: number) => void;
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  totalPages: 1,
+  currentPage: 1
+});
 </script>
 
 <style scoped lang="scss">
@@ -16,7 +47,7 @@
 .page__numbers li.active a,
 .page__numbers.disabled {
   display: inline-block;
-  padding: .25rem .75rem;
+  padding: 0.25rem 0.75rem;
   width: 35px;
   height: 35px;
   font-size: 16px;

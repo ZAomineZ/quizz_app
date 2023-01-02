@@ -211,6 +211,10 @@ body.dark_theme {
     border-color: var(--primary-bg-color);
     color: #ffffff;
   }
+
+  .sidenav_toggled_open .side_menu__label {
+    color: #a9abbd;
+  }
 }
 
 @media only screen and (min-width: 992px) {
