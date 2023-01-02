@@ -22,7 +22,7 @@
                           >
                         </li>
                         <li class="sidenav__menu_item">
-                          <NuxtLink href="/categories">Categories</NuxtLink>
+                          <NuxtLink href="/category">Categories</NuxtLink>
                         </li>
                         <li class="sidenav__menu_item">
                           <NuxtLink href="/ranking">Classement</NuxtLink>

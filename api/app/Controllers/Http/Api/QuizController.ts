@@ -2,6 +2,7 @@ import { HttpContextContract } from "@ioc:Adonis/Core/HttpContext";
 import Quiz from "../../../Models/Quiz";
 import { QuizState } from "../../../enums/QuizState";
 import { inject } from "@adonisjs/fold";
+import Category from "../../../Models/Category";
 
 @inject(["Upload/QuizImage"])
 export default class QuizController {
@@ -18,13 +19,34 @@ export default class QuizController {
     });
   }
 
+  public async byCategory({ response, params }: HttpContextContract) {
+    let limit = params?.limit ?? 18;
+    let page = params?.page ?? 1;
+    let categorySlug = params?.categorySlug;
+
+    let category = (await Category.query()
+      .where("slug", "=", categorySlug)
+      .first()) as Category;
+    let quizzes = await Quiz.query()
+      .where("category_id", "=", category?.id)
+      .paginate(page, limit);
+
+    return response.json({
+      success: true,
+      quizzes
+    });
+  }
+
   public async show({ response, params }: HttpContextContract) {
     let slug = params?.slug ?? null;
 
     let quiz = await Quiz.query()
       .where("slug", "=", slug)
-      .with("category", (builder) => {
-        builder.select("*");
+      .preload("category", (builder) => {
+        builder.select("name", "slug");
+      })
+      .preload("user", (builder) => {
+        builder.select("username");
       })
       .firstOrFail();
 

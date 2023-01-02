@@ -7,8 +7,26 @@
       </div>
       <div class="col">
         <div class="row">
-          <div class="col_12 mb_3">
-            <Lists :categories="categories" />
+          <div class="col_12 mb_3" v-for="category in categories">
+            <div class="row">
+              <div class="col_4 col_sm_3 col_md_2">
+                <div class="img__wrap">
+                  <NuxtLink :href="`/category/${category.slug}`">
+                    <img
+                      class="img__fluid shadow"
+                      src="https://demo.ramsthemes.com/projects/animace/wp-content/uploads/2022/06/Aina-Suzuki-300x300.jpg"
+                      alt=""
+                    />
+                  </NuxtLink>
+                </div>
+              </div>
+              <div class="col">
+                <div class="py_3">
+                  <h6>{{ category.name }}</h6>
+                  8 results
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

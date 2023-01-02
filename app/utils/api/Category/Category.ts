@@ -11,4 +11,16 @@ export default class Category {
   public async list() {
     return await getAPI(`${this.runtimeConfig.public.apiURL}/api/category`);
   }
+
+  public async showSlug(categorySlug: string) {
+    return await getAPI(
+      `${this.runtimeConfig.public.apiURL}/api/category/${categorySlug}`
+    );
+  }
+
+  public async quizzes(categorySlug: string) {
+    return await getAPI(
+      `${this.runtimeConfig.public.apiURL}/api/category/${categorySlug}/quizzes`
+    );
+  }
 }

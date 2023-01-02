@@ -3,7 +3,8 @@ import {
   BelongsTo,
   belongsTo,
   column,
-  HasMany
+  HasMany,
+  scope
 } from "@ioc:Adonis/Lucid/Orm";
 import { QuizDifficulty } from "../enums/Quiz";
 import Category from "./Category";
@@ -12,6 +13,7 @@ import { Question } from "./Question";
 import { hasMany } from "@adonisjs/lucid/build/src/Orm/Decorators";
 import { slugify } from "@ioc:Adonis/Addons/LucidSlugify";
 import User from "./User";
+import Database from "@ioc:Adonis/Lucid/Database";
 
 export default class Quiz extends BaseModel {
   @column({ isPrimary: true })
@@ -49,7 +51,9 @@ export default class Quiz extends BaseModel {
   @belongsTo(() => Category)
   public category: BelongsTo<typeof Category>;
 
-  @belongsTo(() => User)
+  @belongsTo(() => User, {
+    foreignKey: "user_id"
+  })
   public user: BelongsTo<typeof User>;
 
   @hasMany(() => Question, {
@@ -69,4 +73,20 @@ export default class Quiz extends BaseModel {
 
     return imageParts[imageParts.length - 1] ?? "";
   }
+
+  public static groupBy = scope((query, field: string) => {
+    query.distinct(field).groupBy(field);
+  });
+
+  public static groupByMonths = scope(
+    (query, userID: number, relatedAdmin: boolean = true) => {
+      query
+        .select(
+          Database.raw("COUNT(*) as count"),
+          Database.raw("EXTRACT(MONTH FROM created_at) as month")
+        )
+        .where("user_id", relatedAdmin ? "=" : "!=", userID)
+        .groupBy("id", "month");
+    }
+  );
 }

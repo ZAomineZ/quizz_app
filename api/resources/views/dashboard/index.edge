@@ -108,6 +108,18 @@
                         <div class="col_12 col_sm_12">
                             <div class="card">
                                 <div class="card_header">
+                                    <h4 class="card_title">Chart Quiz</h4>
+                                </div>
+                                <div class="card_body">
+                                <div id="chart_quiz_data"></div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col_12 col_sm_12">
+                            <div class="card">
+                                <div class="card_header">
                                     <h4 class="card_title">Quizzes</h4>
                                 </div>
                                 <div class="card_body pt_0">
@@ -248,4 +260,61 @@
             </div>
         </div>
     </div>
+@end
+
+@section('scripts')
+    <script type="text/javascript">
+        let chartQuizMonthUsers = {{{ chartQuizMonthUsers }}}
+
+        let options = {
+            series: [
+                {name: "Admin Quizzes", data: chartQuizMonthUsers.adminData},
+                {name: "Users Quizzes", data: chartQuizMonthUsers.usersData}
+            ],
+            chart: {
+                type: "bar",
+                height: 280
+            },
+            plotOptions: {
+                bar: {
+                    horizontal: false,
+                    columnWidth: '20%',
+                    endingShape: 'rounded'
+                },
+            },
+            legend: {
+                position: "top"
+            },
+            dataLabels: {
+                enabled: false
+            },
+            stroke: {
+                show: true,
+                width: 2,
+                colors: ['transparent']
+            },
+            xaxis: {
+                categories: chartQuizMonthUsers.months
+            },
+            colors: ["var(--primary-bg-color)", "rgb(228, 231, 237)"],
+            yaxis: {
+                title: {
+                    text: 'Count Quizzes'
+                }
+            },
+            fill: {
+                opacity: 1
+            },
+            tooltip: {
+                y: {
+                    formatter: function (val) {
+                        return val + " quizzes"
+                    }
+                }
+            }
+        }
+
+        let chart = new window.Apexchart(document.querySelector('#chart_quiz_data'), options)
+        chart.render()
+    </script>
 @end

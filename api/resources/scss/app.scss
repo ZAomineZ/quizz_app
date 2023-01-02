@@ -116,6 +116,11 @@ svg {
   vertical-align: middle;
 }
 
+svg {
+  overflow: hidden;
+  touch-action: none;
+}
+
 ol,
 ul {
   padding-left: 2rem;
@@ -174,6 +179,7 @@ strong {
 @import "components/dropdown";
 @import "components/icon";
 @import "components/image";
+@import "components/apexchart";
 @import "theme";
 
 // LIB CSS

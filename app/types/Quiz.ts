@@ -1,4 +1,6 @@
 import { Question } from "~/types/Question";
+import { Category } from "~/types/Category";
+import { User } from "~/types/User";
 
 export enum QuizDifficulty {
   Easy = "Facile",
@@ -13,5 +15,7 @@ export interface Quiz {
   difficulty: QuizDifficulty;
   description: string;
   image: string;
+  category?: Category;
   questions?: Question[];
+  user?: User;
 }

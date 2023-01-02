@@ -93,3 +93,14 @@ Route.post(
 ).middleware("auth:api");
 // ROUTES API CATEGORY
 Route.get("/api/category", "Api/CategoryController.list");
+Route.get("/api/category/:categorySlug", "Api/CategoryController.showSlug");
+Route.get(
+  "/api/category/:categorySlug/quizzes",
+  "Api/QuizController.byCategory"
+);
+// ROUTES API VIEWS
+Route.get(
+  "/api/category/:slug/view",
+  "Api/Views/CategoryViewController.createView"
+);
+Route.get("/api/quiz/:slug/view", "Api/Views/QuizViewController.createView");

@@ -7,3 +7,6 @@ import ToggleSideNav from "./modules/ToggleSideNav.js";
 // LIBS JS
 import Toastify from "toastify-js";
 window.Toastify = Toastify;
+
+import ApexCharts from "apexcharts";
+window.Apexchart = ApexCharts

@@ -18,15 +18,21 @@ import { onMounted, ref } from "vue";
 import { Quiz as QuizType } from "~/types/Quiz";
 import Quiz from "~/utils/api/Quiz/Quiz";
 import { useRoute } from "nuxt/app";
+import ViewQuiz from "~/utils/api/View/ViewQuiz";
 
 const route = useRoute();
 const QuizAPI = new Quiz();
+const viewQuizAPI = new ViewQuiz();
 
 const quiz = ref<QuizType | null>(null);
 
 onMounted(async () => {
-  const quizCurrent = await QuizAPI.show(route.params.id as string);
+  const quizID = route.params.id as string;
+  const quizCurrent = await QuizAPI.show(quizID);
   quiz.value = quizCurrent.quiz;
+
+  // ViewQuiz action api
+  await viewQuizAPI.addView(quizID);
 });
 </script>
 

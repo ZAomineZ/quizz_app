@@ -11,4 +11,18 @@ export default class CategoryController {
       categories
     });
   }
+
+  public async showSlug({ params, response }: HttpContextContract) {
+    let categorySlug = params?.categorySlug;
+
+    // Find category
+    let category = await Category.query()
+      .where("slug", "=", categorySlug)
+      .first();
+
+    return response.json({
+      success: true,
+      category
+    });
+  }
 }

@@ -53,20 +53,20 @@
                         </td>
                       </tr>
                       <tr>
-                        <th scope="row">Author</th>
+                        <th scope="row">Category</th>
                         <td>
                           <a
                             href="https://demo.ramsthemes.com/projects/animace/manga_authors/takehiko-inoue/"
-                            >Takehiko Inoue</a
+                            >{{ quiz?.category.name }}</a
                           >
                         </td>
                       </tr>
                       <tr>
-                        <th scope="row">Author</th>
+                        <th scope="row">User</th>
                         <td>
                           <a
                             href="https://demo.ramsthemes.com/projects/animace/manga_authors/takehiko-inoue/"
-                            >Takehiko Inoue</a
+                            >{{ quiz?.user.username }}</a
                           >
                         </td>
                       </tr>

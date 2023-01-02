@@ -215,6 +215,35 @@ body.dark_theme {
   .sidenav_toggled_open .side_menu__label {
     color: #a9abbd;
   }
+
+  .apexcharts-legend-text {
+    color: #eaecf3 !important;
+  }
+
+  .apexcharts-menu-icon svg {
+    fill: #a9abbd;
+  }
+
+  .apexcharts-menu {
+    background: #2a2e3f;
+    border: 1px solid #484863;
+  }
+
+  .apexcharts-menu-item:hover {
+    background: #2a2e3f !important;
+  }
+
+  .apexcharts-tooltip {
+    background: #2a2e3f !important;
+    border: 1px solid #484863 !important;
+    color: #ffffff !important;
+  }
+
+  .apexcharts-tooltip-title {
+    background: #2a2e3f !important;
+    border-bottom: #484863 !important;
+    color: #ffffff !important;
+  }
 }
 
 @media only screen and (min-width: 992px) {

@@ -6,10 +6,10 @@
         <div class="line my_3"></div>
       </div>
       <div class="col">
-        <ButtonBadge label="Filters">
+        <ButtonBadge label="Filters" @click="toggleFilters">
           <i class="fa fa-solid fa-arrow-down-wide-short"></i>
         </ButtonBadge>
-        <div class="collapse show">
+        <div class="collapse show" v-if="showFilter">
           <Card class-name="mb_3">
             <CardBody>
               <div class="row">
@@ -179,6 +179,7 @@ const quiz = new Quiz();
 const category = new Category();
 
 const quizzes = ref<QuizType[]>([]);
+const showFilter = ref<boolean>(true);
 const years = ref<string[]>([]);
 const categories = ref<CategoryType[]>();
 const pagination = ref<PaginationType | null>(null);
@@ -198,6 +199,10 @@ onMounted(async () => {
 });
 
 // Methods
+const toggleFilters = async () => {
+  showFilter.value = !showFilter.value;
+};
+
 const handleSubmit = async () => {
   await sort();
 };
