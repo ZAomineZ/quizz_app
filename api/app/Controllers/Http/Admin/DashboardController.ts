@@ -7,10 +7,14 @@ import User from "../../../Models/User";
 import { Question } from "../../../Models/Question";
 import { inject } from "@adonisjs/fold";
 import QuizCreateUsers from "../../../Services/Chart/QuizCreateUsers";
+import QuizByCategory from "../../../Services/Chart/QuizByCategory";
 
-@inject(["Chart/QuizCreateUsers"])
+@inject(["Chart/QuizCreateUsers", "Chart/QuizByCategory"])
 export default class DashboardController {
-  public constructor(protected quizCreateUsers: QuizCreateUsers) {}
+  public constructor(
+    protected quizCreateUsers: QuizCreateUsers,
+    protected quizByCategory: QuizByCategory
+  ) {}
 
   public async index({ view, auth }: HttpContextContract) {
     let user = auth?.user;
@@ -56,7 +60,25 @@ export default class DashboardController {
       monthsString
     );
 
-    // Charts Questions Data
+    // Charts quizzes by category Data
+    let quizzesCountByCategoryAdmin = await Quiz.query().withScopes(
+      (scopes) => {
+        scopes.groupByCategories(user?.id);
+      }
+    );
+    let quizzesCountByCategoryNotAdmin = await Quiz.query().withScopes(
+      (scopes) => {
+        scopes.groupByCategories(user?.id, false);
+      }
+    );
+    let categoriesGrouped = await Category.query().withScopes((scopes) => {
+      scopes.groupBy("name");
+    });
+    let chartQuizByCategoryUsers = this.quizByCategory.createData(
+      quizzesCountByCategoryAdmin,
+      quizzesCountByCategoryNotAdmin,
+      categoriesGrouped
+    );
 
     return view.render("dashboard/index", {
       quizzes,
@@ -65,7 +87,8 @@ export default class DashboardController {
       categoriesCount,
       usersCount,
       questionsCount,
-      chartQuizMonthUsers: JSON.stringify(chartQuizMonthUsers)
+      chartQuizMonthUsers: JSON.stringify(chartQuizMonthUsers),
+      chartQuizByCategoryUsers: JSON.stringify(chartQuizByCategoryUsers)
     });
   }
 }

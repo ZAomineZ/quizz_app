@@ -23,6 +23,11 @@ import { onMounted, ref } from "vue";
 import Quiz from "~/utils/api/Quiz/Quiz";
 import { Quiz as QuizType } from "~/types/Quiz";
 import { useRoute } from "nuxt/app";
+import { definePageMeta } from "#imports";
+
+definePageMeta({
+  middleware: ["auth"]
+});
 
 const route = useRoute();
 const quizAPI = new Quiz();

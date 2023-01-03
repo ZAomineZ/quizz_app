@@ -23,17 +23,22 @@ import { ref } from "vue";
 import { Category as CategoryType } from "~/types/Category";
 import { useRoute } from "nuxt/app";
 import { Quiz as QuizType } from "~/types/Quiz";
+import ViewCategory from "~/utils/api/View/ViewCategory";
 
 const route = useRoute();
 const params = route.params;
 const categoryAPI = new Category();
+const viewCategoryAPI = new ViewCategory();
 
 const categoryCurrent = ref<CategoryType | null>(null);
 const quizzes = ref<QuizType[]>([]);
 
 onMounted(async () => {
-  // Get category current
   let categorySlug = params?.id as string;
+  // Add views
+  await viewCategoryAPI.addView(categorySlug);
+
+  // Get category current
   const categoryBySlug = await categoryAPI.showSlug(categorySlug);
   categoryCurrent.value = categoryBySlug.category;
 

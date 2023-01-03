@@ -5,7 +5,7 @@
         <div class="list__item_left">
           <img
             class="img__res shadow__sm"
-            src="https://demo.ramsthemes.com/projects/animace/wp-content/uploads/2022/06/Aina-Suzuki-150x150.jpg"
+            :src="`${runtimeConfig.public.apiURL}${category?.image}`"
             alt=""
           />
         </div>
@@ -17,12 +17,15 @@
 
 <script setup lang="ts">
 import { Category } from "~/types/Category";
+import { useRuntimeConfig } from "#app";
 
 interface Props {
   category: Category;
 }
 
 const props = withDefaults(defineProps<Props>(), {});
+
+const runtimeConfig = useRuntimeConfig();
 </script>
 
 <style scoped lang="scss">

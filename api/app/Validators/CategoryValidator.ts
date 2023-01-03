@@ -4,6 +4,10 @@ import type { HttpContextContract } from "@ioc:Adonis/Core/HttpContext";
 export default class CategoryValidator {
   constructor(protected ctx: HttpContextContract) {}
 
+  public refs = schema.refs({
+    id: this.ctx.params.id ?? null
+  });
+
   /*
    * Define schema to validate the "shape", "type", "formatting" and "integrity" of data.
    *
@@ -40,7 +44,17 @@ export default class CategoryValidator {
       }),
       rules.maxLength(255)
     ]),
-    description: schema.string({ trim: true }, [rules.minLength(10)])
+    description: schema.string({ trim: true }, [rules.minLength(10)]),
+    image_upload:
+      this.refs?.id !== undefined
+        ? schema.file.optional({
+            size: "2mb",
+            extnames: ["jpg", "png"]
+          })
+        : schema.file({
+            size: "2mb",
+            extnames: ["jpg", "png"]
+          })
   });
 
   /**

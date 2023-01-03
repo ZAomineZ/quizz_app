@@ -13,7 +13,6 @@ export default class QuizViewController {
     const quiz = (await Quiz.query()
       .where("slug", "=", quizSlug)
       .first()) as Quiz;
-    console.log(quiz);
     const viewQuiz = await ViewsQuiz.query()
       .where("ip", "=", clientIP)
       .where("quiz_id", "=", quiz?.id)
@@ -53,18 +52,25 @@ export default class QuizViewController {
     let categoryFirstName = categories[0]?.name;
     let categorySecondName = categories[1]?.name;
 
-    let quizzesFirstCategory = await Quiz.query()
-      .where("category_id", "=", categoryFirstID)
-      .where("is_public", "=", QuizState.IS_PUBLIC)
-      .withCount("viewsQuiz")
-      .orderBy("viewsQuiz_count", "desc")
-      .limit(4);
-    let quizzesSecondCategory = await Quiz.query()
-      .where("category_id", "=", categorySecondID)
-      .where("is_public", "=", QuizState.IS_PUBLIC)
-      .withCount("viewsQuiz")
-      .orderBy("viewsQuiz_count", "desc")
-      .limit(4);
+    let quizzesFirstCategory = [] as Quiz[];
+    let quizzesSecondCategory = [] as Quiz[];
+
+    if (categoryFirstID) {
+      quizzesFirstCategory = await Quiz.query()
+        .where("category_id", "=", categoryFirstID)
+        .where("is_public", "=", QuizState.IS_PUBLIC)
+        .withCount("viewsQuiz")
+        .orderBy("viewsQuiz_count", "desc")
+        .limit(4);
+    }
+    if (categorySecondName) {
+      quizzesSecondCategory = await Quiz.query()
+        .where("category_id", "=", categorySecondID)
+        .where("is_public", "=", QuizState.IS_PUBLIC)
+        .withCount("viewsQuiz")
+        .orderBy("viewsQuiz_count", "desc")
+        .limit(4);
+    }
 
     return response.json({
       success: true,

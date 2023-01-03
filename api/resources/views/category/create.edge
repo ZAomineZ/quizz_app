@@ -17,7 +17,7 @@
                                     <h3 class="card_title">Category</h3>
                                 </div>
                                 <div class="card_body">
-                                    <form action="{{ route('category.store') }}" class="row was_validated needs__validation" method="POST">
+                                    <form action="{{ route('category.store') }}" class="row was_validated needs__validation" enctype="multipart/form-data" method="POST">
                                         {{ csrfField() }}
 
                                         <div class="col_md_6">
@@ -34,6 +34,13 @@
                                             <label for="#" class="form_label">Description</label>
                                             <textarea required class="form_control" placeholder="Your description..." name="description"></textarea>
                                             <div class="invalid_feedback">Please enter an message in the description</div>
+                                        </div>
+                                        <div class="col_md_6 mb_2">
+                                          <label for="#" class="form_label">Image</label>
+                                          <input type="file" name="image_upload" class="form_control">
+                                          @if (flashMessages.has('errors.image_upload'))
+                                              <div class="invalid_feedback">{{ flashMessages.get('errors.image_upload') }}</div>
+                                          @endif
                                         </div>
                                         <div class="col_md_12 mt_3">
                                             <button type="submit" class="btn btn_primary mt_0 mb_0">Submit</button>

@@ -1,8 +1,7 @@
 import { DateTime } from "luxon";
-import { column, BaseModel, HasMany } from "@ioc:Adonis/Lucid/Orm";
+import { column, BaseModel, HasMany, scope } from "@ioc:Adonis/Lucid/Orm";
 import ViewsCategory from "./ViewsCategory";
 import { hasMany } from "@adonisjs/lucid/build/src/Orm/Decorators";
-import ViewsQuiz from "./ViewsQuiz";
 
 export default class Category extends BaseModel {
   @column({ isPrimary: true })
@@ -17,6 +16,9 @@ export default class Category extends BaseModel {
   @column()
   public description: string;
 
+  @column()
+  public image: string;
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime;
 
@@ -27,4 +29,15 @@ export default class Category extends BaseModel {
     foreignKey: "category_id"
   })
   public viewsCategory: HasMany<typeof ViewsCategory>;
+
+  public nameImage(): string {
+    let image = this.image;
+    let imageParts = image?.split("/") ?? [];
+
+    return imageParts[imageParts.length - 1] ?? "";
+  }
+
+  public static groupBy = scope((query, field: string) => {
+    query.distinct(field).groupBy(field);
+  });
 }

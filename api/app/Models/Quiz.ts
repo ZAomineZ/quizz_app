@@ -38,7 +38,7 @@ export default class Quiz extends BaseModel {
   public difficulty: QuizDifficulty;
 
   @column()
-  public categoryId: number;
+  public category_id: number;
 
   @column()
   public user_id: number;
@@ -49,7 +49,9 @@ export default class Quiz extends BaseModel {
   @column()
   public is_public: boolean;
 
-  @belongsTo(() => Category)
+  @belongsTo(() => Category, {
+    foreignKey: "category_id"
+  })
   public category: BelongsTo<typeof Category>;
 
   @belongsTo(() => User, {
@@ -93,6 +95,18 @@ export default class Quiz extends BaseModel {
         )
         .where("user_id", relatedAdmin ? "=" : "!=", userID)
         .groupBy("id", "month");
+    }
+  );
+
+  public static groupByCategories = scope(
+    (query, userID: number, relatedAdmin: boolean = true) => {
+      query
+        // @ts-ignore
+        .preload("category")
+        .join("categories", "categories.id", "quizzes.category_id")
+        .select(Database.raw("COUNT(*) as count"), "quizzes.category_id")
+        .where("user_id", relatedAdmin ? "=" : "!=", userID)
+        .groupBy("quizzes.id", "categories.id", "categories.name");
     }
   );
 }

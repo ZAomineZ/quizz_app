@@ -2,6 +2,7 @@ import Quiz from "../../../Models/Quiz";
 import { ModelQueryBuilderContract } from "@ioc:Adonis/Lucid/Orm";
 import { QuizDifficulty } from "../../../enums/Quiz";
 import { HttpContextContract } from "@ioc:Adonis/Core/HttpContext";
+import { QuizState } from "../../../enums/QuizState";
 
 export default class QuizSortController {
   public async index({ response, request }: HttpContextContract) {
@@ -37,7 +38,9 @@ export default class QuizSortController {
       query = query.whereRaw(`extract(year from created_at) = ?`, [year]);
     }
 
-    let quizzes = await query.paginate(page, limit);
+    let quizzes = await query
+      .where("is_public", "=", QuizState.IS_PUBLIC)
+      .paginate(page, limit);
 
     let years = await Quiz.query().select("created_at").groupBy("created_at");
     years = years.map((row) => row.createdAt.toFormat("yyyy"));

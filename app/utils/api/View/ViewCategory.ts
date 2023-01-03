@@ -8,9 +8,9 @@ export default class ViewCategory {
     this.runtimeConfig = useRuntimeConfig();
   }
 
-  public async addView(categoryID: number) {
+  public async addView(categorySlug: string) {
     return await getAPI(
-      `${this.runtimeConfig.public.apiURL}/api/category/${categoryID}/view`
+      `${this.runtimeConfig.public.apiURL}/api/category/${categorySlug}/view`
     );
   }
 }
