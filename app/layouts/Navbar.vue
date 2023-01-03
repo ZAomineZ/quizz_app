@@ -7,13 +7,23 @@
         <div class="col_2 col_xl_3">
           <NuxtLink to="/" class="navbar__logo_left">
             <img
-              class="logo logo__loaded logo__light"
+              class="logo logo__loaded logo__light logo__full"
               src="https://demo.ramsthemes.com/projects/animace/wp-content/uploads/2021/11/a-logo-red.svg"
               alt=""
             />
             <img
-              class="logo logo__loaded logo__dark"
+              class="logo logo__loaded logo__dark logo__full"
               src="https://demo.ramsthemes.com/projects/animace/wp-content/uploads/2021/11/a-logo-red-w.svg"
+              alt=""
+            />
+            <img
+              class="logo logo__loaded logo__light logo__not_full"
+              src="https://demo.ramsthemes.com/projects/animace/wp-content/uploads/2021/11/a-logo-res.svg"
+              alt=""
+            />
+            <img
+              class="logo logo__loaded logo__dark logo__not_full"
+              src="https://demo.ramsthemes.com/projects/animace/wp-content/uploads/2021/11/a-logo-res.svg"
               alt=""
             />
           </NuxtLink>
@@ -148,6 +158,30 @@ const handleLogout = async () => {
 @media only screen and (min-width: 1386px) {
   .navbar .logo {
     width: 215px;
+  }
+}
+
+@media only screen and (min-width: 1385px) {
+  .logo__not_full.logo__loaded.logo__dark,
+  .logo__not_full.logo__loaded.logo__light {
+    display: none !important;
+  }
+}
+
+@media only screen and (max-width: 1385px) {
+  .logo__full.logo__loaded.logo__dark,
+  .logo__full.logo__loaded.logo__light {
+    display: none !important;
+  }
+}
+
+@media only screen and (max-width: 1699px) {
+  .fixed__header {
+    width: 100%;
+  }
+
+  .navbar__position {
+    padding: 0;
   }
 }
 </style>

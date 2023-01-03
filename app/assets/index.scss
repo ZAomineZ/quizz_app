@@ -164,7 +164,7 @@ th {
   width: 100%;
   margin-right: auto;
   margin-left: auto;
-  min-width: 100vh;
+  min-height: 100vh;
 }
 
 .wrapper {
@@ -373,6 +373,28 @@ th {
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
   body {
     overflow-x: hidden;
+  }
+}
+
+@media only screen and (max-width: 1385px) {
+  .container__general {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
+
+@media only screen and (max-width: 1699px) {
+  .pt_fixed {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 991px) {
+  .pt_fixed {
+    top: calc(70px * 1.15);
   }
 }
 

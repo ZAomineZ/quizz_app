@@ -2,6 +2,7 @@ import { HttpContextContract } from "@ioc:Adonis/Core/HttpContext";
 import ViewsQuiz from "../../../../Models/ViewsQuiz";
 import Quiz from "../../../../Models/Quiz";
 import Category from "../../../../Models/Category";
+import { QuizState } from "../../../../enums/QuizState";
 
 export default class QuizViewController {
   public async createView({ params, response, request }: HttpContextContract) {
@@ -54,11 +55,13 @@ export default class QuizViewController {
 
     let quizzesFirstCategory = await Quiz.query()
       .where("category_id", "=", categoryFirstID)
+      .where("is_public", "=", QuizState.IS_PUBLIC)
       .withCount("viewsQuiz")
       .orderBy("viewsQuiz_count", "desc")
       .limit(4);
     let quizzesSecondCategory = await Quiz.query()
       .where("category_id", "=", categorySecondID)
+      .where("is_public", "=", QuizState.IS_PUBLIC)
       .withCount("viewsQuiz")
       .orderBy("viewsQuiz_count", "desc")
       .limit(4);
