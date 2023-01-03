@@ -14,6 +14,7 @@ import { hasMany } from "@adonisjs/lucid/build/src/Orm/Decorators";
 import { slugify } from "@ioc:Adonis/Addons/LucidSlugify";
 import User from "./User";
 import Database from "@ioc:Adonis/Lucid/Database";
+import ViewsQuiz from "./ViewsQuiz";
 
 export default class Quiz extends BaseModel {
   @column({ isPrimary: true })
@@ -60,6 +61,11 @@ export default class Quiz extends BaseModel {
     foreignKey: "quiz_id"
   })
   public questions: HasMany<typeof Question>;
+
+  @hasMany(() => ViewsQuiz, {
+    foreignKey: "quiz_id"
+  })
+  public viewsQuiz: HasMany<typeof ViewsQuiz>;
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime;

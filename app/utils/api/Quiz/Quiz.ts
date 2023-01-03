@@ -12,6 +12,18 @@ export default class Quiz {
     return await getAPI(`${this.runtimeConfig.public.apiURL}/api/quiz/latest`);
   }
 
+  public async mostViews() {
+    return await getAPI(
+      `${this.runtimeConfig.public.apiURL}/api/quiz/mostViews`
+    );
+  }
+
+  public async mostViewTwoCategory() {
+    return await getAPI(
+      `${this.runtimeConfig.public.apiURL}/api/quiz/mostViewTwoCategory`
+    );
+  }
+
   public async sort(query: string, page: number = 1) {
     let uri = `${this.runtimeConfig.public.apiURL}/api/quiz/sort?`;
     if (page !== 1) {

@@ -25,4 +25,16 @@ export default class CategoryViewController {
 
     return response.ok({});
   }
+
+  public async mostViews({ response }: HttpContextContract) {
+    let categories = await Category.query()
+      .withCount("viewsCategory")
+      .orderBy("viewsCategory_count", "desc")
+      .limit(4);
+
+    return response.json({
+      success: true,
+      categories
+    });
+  }
 }

@@ -81,6 +81,11 @@ Route.post("/api/logout", "Api/AuthController.logout");
 Route.get("/api/me", "Api/AuthController.me").middleware("auth:api");
 // ROUTES API QUIZ
 Route.get("/api/quiz/latest", "Api/QuizController.latest");
+Route.get("/api/quiz/mostViews", "Api/Views/QuizViewController.mostViews");
+Route.get(
+  "/api/quiz/mostViewTwoCategory",
+  "Api/Views/QuizViewController.mostViewTwoCategory"
+);
 Route.get("/api/quiz/sort", "Api/QuizSortController.index");
 Route.get("/api/quiz/:slug", "Api/QuizController.show");
 Route.get("/api/quiz/:slug/questions", "Api/QuizController.questions");
@@ -93,6 +98,10 @@ Route.post(
 ).middleware("auth:api");
 // ROUTES API CATEGORY
 Route.get("/api/category", "Api/CategoryController.list");
+Route.get(
+  "/api/category/mostViews",
+  "Api/Views/CategoryViewController.mostViews"
+);
 Route.get("/api/category/:categorySlug", "Api/CategoryController.showSlug");
 Route.get(
   "/api/category/:categorySlug/quizzes",

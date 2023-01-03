@@ -12,6 +12,12 @@ export default class Category {
     return await getAPI(`${this.runtimeConfig.public.apiURL}/api/category`);
   }
 
+  public async mostViews() {
+    return await getAPI(
+      `${this.runtimeConfig.public.apiURL}/api/category/mostViews`
+    );
+  }
+
   public async showSlug(categorySlug: string) {
     return await getAPI(
       `${this.runtimeConfig.public.apiURL}/api/category/${categorySlug}`

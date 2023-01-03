@@ -3,7 +3,7 @@ import { DateTime } from "luxon";
 import Category from "./Category";
 
 export default class ViewsCategory extends BaseModel {
-  public static table = "views_category";
+  public static table = "views_categories";
 
   @column({ isPrimary: true })
   public id: number;
