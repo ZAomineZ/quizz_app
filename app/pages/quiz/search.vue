@@ -169,12 +169,16 @@ import Quiz from "~/utils/api/Quiz/Quiz";
 import { PaginationType } from "~/types/Pagination";
 import Category from "~/utils/api/Category/Category";
 import { QuizDifficulty } from "~/types/Quiz";
+import { useRoute } from "nuxt/app";
+import { useRuntimeConfig } from "#app";
 
 type Query = {
   value: string;
   key: string;
 };
 
+const route = useRoute();
+const runtimeConfig = useRuntimeConfig();
 const quiz = new Quiz();
 const category = new Category();
 
@@ -195,7 +199,7 @@ onMounted(async () => {
   const categoriesList = await category.list();
   categories.value = categoriesList.categories;
 
-  await sort();
+  await sort(1, true);
 });
 
 // Methods
@@ -212,8 +216,10 @@ const handleCategory = (category: string) => {
   else categoryField.value = category;
 };
 
-const sort = async (page = 1) => {
+const sort = async (page = 1, mounted: boolean = false) => {
   queries.value = [];
+  if (mounted) queryDataHistory();
+
   let query = queryData();
   const quizzesSort = await quiz.sort(query, page);
 
@@ -222,6 +228,25 @@ const sort = async (page = 1) => {
     years.value = quizzesSort.years;
   }
   pagination.value = quizzesSort.quizzes.meta;
+};
+
+const queryDataHistory = () => {
+  const query = route.query;
+  if (query) {
+    for (let q in query) {
+      let value = query[q] as string;
+
+      if (q === "s") search.value = value ?? "";
+
+      if (q === "sort") sortField.value = value ?? "";
+
+      if (q === "year") yearField.value = value ?? "";
+
+      if (q === "difficulty") difficultyField.value = value ?? "";
+
+      if (q === "categoryId") categoryField.value = value ?? "";
+    }
+  }
 };
 
 const queryData = () => {
@@ -252,6 +277,15 @@ const queryData = () => {
       resultQuery += "&";
     }
   });
+
+  // Add query for uri
+  let urlCurrent = runtimeConfig.public.currentURL + route.path;
+  let urlWithQuery = urlCurrent + "?" + resultQuery;
+  window.history.replaceState(
+    {},
+    "",
+    resultQuery.length === 0 ? urlCurrent : urlWithQuery
+  );
 
   return resultQuery;
 };

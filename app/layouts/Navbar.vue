@@ -29,7 +29,10 @@
           </NuxtLink>
         </div>
         <div class="col_5 col_xl_6">
-          <SearchNavbar />
+          <SearchNavbar
+            @submit.prevent="handleSubmitSearch"
+            v-model="searchValue"
+          />
         </div>
         <div class="col_5 col_xl_3 my_auto">
           <div class="row d_flex align_items_center justify_content_end pr_3">
@@ -76,10 +79,13 @@ import DropdownToggle from "~/components/Dropdown/DropdownToggle.vue";
 import DropdownItem from "~/components/Dropdown/DropdownItem.vue";
 import { useAuth, useAuthUser } from "~/composables/auth";
 import { useRouter } from "nuxt/app";
+import { ref } from "vue";
 
 const router = useRouter();
 const currentUser = useAuthUser();
 const { logout } = useAuth();
+
+const searchValue = ref<string>("");
 
 const emit = defineEmits(["hamburgerClick"]);
 
@@ -92,6 +98,10 @@ const handleModeDark = () => {
 const handleLogout = async () => {
   await logout();
   await router.push("/login");
+};
+
+const handleSubmitSearch = () => {
+  router.push(`/quiz/search?s=${searchValue.value}`);
 };
 </script>
 
