@@ -46,6 +46,11 @@
                 </DropdownItem>
               </DropdownToggle>
             </div>
+            <div class="col_auto px_2">
+              <div class="d_flex align_middle" @click="emit('hamburgerClick')">
+                <i class="fas fa-bars fa-lg hamburger_menu_right"></i>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -65,6 +70,8 @@ import { useRouter } from "nuxt/app";
 const router = useRouter();
 const currentUser = useAuthUser();
 const { logout } = useAuth();
+
+const emit = defineEmits(["hamburgerClick"]);
 
 // Methods
 const handleModeDark = () => {
@@ -131,6 +138,11 @@ const handleLogout = async () => {
   .logo__loaded.logo__dark {
     display: none;
   }
+}
+
+.hamburger_menu_right {
+  position: relative;
+  cursor: pointer;
 }
 
 @media only screen and (min-width: 1386px) {

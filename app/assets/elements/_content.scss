@@ -21,3 +21,9 @@
     max-width: 100vw;
   }
 }
+
+@media only screen and (max-width: 1385px) {
+  .navigation_sticky_top {
+    position: unset;
+  }
+}

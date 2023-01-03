@@ -15,7 +15,11 @@
       referrerpolicy="no-referrer"
     />
   </Head>
-  <Navbar />
+  <Navbar @hamburgerClick="handleHamburgerToggle" />
+  <SidebarRightResponsive
+    :show="sidebarBarRightActive"
+    @close="closeHamburgerMenu"
+  />
   <main class="pt_fixed">
     <div class="container__general">
       <div class="wrapper">
@@ -29,14 +33,27 @@
   </main>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import Navbar from "../layouts/Navbar";
 import SidebarContent from "~/layouts/SidebarContent";
+import SidebarRightResponsive from "~/layouts/SidebarRightResponsive";
 import Footer from "~/layouts/Footer";
 import "assets/index.scss";
 import { useRoute } from "nuxt/app";
+import { ref } from "vue";
 
 const route = useRoute();
+
+const sidebarBarRightActive = ref<boolean>(false);
+
+// Methods
+const handleHamburgerToggle = () => {
+  sidebarBarRightActive.value = !sidebarBarRightActive.value;
+};
+
+const closeHamburgerMenu = () => {
+  sidebarBarRightActive.value = false;
+};
 </script>
 
 <style scoped></style>

@@ -196,6 +196,10 @@ th {
   align-items: center !important;
 }
 
+.align_middle {
+  vertical-align: middle !important;
+}
+
 .justify_content_end {
   justify-content: end !important;
 }
@@ -307,6 +311,16 @@ th {
   padding-left: 0.25rem !important;
 }
 
+.pl_2,
+.px_2 {
+  padding-left: 0.5rem !important;
+}
+
+.pr_2,
+.px_2 {
+  padding-right: 0.5rem !important;
+}
+
 .pt_fixed {
   position: absolute;
   width: 1700px;
@@ -356,6 +370,12 @@ th {
   }
 }
 
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  body {
+    overflow-x: hidden;
+  }
+}
+
 @import "elements/background";
 @import "elements/column";
 @import "elements/content";
@@ -364,5 +384,6 @@ th {
 @import "components/button";
 @import "components/table";
 @import "components/nav";
+@import "components/sidebar";
 @import "components/tab";
 @import "theme";
