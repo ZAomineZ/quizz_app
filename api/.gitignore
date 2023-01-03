@@ -7,4 +7,5 @@ coverage
 tmp
 /.idea
 public/assets
+public/uploads
 .env.test
