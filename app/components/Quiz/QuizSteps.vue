@@ -56,7 +56,10 @@
                     class="next"
                     :disabled="!selectedAnswer"
                     @click="confirmAnswer"
-                    v-if="!submitAnswer"
+                    v-if="
+                      !submitAnswer &&
+                      currentQuestion !== quiz?.questions.length
+                    "
                   >
                     Confirm
                     <i class="fa fa-solid fa-arrow-right"></i>
@@ -67,7 +70,7 @@
                     v-if="
                       selectedAnswer &&
                       submitAnswer &&
-                      currentQuestion !== quiz?.questions.length - 1
+                      currentQuestion !== quiz?.questions.length
                     "
                     @click="nextQuestion"
                   >
@@ -78,7 +81,7 @@
                     type="button"
                     class="next"
                     @click="endQuiz"
-                    v-if="currentQuestion === quiz?.questions.length - 1"
+                    v-if="currentQuestion === quiz?.questions.length"
                     :disabled="!selectedAnswer"
                   >
                     Finish
@@ -99,13 +102,18 @@ import { Quiz } from "~/types/Quiz";
 import { ref, watch } from "vue";
 import { shuffle } from "~/utils/array/Array";
 import { Question } from "~/types/Question";
-import { useRouter } from "nuxt/app";
+import { useRoute, useRouter } from "nuxt/app";
+import QuizSessions from "~/utils/api/Quiz/QuizSessions";
 
 interface Props {
   quiz: Quiz;
 }
 
-const route = useRouter();
+const router = useRouter();
+const route = useRoute();
+let quizSlug = route.params.id as string;
+
+const quizSessions = new QuizSessions();
 
 const props = withDefaults(defineProps<Props>(), {});
 
@@ -117,53 +125,43 @@ let answers = ref<string[]>([]);
 
 watch(
   () => props.quiz,
-  (newValue) => {
+  async (newValue) => {
     // Clear state
     clearState();
-
-    let quiz = newValue as Quiz;
-    let answersData = [] as string[];
-    let questions = quiz?.questions;
-    let questionCurrent = questions
-      ? (questions[currentQuestion.value - 1] as Question)
-      : null;
-    if (questionCurrent) {
-      goodAnswer.value = questionCurrent.good_answer;
-      answersData = [
-        questionCurrent.good_answer,
-        questionCurrent.bad_answer_1,
-        questionCurrent.bad_answer_2,
-        questionCurrent.bad_answer_3
-      ];
-    }
-    answers.value = shuffle<string>(answersData as string[]);
+    await createAnswers(newValue, currentQuestion.value);
   }
 );
 
 watch(
   () => currentQuestion.value,
-  (newValue) => {
+  async (newValue) => {
     // Clear state
     clearState();
-
-    let quiz = props.quiz as Quiz;
-    let answersData = [] as string[];
-    let questions = quiz?.questions;
-    let questionCurrent = questions
-      ? (questions[newValue - 1] as Question)
-      : null;
-    if (questionCurrent) {
-      goodAnswer.value = questionCurrent.good_answer;
-      answersData = [
-        questionCurrent.good_answer,
-        questionCurrent.bad_answer_1,
-        questionCurrent.bad_answer_2,
-        questionCurrent.bad_answer_3
-      ];
-    }
-    answers.value = shuffle<string>(answersData as string[]);
+    await createAnswers(props.quiz, newValue);
   }
 );
+
+const createAnswers = async (quiz: Quiz, currentQuestion: number) => {
+  let answersData = [] as string[];
+  let questions = quiz?.questions;
+  let questionCurrent = questions
+    ? (questions[currentQuestion - 1] as Question)
+    : null;
+  if (questionCurrent) {
+    goodAnswer.value = questionCurrent.good_answer;
+    answersData = [
+      questionCurrent.good_answer,
+      questionCurrent.bad_answer_1,
+      questionCurrent.bad_answer_2,
+      questionCurrent.bad_answer_3
+    ];
+  }
+  answersData = answersData.filter((answer) => answer.length !== 0);
+  if (answersData.length === 0 && currentQuestion === 1) {
+    return await router.push(`/quiz/${quizSlug}`);
+  }
+  answers.value = shuffle<string>(answersData as string[]);
+};
 
 // Methods
 const clearState = () => {
@@ -176,8 +174,12 @@ const handleSelectedAnswer = (answer: string) => {
   selectedAnswer.value = answer;
 };
 
-const confirmAnswer = () => {
+const confirmAnswer = async () => {
   submitAnswer.value = true;
+  // Add good answer api
+  if (selectedAnswer.value === goodAnswer.value) {
+    await quizSessions.answerSuccess(quizSlug);
+  }
 };
 
 const nextQuestion = () => {
@@ -201,9 +203,15 @@ const prevQuestion = () => {
   }
 };
 
-const endQuiz = () => {
-  let fullPath = route.currentRoute.value.fullPath;
-  route.push(fullPath.replace("start", "end"));
+const endQuiz = async () => {
+  // Add good answer api
+  if (selectedAnswer.value === goodAnswer.value) {
+    await quizSessions.answerSuccess(quizSlug);
+  }
+  let fullPath = router.currentRoute.value.fullPath;
+  // Add end quiz api
+  await quizSessions.end(quizSlug);
+  await router.push(fullPath.replace("start", "end"));
 };
 </script>
 

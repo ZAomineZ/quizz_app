@@ -9,13 +9,15 @@
               <div class="done_tick"></div>
               <i class="fa fa-solid fa-check"></i>
             </div>
-            <h2>Success Quiz</h2>
+            <h2>Score {{ quizSession?.score }}/{{ quiz?.questions_count }}</h2>
             <p>
-              Don't be afried, Our Telemedical team also give your proper
-              guidline
+              Bravo tu as terminé le quiz "{{ quiz?.title }}", vous pouvez
+              trouver encore plus de quiz en retournant à l'accueil
             </p>
             <div>
-              <button class="back_home">Back Home</button>
+              <button class="back_home" @click.prevent="backHome">
+                Back Home
+              </button>
             </div>
           </div>
         </div>
@@ -24,7 +26,27 @@
   </section>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import {
+  Quiz as QuizType,
+  QuizSessions as QuizSessionsType
+} from "~/types/Quiz";
+import { useRouter } from "nuxt/app";
+
+const router = useRouter();
+
+interface Props {
+  quiz: QuizType;
+  quizSession: QuizSessionsType;
+}
+
+const props = withDefaults(defineProps<Props>(), {});
+
+// Methods
+const backHome = async () => {
+  await router.push("/");
+};
+</script>
 
 <style scoped lang="scss">
 .thankyou__page {

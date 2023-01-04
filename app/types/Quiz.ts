@@ -17,5 +17,13 @@ export interface Quiz {
   image: string;
   category?: Category;
   questions?: Question[];
+  questions_count?: string | number;
   user?: User;
+}
+
+export interface QuizSessions {
+  id: number;
+  start: boolean;
+  end: boolean;
+  score: number;
 }

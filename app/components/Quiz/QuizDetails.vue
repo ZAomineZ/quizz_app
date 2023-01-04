@@ -25,7 +25,7 @@
               <div class="d_inline_block">
                 <ButtonBadge
                   label="Commencer le quiz"
-                  :link="`/quiz/${route.params?.id}/start`"
+                  @click.prevent="startQuiz"
                 />
               </div>
             </div>
@@ -111,18 +111,30 @@
 <script lang="ts" setup>
 import Card from "../Card/Card.vue";
 import { Quiz } from "~/types/Quiz";
-import { useRoute } from "nuxt/app";
+import { useRoute, useRouter } from "nuxt/app";
 import { useRuntimeConfig } from "#app";
+import QuizSessions from "~/utils/api/Quiz/QuizSessions";
 
 interface Props {
   quiz?: Quiz;
 }
 
 const route = useRoute();
+const router = useRouter();
+const quizSessionsAPI = new QuizSessions();
 
 const props = withDefaults(defineProps<Props>(), {});
 
 const runtimeConfig = useRuntimeConfig();
+
+// METHODS
+const startQuiz = async () => {
+  let quizSlug = route.params.id as string;
+  const response = await quizSessionsAPI.start(quizSlug);
+  if (response.success) {
+    await router.push(`/quiz/${quizSlug}/start`);
+  }
+};
 </script>
 
 <style scoped>

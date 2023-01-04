@@ -113,3 +113,24 @@ Route.get(
   "Api/Views/CategoryViewController.createView"
 );
 Route.get("/api/quiz/:slug/view", "Api/Views/QuizViewController.createView");
+// ROUTES API QUIZZES SESSIONS
+Route.get(
+  "/api/quiz-sessions/:quizSlug/start",
+  "Api/QuizSessionsController.startQuiz"
+).middleware("auth:api");
+Route.get(
+  "/api/quiz-sessions/:quizSlug/check-started",
+  "Api/QuizSessionsController.startQuizChecked"
+).middleware("auth:api");
+Route.get(
+  "/api/quiz-sessions/:quizSlug/end",
+  "Api/QuizSessionsController.endQuiz"
+).middleware("auth:api");
+Route.get(
+  "/api/quiz-sessions/:quizSlug/check-ended",
+  "Api/QuizSessionsController.endQuizChecked"
+).middleware("auth:api");
+Route.get(
+  "/api/quiz-sessions/:quizSlug/answer-success",
+  "Api/QuizSessionsController.answerSuccess"
+).middleware("auth:api");

@@ -15,14 +15,39 @@
       referrerpolicy="no-referrer"
     />
   </Head>
-  <QuizEnd />
+  <QuizEnd :quiz="quiz" :quizSession="quizSession" />
 </template>
 
 <script lang="ts" setup>
-import { definePageMeta } from "#imports";
+import { definePageMeta, onMounted } from "#imports";
+import { useRoute, useRouter } from "nuxt/app";
+import QuizSessions from "~/utils/api/Quiz/QuizSessions";
+import { ref } from "vue";
+import {
+  Quiz as QuizType,
+  QuizSessions as QuizSessionsType
+} from "~/types/Quiz";
 
 definePageMeta({
   middleware: ["auth"]
+});
+
+const route = useRoute();
+const router = useRouter();
+const quizSessionsAPI = new QuizSessions();
+
+const quiz = ref<QuizType | null>(null);
+const quizSession = ref<QuizSessionsType | null>(null);
+
+onMounted(async () => {
+  let quizSlug = route.params.id as string;
+  // Check authorization
+  const checkEndedResponse = await quizSessionsAPI.checkEnded(quizSlug);
+  if (!checkEndedResponse.success) {
+    return await router.push(`/quiz/${quizSlug}`);
+  }
+  quiz.value = checkEndedResponse.quiz;
+  quizSession.value = checkEndedResponse.quizSession;
 });
 </script>
 

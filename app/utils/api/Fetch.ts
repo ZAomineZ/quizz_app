@@ -2,7 +2,6 @@ export async function getAPI(url: string, bearerToken: string | null = null) {
   let headers = new Headers();
   headers.append("Content-type", "application/json");
   if (bearerToken) {
-    console.log(bearerToken);
     headers.append("Authorization", `Bearer ${bearerToken}`);
   }
 

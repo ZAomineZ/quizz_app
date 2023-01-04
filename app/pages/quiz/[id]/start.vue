@@ -22,20 +22,30 @@
 import { onMounted, ref } from "vue";
 import Quiz from "~/utils/api/Quiz/Quiz";
 import { Quiz as QuizType } from "~/types/Quiz";
-import { useRoute } from "nuxt/app";
+import { useRoute, useRouter } from "nuxt/app";
 import { definePageMeta } from "#imports";
+import QuizSessions from "~/utils/api/Quiz/QuizSessions";
 
 definePageMeta({
   middleware: ["auth"]
 });
 
 const route = useRoute();
+const router = useRouter();
 const quizAPI = new Quiz();
+const quizSessionsAPI = new QuizSessions();
 
 const quiz = ref<QuizType | null>(null);
 
 onMounted(async () => {
-  let quizCurrent = await quizAPI.withQuestions(route.params.id as string);
+  let quizSlug = route.params.id as string;
+  // Check authorization
+  const checkStartedResponse = await quizSessionsAPI.checkStarted(quizSlug);
+  if (!checkStartedResponse.success) {
+    await router.push(`/quiz/${quizSlug}`);
+  }
+
+  let quizCurrent = await quizAPI.withQuestions(quizSlug);
   quiz.value = quizCurrent.quiz;
 });
 </script>

@@ -42,7 +42,7 @@ export default class QuizzesController {
     let quiz = await Quiz.create({
       ...payload,
       user_id: auth.user?.id,
-      categoryId: category.id,
+      category_id: category.id,
       is_public: payload.is_public === "on"
     });
 
