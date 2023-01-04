@@ -40,6 +40,10 @@
   justify-content: center !important;
 }
 
+.justify_content_between {
+  justify-content: space-between !important;
+}
+
 .align_items_center {
   align-items: center !important;
 }
@@ -80,6 +84,16 @@
 .mb_0,
 .my_0 {
   margin-bottom: 0 !important;
+}
+
+.ms_3,
+.mx_3 {
+  margin-left: 1rem !important;
+}
+
+.ms_auto,
+.mx_auto {
+  margin-left: auto !important;
 }
 
 .mr_1,
@@ -251,12 +265,24 @@
   border: 1px solid #ededf5 !important;
 }
 
+.border_0 {
+  border: 0 !important;
+}
+
 .br_5 {
   border-radius: 5px !important;
 }
 
+.br_round {
+  border-radius: 50%;
+}
+
 .shadow {
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.09) !important;
+}
+
+.box_shadow {
+  box-shadow: none;
 }
 
 .text_center {
@@ -265,6 +291,10 @@
 
 .text_nowrap {
   white-space: nowrap !important;
+}
+
+.text_muted {
+  color: #6c757d !important;
 }
 
 .tx_12 {

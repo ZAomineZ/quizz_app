@@ -67,6 +67,10 @@ Route.resource("quiz", "Admin/QuizzesController")
 Route.resource("category", "Admin/CategoriesController")
   .as("category")
   .middleware({ "*": ["auth", "adminRole"] });
+// Routes notifications
+Route.get('/notifications', "Admin/NotificationsController.index")
+.as('notifications')
+.middleware(["auth:web", "adminRole"])
 // API ROUTES
 Route.post("/api/question/:quizID/create", "Admin/QuestionsController.create")
   .as("question.create")

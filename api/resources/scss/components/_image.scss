@@ -37,3 +37,22 @@
     width: 200px;
   }
 }
+
+.avatar {
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100%;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  height: 36px;
+  width: 36px;
+}
+
+.avatar_md {
+  font-size: 20px !important;
+  height: 48px !important;
+  width: 48px !important;
+}

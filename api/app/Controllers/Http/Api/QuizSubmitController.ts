@@ -34,7 +34,7 @@ export default class QuizSubmitController {
     // Create quiz
     const quiz = await Quiz.create({
       ...payload,
-      categoryId: category.id,
+      category_id: category.id,
       user_id: user?.id
     });
 

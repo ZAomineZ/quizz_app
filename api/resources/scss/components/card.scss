@@ -92,6 +92,23 @@
     top: 21px;
   }
 
+  .card_options {
+    display: flex;
+    align-self: center;
+    color: #a8afc7;
+    margin-left: auto;
+    margin-right: -0.5rem;
+    order: 100;
+  }
+
+  .card_options a:not(.btn) {
+    display: inline-block;
+    color: #505069;
+    margin-left: 0;
+    min-width: 1rem;
+    padding: 0 15px;
+  }
+
   .card_body {
     flex: 1 1 auto;
     padding: 1.25rem;

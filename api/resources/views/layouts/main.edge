@@ -46,7 +46,7 @@
                                         </a>
                                     </li>
                                     <div class="dropdown nav_item d_flex">
-                                        <button type="button" class="nav_link btn">
+                                        <button type="button" class="nav_link btn" id="sidebar_notifications_button">
                                             @include('../icons/bell-icon.edge')
                                             <span class="pulse"></span>
                                         </button>
@@ -126,12 +126,126 @@
                                     <span class="side_menu__label">Create</span>
                                 </a>
                             </li>
+                            <li class="side_item side_item_category">Notifications</li>
+                            <li class="slide">
+                                <a href="{{ route('notifications') }}" class="side_menu__item is_expanded">
+                                    @include('../icons/list-icon.edge')
+                                    <span class="side_menu__label">Listing</span>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </aside>
             </div>
         </div>
         @!section('body')
+        <div>
+            <div class="sidebar_right sidebar_animate" id="sidebar_notification">
+                <div class="card mb_0 box_shadow">
+                    <div class="tab_menu_heading border_0 p_3">
+                        <div class="card_title mb_0">Notifications</div>
+                        <div class="card_options ms_auto">
+                            <a href="#" class="sidebar_right_remove">
+                                <i class="fa fa-solid fa-xmark"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="tab_menu_body p_0 border_0">
+                        <div class="tabs_menu">
+                            <div class="panel_tabs nav" role="tablist">
+                                <div class="nav_item">
+                                    <a href="#" role="tab" class="nav_link active">
+                                        @include('icons/bell-icon-menu')
+                                        Notifications
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="tab_content">
+                                <div role="tabpanel" class="fade tab_pane active show">
+                                    <div>
+                                        <div class="list d_flex align_items_center border_bottom p_3">
+                                            <div>
+                                                <span class="avatar bg_primary br_round avatar_md">CH</span>
+                                            </div>
+                                            <a href="#" class="wrapper w_100 ms_3">
+                                                <p class="mb_0 d_flex">
+                                                    <b>New notification</b>
+                                                </p>
+                                                <div class="d_flex justify_content_between align_items_center">
+                                                    <div class="d_flex align_items_center">
+                                                        <small class="text_muted ms_auto">30 mins ago</small>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="list d_flex align_items_center border_bottom p_3">
+                                            <div>
+                                                <span class="avatar bg_primary br_round avatar_md">CH</span>
+                                            </div>
+                                            <a href="#" class="wrapper w_100 ms_3">
+                                                <p class="mb_0 d_flex">
+                                                    <b>New notification</b>
+                                                </p>
+                                                <div class="d_flex justify_content_between align_items_center">
+                                                    <div class="d_flex align_items_center">
+                                                        <small class="text_muted ms_auto">30 mins ago</small>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="list d_flex align_items_center border_bottom p_3">
+                                            <div>
+                                                <span class="avatar bg_primary br_round avatar_md">CH</span>
+                                            </div>
+                                            <a href="#" class="wrapper w_100 ms_3">
+                                                <p class="mb_0 d_flex">
+                                                    <b>New notification</b>
+                                                </p>
+                                                <div class="d_flex justify_content_between align_items_center">
+                                                    <div class="d_flex align_items_center">
+                                                        <small class="text_muted ms_auto">30 mins ago</small>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="list d_flex align_items_center border_bottom p_3">
+                                            <div>
+                                                <span class="avatar bg_primary br_round avatar_md">CH</span>
+                                            </div>
+                                            <a href="#" class="wrapper w_100 ms_3">
+                                                <p class="mb_0 d_flex">
+                                                    <b>New notification</b>
+                                                </p>
+                                                <div class="d_flex justify_content_between align_items_center">
+                                                    <div class="d_flex align_items_center">
+                                                        <small class="text_muted ms_auto">30 mins ago</small>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="list d_flex align_items_center border_bottom p_3">
+                                            <div>
+                                                <span class="avatar bg_primary br_round avatar_md">CH</span>
+                                            </div>
+                                            <a href="#" class="wrapper w_100 ms_3">
+                                                <p class="mb_0 d_flex">
+                                                    <b>New notification</b>
+                                                </p>
+                                                <div class="d_flex justify_content_between align_items_center">
+                                                    <div class="d_flex align_items_center">
+                                                        <small class="text_muted ms_auto">30 mins ago</small>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="main_footer">
             <div class="text_center col_md_12 col_sm_12">
                 <div class="container_fluid pt_0 h_100">

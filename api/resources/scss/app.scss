@@ -158,6 +158,12 @@ strong {
   font-weight: bolder;
 }
 
+.small, small {
+  font-size: 80%;
+  font-weight: 400;
+  opacity: .6;
+}
+
 @media (min-width: 1200px) {
   .h2,
   h2 {

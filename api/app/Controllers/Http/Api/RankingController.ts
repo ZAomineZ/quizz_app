@@ -2,6 +2,7 @@ import { HttpContextContract } from "@ioc:Adonis/Core/HttpContext";
 import QuizzesSessions from "../../../Models/QuizzesSessions";
 import Database from "@ioc:Adonis/Lucid/Database";
 import Quiz from "../../../Models/Quiz";
+import { QuizState } from "../../../enums/QuizState";
 
 export default class RankingController {
   public async scores({ response, request }: HttpContextContract) {
@@ -65,6 +66,7 @@ export default class RankingController {
         builder.select("username");
       })
       .groupBy("user_id")
+      .where("is_public", "=", QuizState.IS_PUBLIC)
       .paginate(page, limit);
 
     let quizzesSerialize = quizzes.serialize(this.serialize());
