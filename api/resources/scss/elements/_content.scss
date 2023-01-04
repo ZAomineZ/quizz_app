@@ -273,6 +273,10 @@
   border-radius: 5px !important;
 }
 
+.bd_t_0 {
+  border-top: 0 !important;
+}
+
 .br_round {
   border-radius: 50%;
 }
@@ -367,6 +371,10 @@
     line-height: 2;
     margin-bottom: 20px;
     text-indent: -1px;
+  }
+
+  .main_content_body {
+    flex: 1 1 !important;
   }
 
   .main_content_left {
@@ -523,6 +531,10 @@
     .main_menu .nav_link {
       font-size: 13.5px;
     }
+  }
+
+  .mb_lg_30 {
+    margin-bottom: 30px;
   }
 }
 

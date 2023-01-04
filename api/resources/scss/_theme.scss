@@ -287,6 +287,39 @@ body.dark_theme {
   .tab_menu_heading {
     border-bottom: 0 solid #e9edf4 !important;
   }
+
+  .notification_pagination a.btn_np {
+    border: 1px solid var(--primary-color);
+  }
+
+  .main_notifications_list {
+    border: 1px solid #484863;
+  }
+
+  .main_notification_item {
+    border-bottom: 1px solid #484863;
+    border-top: 1px solid #484863;
+  }
+
+  .main_notification_subject strong  {
+    color: hsla(0, 0%, 100%, .7);
+  }
+
+  .main_notification_subject span  {
+    color: hsla(0, 0%, 100%, .6);
+  }
+
+  .pagination .page_link {
+    border: 1px solid rgba(226, 232, 245, .2);
+    background-color: #2a2e3f;
+    color: #fff;
+  }
+
+  .pagination .page_item.disabled .page_link {
+    background: #383d52 !important;
+    border-color: #3c465d;
+    color: #555d6f;
+  }
 }
 
 @media only screen and (min-width: 992px) {
