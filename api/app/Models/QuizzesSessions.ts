@@ -4,6 +4,11 @@ import User from "./User";
 import Quiz from "./Quiz";
 
 export default class QuizzesSessions extends BaseModel {
+  /**
+   * Serialize the `$extras` object as it is
+   */
+  public serializeExtras = true;
+
   @column({ isPrimary: true })
   public id: number;
 

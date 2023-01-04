@@ -17,6 +17,11 @@ import Database from "@ioc:Adonis/Lucid/Database";
 import ViewsQuiz from "./ViewsQuiz";
 
 export default class Quiz extends BaseModel {
+  /**
+   * Serialize the `$extras` object as it is
+   */
+  public serializeExtras = true;
+
   @column({ isPrimary: true })
   public id: number;
 

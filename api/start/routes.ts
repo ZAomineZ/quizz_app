@@ -134,3 +134,10 @@ Route.get(
   "/api/quiz-sessions/:quizSlug/answer-success",
   "Api/QuizSessionsController.answerSuccess"
 ).middleware("auth:api");
+// ROUTES API RANKING
+Route.get("/api/ranking/scores", "Api/RankingController.scores");
+Route.get(
+  "/api/ranking/participations",
+  "Api/RankingController.participations"
+);
+Route.get("/api/ranking/publications", "Api/RankingController.publications");

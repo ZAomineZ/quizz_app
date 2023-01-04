@@ -12,8 +12,6 @@
   </AppLayout>
 </template>
 
-<script setup lang="ts">
-import QuizDetails from "/components/Ranking/RankingUsers.vue";
-</script>
+<script setup lang="ts"></script>
 
 <style scoped></style>
