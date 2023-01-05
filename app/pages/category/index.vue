@@ -14,7 +14,7 @@
                   <NuxtLink :href="`/category/${category.slug}`">
                     <img
                       class="img__fluid shadow"
-                      src="https://demo.ramsthemes.com/projects/animace/wp-content/uploads/2022/06/Aina-Suzuki-300x300.jpg"
+                      :src="`${runtimeConfig.public.apiURL}${category?.image}`"
                       alt=""
                     />
                   </NuxtLink>
@@ -52,10 +52,13 @@ import Lists from "~/components/Lists/Lists.vue";
 import { onMounted, ref } from "vue";
 import { Category as CategoryType } from "~/types/Category";
 import Category from "~/utils/api/Category/Category";
+import { useRuntimeConfig } from "#app";
 
 const categoryAPI = new Category();
 
 const categories = ref<CategoryType[]>([]);
+
+const runtimeConfig = useRuntimeConfig();
 
 onMounted(async () => {
   const categoriesList = await categoryAPI.list();

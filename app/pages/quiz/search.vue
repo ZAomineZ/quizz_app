@@ -22,6 +22,7 @@
                       <Button
                         class-name="btn_secondary border_class"
                         label="Reset all Filters"
+                        @click.prevent="reset"
                       />
                     </div>
                   </div>
@@ -108,6 +109,17 @@
                       </Select>
                     </div>
                   </div>
+                  <div>
+                    <h6>Creators</h6>
+                    <div class="input_group_search">
+                      <Select class="form_control" v-model="creatorField">
+                        <option value="">Sort by</option>
+                        <option :value="creator.id" v-for="creator in creators">
+                          {{ creator.username }}
+                        </option>
+                      </Select>
+                    </div>
+                  </div>
                 </div>
                 <div class="col_12">
                   <div class="d_inline_block">
@@ -164,6 +176,7 @@ import InputCheckbox from "~/components/Form/InputCheckbox.vue";
 import Select from "~/components/Form/Select.vue";
 import { onMounted, ref } from "vue";
 import { Quiz as QuizType } from "~/types/Quiz";
+import { User as UserType } from "~/types/User";
 import { Category as CategoryType } from "~/types/Category";
 import Quiz from "~/utils/api/Quiz/Quiz";
 import { PaginationType } from "~/types/Pagination";
@@ -185,11 +198,13 @@ const category = new Category();
 const quizzes = ref<QuizType[]>([]);
 const showFilter = ref<boolean>(true);
 const years = ref<string[]>([]);
+const creators = ref<UserType[]>([]);
 const categories = ref<CategoryType[]>();
 const pagination = ref<PaginationType | null>(null);
 const queries = ref<Query[]>([]);
 const search = ref<string>("");
 const categoryField = ref<string>("");
+const creatorField = ref<string>("");
 const sortField = ref<string>("");
 const yearField = ref<string>("");
 const difficultyField = ref<QuizDifficulty | string>("");
@@ -227,6 +242,9 @@ const sort = async (page = 1, mounted: boolean = false) => {
   if (years.value.length === 0) {
     years.value = quizzesSort.years;
   }
+  if (creators.value.length === 0) {
+    creators.value = quizzesSort.creators;
+  }
   pagination.value = quizzesSort.quizzes.meta;
 };
 
@@ -245,6 +263,8 @@ const queryDataHistory = () => {
       if (q === "difficulty") difficultyField.value = value ?? "";
 
       if (q === "categoryId") categoryField.value = value ?? "";
+
+      if (q === "creatorId") creatorField.value = value ?? "";
     }
   }
 };
@@ -270,6 +290,10 @@ const queryData = () => {
     queries.value.push({ value: categoryField.value, key: "categoryId" });
   }
 
+  if (creatorField.value.length !== 0) {
+    queries.value.push({ value: creatorField.value, key: "creatorId" });
+  }
+
   let resultQuery = "";
   queries.value.forEach((query, index) => {
     resultQuery += `${query.key}=${query.value}`;
@@ -288,6 +312,18 @@ const queryData = () => {
   );
 
   return resultQuery;
+};
+
+const reset = async () => {
+  // Clear state
+  search.value = "";
+  sortField.value = "";
+  yearField.value = "";
+  difficultyField.value = "";
+  categoryField.value = "";
+  creatorField.value = "";
+
+  await sort(1, false);
 };
 
 const handlePage = async (page: number) => {

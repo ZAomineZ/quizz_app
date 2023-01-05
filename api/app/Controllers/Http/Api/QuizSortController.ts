@@ -3,6 +3,8 @@ import { ModelQueryBuilderContract } from "@ioc:Adonis/Lucid/Orm";
 import { QuizDifficulty } from "../../../enums/Quiz";
 import { HttpContextContract } from "@ioc:Adonis/Core/HttpContext";
 import { QuizState } from "../../../enums/QuizState";
+import Database from "@ioc:Adonis/Lucid/Database";
+import User from "../../../Models/User";
 
 export default class QuizSortController {
   public async index({ response, request }: HttpContextContract) {
@@ -13,6 +15,7 @@ export default class QuizSortController {
     let sort = qs?.sort ?? null;
     let difficulty = qs?.difficulty ?? (null as QuizDifficulty | null);
     let year = qs?.year ?? null;
+    let creatorID = qs?.creatorId;
     let limit = qs?.limit ?? 18;
     let page = qs?.page ?? 1;
 
@@ -38,17 +41,35 @@ export default class QuizSortController {
       query = query.whereRaw(`extract(year from created_at) = ?`, [year]);
     }
 
+    if (creatorID) {
+      query = query?.where("user_id", "=", creatorID);
+    }
+
     let quizzes = await query
       .where("is_public", "=", QuizState.IS_PUBLIC)
       .paginate(page, limit);
 
-    let years = await Quiz.query().select("created_at").groupBy("created_at");
-    years = years.map((row) => row.createdAt.toFormat("yyyy"));
+    // Years label
+    let years = await Quiz.query()
+      .select(Database.raw("extract(year from created_at)"))
+      .distinct()
+      .groupBy("created_at");
+    years = years.map((item: any) => item.$extras.date_part);
+    // Creators label
+    let creators = await User.query()
+      .select("id", "username")
+      .distinct()
+      .whereHas("quizzes", (builder) => {
+        builder.where("is_public", "=", QuizState.IS_PUBLIC);
+      })
+      .has("quizzes", ">=", 1)
+      .groupBy("id", "username");
 
     return response.json({
       success: true,
       years: years,
-      quizzes
+      quizzes,
+      creators
     });
   }
 

@@ -37,7 +37,7 @@
         <div class="col_5 col_xl_3 my_auto">
           <div class="row d_flex align_items_center justify_content_end pr_3">
             <div class="col_auto px_1">
-              <ButtonSwitch @clickButton="handleModeDark" />
+              <ButtonSwitch :active="darkMode" @clickButton="handleModeDark" />
             </div>
             <div class="col_auto px_1">
               <DropdownToggle>
@@ -80,19 +80,29 @@ import DropdownItem from "~/components/Dropdown/DropdownItem.vue";
 import { useAuth, useAuthUser } from "~/composables/auth";
 import { useRouter } from "nuxt/app";
 import { ref } from "vue";
+import { onMounted } from "#imports";
 
 const router = useRouter();
 const currentUser = useAuthUser();
 const { logout } = useAuth();
 
 const searchValue = ref<string>("");
+const darkMode = ref<boolean>(false);
 
 const emit = defineEmits(["hamburgerClick"]);
 
 // Methods
 const handleModeDark = () => {
   let body = document.querySelector("body");
+
   body?.classList.toggle("is_dark");
+
+  if (body?.classList?.contains("is_dark")) {
+    localStorage.setItem("dark_mode", "true");
+    darkMode.value = true;
+  } else {
+    localStorage.removeItem("dark_mode");
+  }
 };
 
 const handleLogout = async () => {
@@ -103,6 +113,11 @@ const handleLogout = async () => {
 const handleSubmitSearch = () => {
   router.push(`/quiz/search?s=${searchValue.value}`);
 };
+
+onMounted(() => {
+  let darkModeStorage = localStorage.getItem("dark_mode");
+  darkMode.value = darkModeStorage === "true";
+});
 </script>
 
 <style lang="scss" scoped>

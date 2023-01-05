@@ -46,27 +46,30 @@
                       <tr>
                         <th scope="row">Difficulty</th>
                         <td>
-                          <a
-                            href="https://demo.ramsthemes.com/projects/animace/manga_authors/takehiko-inoue/"
-                            >{{ quiz?.difficulty }}</a
+                          <NuxtLink
+                            v-if="quiz?.difficulty"
+                            :to="`/quiz/search?difficulty=${quiz?.difficulty}`"
+                            >{{ quiz?.difficulty }}</NuxtLink
                           >
                         </td>
                       </tr>
                       <tr>
                         <th scope="row">Category</th>
                         <td>
-                          <a
-                            href="https://demo.ramsthemes.com/projects/animace/manga_authors/takehiko-inoue/"
-                            >{{ quiz?.category.name }}</a
+                          <NuxtLink
+                            v-if="quiz?.category"
+                            :to="`/quiz/search?categoryId=${quiz?.category.id}`"
+                            >{{ quiz?.category.name }}</NuxtLink
                           >
                         </td>
                       </tr>
                       <tr>
                         <th scope="row">User</th>
                         <td>
-                          <a
-                            href="https://demo.ramsthemes.com/projects/animace/manga_authors/takehiko-inoue/"
-                            >{{ quiz?.user.username }}</a
+                          <NuxtLink
+                            v-if="quiz?.user"
+                            :to="`/quiz/search?creatorId=${quiz?.user.id}`"
+                            >{{ quiz?.user.username }}</NuxtLink
                           >
                         </td>
                       </tr>

@@ -29,6 +29,7 @@ export default class QuizController {
       .first()) as Category;
     let quizzes = await Quiz.query()
       .where("category_id", "=", category?.id)
+      .where("is_public", "=", QuizState.IS_PUBLIC)
       .paginate(page, limit);
 
     return response.json({
@@ -99,6 +100,7 @@ export default class QuizController {
 
     let quizzes = await Quiz.query()
       .where("category_id", "=", categoryID)
+      .where("is_public", "=", QuizState.IS_PUBLIC)
       .limit(limit);
 
     return response.json({

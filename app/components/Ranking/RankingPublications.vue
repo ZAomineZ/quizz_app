@@ -3,7 +3,7 @@
     <div class="col_12">
       <Card class-name="card_custom">
         <CardBody class-name="p_3">
-          <Table class-name="table_responsive table_bordered">
+          <Table class-name="table_bordered">
             <tr>
               <th>Avatar</th>
               <th>Name</th>

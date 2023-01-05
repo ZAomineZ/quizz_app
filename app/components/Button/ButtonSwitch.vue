@@ -8,11 +8,26 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue";
+import { ref, watch } from "vue";
+
+interface Props {
+  active: boolean;
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  active: false
+});
 
 const emit = defineEmits(["clickButton"]);
 
 const activeButton = ref<boolean>(false);
+
+watch(
+  () => props.active,
+  (newValue: boolean) => {
+    activeButton.value = newValue;
+  }
+);
 
 // Methods
 const handleClick = () => {

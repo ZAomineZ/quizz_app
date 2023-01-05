@@ -39,7 +39,7 @@
                                                     <strong>{{ notification.type }}</strong>
                                                     <span>{{ notification.message }}</span>
                                                 </div>
-                                                <div class="main_notification_date">11:30am</div>
+                                                <div class="main_notification_date">{{ notification.createdAt.toRelative() }}</div>
                                             </div>
                                         </div>
                                     @end

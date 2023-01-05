@@ -6,10 +6,13 @@ import {
   BaseModel,
   BelongsTo,
   belongsTo,
-  computed
+  computed,
+  HasMany,
+  hasMany
 } from "@ioc:Adonis/Lucid/Orm";
 import Role from "./Role";
 import { UserRole } from "../enums/UserRole";
+import Quiz from "./Quiz";
 
 export default class User extends BaseModel {
   @column({ isPrimary: true })
@@ -44,6 +47,11 @@ export default class User extends BaseModel {
 
   @belongsTo(() => Role)
   public role: BelongsTo<typeof Role>;
+
+  @hasMany(() => Quiz, {
+    foreignKey: "user_id"
+  })
+  public quizzes: HasMany<typeof Quiz>;
 
   @computed()
   public get isAdmin() {

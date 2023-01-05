@@ -41,6 +41,7 @@ import Footer from "~/layouts/Footer";
 import "assets/index.scss";
 import { useRoute } from "nuxt/app";
 import { ref } from "vue";
+import { onMounted } from "#imports";
 
 const route = useRoute();
 
@@ -54,6 +55,16 @@ const handleHamburgerToggle = () => {
 const closeHamburgerMenu = () => {
   sidebarBarRightActive.value = false;
 };
+
+onMounted(() => {
+  let body = document?.querySelector("body");
+  if (body) {
+    let darkMode = localStorage.getItem("dark_mode");
+    if (darkMode === "true") {
+      body.classList.add("is_dark");
+    }
+  }
+});
 </script>
 
 <style scoped></style>
