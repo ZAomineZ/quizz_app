@@ -24,7 +24,9 @@ Server.middleware.register([
   () => import("@ioc:Adonis/Core/BodyParser"),
   // @ts-ignore
   () => import("App/Middleware/SilentAuth"),
-  () => import("@ioc:Adonis/Addons/Shield")
+  () => import("@ioc:Adonis/Addons/Shield"),
+  // @ts-ignore
+  () => import("App/Middleware/GlobalView")
 ]);
 
 /*

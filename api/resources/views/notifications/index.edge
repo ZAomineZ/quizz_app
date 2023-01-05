@@ -28,66 +28,21 @@
                                     </div>
                                 </div>
                                 <div class="main_notifications_list bd_t_0">
-                                    <div class="main_notification_item">
-                                        <div class="main_img_user">
-                                            <img src="https://react.spruko.com/nowa-ts/preview/static/media/5.ebc150c6d2b62aad6831.jpg" alt="">
-                                        </div>
-                                        <div class="main_notification_body">
-                                            <div class="main_notification_from">Vincent Capek</div>
-                                            <div class="main_notification_subject">
-                                                <strong>New proposition quiz</strong>
-                                                <span>
-                                                    enean commodo li gula eget dolor cum socia eget dolor enean commodo li gula eget dolor cum socia eget dolor
-                                                </span>
+                                    @each(notification in notifications)
+                                        <div class="main_notification_item">
+                                            <div class="main_img_user">
+                                                <img src="https://react.spruko.com/nowa-ts/preview/static/media/5.ebc150c6d2b62aad6831.jpg" alt="">
                                             </div>
-                                            <div class="main_notification_date">11:30am</div>
-                                        </div>
-                                    </div>
-                                    <div class="main_notification_item">
-                                        <div class="main_img_user">
-                                            <img src="https://react.spruko.com/nowa-ts/preview/static/media/5.ebc150c6d2b62aad6831.jpg" alt="">
-                                        </div>
-                                        <div class="main_notification_body">
-                                            <div class="main_notification_from">Vincent Capek</div>
-                                            <div class="main_notification_subject">
-                                                <strong>New proposition quiz</strong>
-                                                <span>
-                                                    enean commodo li gula eget dolor cum socia eget dolor enean commodo li gula eget dolor cum socia eget dolor
-                                                </span>
+                                            <div class="main_notification_body">
+                                                <div class="main_notification_from">{{ notification.fromUser.username }}</div>
+                                                <div class="main_notification_subject">
+                                                    <strong>{{ notification.type }}</strong>
+                                                    <span>{{ notification.message }}</span>
+                                                </div>
+                                                <div class="main_notification_date">11:30am</div>
                                             </div>
-                                            <div class="main_notification_date">11:30am</div>
                                         </div>
-                                    </div>
-                                    <div class="main_notification_item">
-                                        <div class="main_img_user">
-                                            <img src="https://react.spruko.com/nowa-ts/preview/static/media/5.ebc150c6d2b62aad6831.jpg" alt="">
-                                        </div>
-                                        <div class="main_notification_body">
-                                            <div class="main_notification_from">Vincent Capek</div>
-                                            <div class="main_notification_subject">
-                                                <strong>New proposition quiz</strong>
-                                                <span>
-                                                    enean commodo li gula eget dolor cum socia eget dolor enean commodo li gula eget dolor cum socia eget dolor
-                                                </span>
-                                            </div>
-                                            <div class="main_notification_date">11:30am</div>
-                                        </div>
-                                    </div>
-                                    <div class="main_notification_item">
-                                        <div class="main_img_user">
-                                            <img src="https://react.spruko.com/nowa-ts/preview/static/media/5.ebc150c6d2b62aad6831.jpg" alt="">
-                                        </div>
-                                        <div class="main_notification_body">
-                                            <div class="main_notification_from">Vincent Capek</div>
-                                            <div class="main_notification_subject">
-                                                <strong>New proposition quiz</strong>
-                                                <span>
-                                                    enean commodo li gula eget dolor cum socia eget dolor enean commodo li gula eget dolor cum socia eget dolor
-                                                </span>
-                                            </div>
-                                            <div class="main_notification_date">11:30am</div>
-                                        </div>
-                                    </div>
+                                    @end
                                 </div>
                                 <div class="mb_lg_30"></div>
                             </div>

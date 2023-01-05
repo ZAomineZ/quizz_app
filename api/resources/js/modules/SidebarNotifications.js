@@ -1,3 +1,5 @@
+import { getAPI } from "../utils/Fetch";
+
 export default class SidebarNotifications {
   constructor() {}
 
@@ -13,8 +15,18 @@ export default class SidebarNotifications {
         ".sidebar_right_remove"
       );
 
-      this.sidebarNotificationsButton.addEventListener("click", () => {
+      this.sidebarNotificationsButton.addEventListener("click", async () => {
         this.sidebarNotifications.classList.toggle("sidebar_open");
+
+        // Call api read notifications
+        if (this.sidebarNotifications.classList.contains("sidebar_open")) {
+          const response = await getAPI("/api/notification/read");
+          if (response.success) {
+            const badgeHeader =
+              this.sidebarNotificationsButton.querySelector(".header_badge");
+            badgeHeader?.remove();
+          }
+        }
       });
 
       this.sidebarNotificationsClose.addEventListener("click", () => {

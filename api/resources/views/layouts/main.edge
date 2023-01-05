@@ -48,7 +48,9 @@
                                     <div class="dropdown nav_item d_flex">
                                         <button type="button" class="nav_link btn" id="sidebar_notifications_button">
                                             @include('../icons/bell-icon.edge')
-                                            <span class="pulse"></span>
+                                            @if(notificationsUnread != 0)
+                                                 <span class="badge bg_secondary header_badge">{{ notificationsUnread }}</span>
+                                            @endif
                                         </button>
                                     </div>
                                     <div class="main_profile_menu nav nav_item ps_lg_2 dropdown dropdown__items">
@@ -162,82 +164,24 @@
                             </div>
                             <div class="tab_content">
                                 <div role="tabpanel" class="fade tab_pane active show">
-                                    <div>
-                                        <div class="list d_flex align_items_center border_bottom p_3">
-                                            <div>
-                                                <span class="avatar bg_primary br_round avatar_md">CH</span>
-                                            </div>
-                                            <a href="#" class="wrapper w_100 ms_3">
-                                                <p class="mb_0 d_flex">
-                                                    <b>New notification</b>
-                                                </p>
-                                                <div class="d_flex justify_content_between align_items_center">
-                                                    <div class="d_flex align_items_center">
-                                                        <small class="text_muted ms_auto">30 mins ago</small>
-                                                    </div>
+                                    <div id="notifications">
+                                        @each(notification in notificationsSidebar)
+                                            <div class="list d_flex align_items_center border_bottom p_3">
+                                                <div>
+                                                    <span class="avatar bg_primary br_round avatar_md">CH</span>
                                                 </div>
-                                            </a>
-                                        </div>
-                                        <div class="list d_flex align_items_center border_bottom p_3">
-                                            <div>
-                                                <span class="avatar bg_primary br_round avatar_md">CH</span>
-                                            </div>
-                                            <a href="#" class="wrapper w_100 ms_3">
-                                                <p class="mb_0 d_flex">
-                                                    <b>New notification</b>
-                                                </p>
-                                                <div class="d_flex justify_content_between align_items_center">
-                                                    <div class="d_flex align_items_center">
-                                                        <small class="text_muted ms_auto">30 mins ago</small>
+                                                <a href="#" class="wrapper w_100 ms_3">
+                                                    <p class="mb_0 d_flex">
+                                                        <b>{{ notification?.type }}</b>
+                                                    </p>
+                                                    <div class="d_flex justify_content_between align_items_center">
+                                                        <div class="d_flex align_items_center">
+                                                            <small class="text_muted ms_auto">30 mins ago</small>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                        <div class="list d_flex align_items_center border_bottom p_3">
-                                            <div>
-                                                <span class="avatar bg_primary br_round avatar_md">CH</span>
+                                                </a>
                                             </div>
-                                            <a href="#" class="wrapper w_100 ms_3">
-                                                <p class="mb_0 d_flex">
-                                                    <b>New notification</b>
-                                                </p>
-                                                <div class="d_flex justify_content_between align_items_center">
-                                                    <div class="d_flex align_items_center">
-                                                        <small class="text_muted ms_auto">30 mins ago</small>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                        <div class="list d_flex align_items_center border_bottom p_3">
-                                            <div>
-                                                <span class="avatar bg_primary br_round avatar_md">CH</span>
-                                            </div>
-                                            <a href="#" class="wrapper w_100 ms_3">
-                                                <p class="mb_0 d_flex">
-                                                    <b>New notification</b>
-                                                </p>
-                                                <div class="d_flex justify_content_between align_items_center">
-                                                    <div class="d_flex align_items_center">
-                                                        <small class="text_muted ms_auto">30 mins ago</small>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                        <div class="list d_flex align_items_center border_bottom p_3">
-                                            <div>
-                                                <span class="avatar bg_primary br_round avatar_md">CH</span>
-                                            </div>
-                                            <a href="#" class="wrapper w_100 ms_3">
-                                                <p class="mb_0 d_flex">
-                                                    <b>New notification</b>
-                                                </p>
-                                                <div class="d_flex justify_content_between align_items_center">
-                                                    <div class="d_flex align_items_center">
-                                                        <small class="text_muted ms_auto">30 mins ago</small>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </div>
+                                        @end
                                     </div>
                                 </div>
                             </div>

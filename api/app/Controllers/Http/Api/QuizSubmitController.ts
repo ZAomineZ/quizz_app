@@ -6,6 +6,7 @@ import Category from "../../../Models/Category";
 import Quiz from "../../../Models/Quiz";
 import QuestionValidator from "../../../Validators/QuestionValidator";
 import { Question } from "../../../Models/Question";
+import Event from "@ioc:Adonis/Core/Event";
 
 @inject(["Upload/QuizImage"])
 export default class QuizSubmitController {
@@ -37,6 +38,9 @@ export default class QuizSubmitController {
       category_id: category.id,
       user_id: user?.id
     });
+
+    // Add notification for quiz submitted
+    await Event.emit("notification:quiz_submitted", { quiz });
 
     return response.json({
       success: true,

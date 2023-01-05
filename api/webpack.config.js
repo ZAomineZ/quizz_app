@@ -1,5 +1,6 @@
-const { join } = require('path')
-const Encore = require('@symfony/webpack-encore')
+const { join } = require("path");
+const Encore = require("@symfony/webpack-encore");
+const Dotenv = require("dotenv-webpack");
 
 /*
 |--------------------------------------------------------------------------
@@ -7,7 +8,7 @@ const Encore = require('@symfony/webpack-encore')
 |--------------------------------------------------------------------------
 */
 if (!Encore.isRuntimeEnvironmentConfigured()) {
-  Encore.configureRuntimeEnvironment(process.env.NODE_ENV || 'dev')
+  Encore.configureRuntimeEnvironment(process.env.NODE_ENV || "dev");
 }
 
 /*
@@ -19,7 +20,7 @@ if (!Encore.isRuntimeEnvironmentConfigured()) {
 | be inside the public directory, so that AdonisJS can serve it.
 |
 */
-Encore.setOutputPath('./public/assets')
+Encore.setOutputPath("./public/assets");
 
 /*
 |--------------------------------------------------------------------------
@@ -30,7 +31,7 @@ Encore.setOutputPath('./public/assets')
 | relative from the "public" directory.
 |
 */
-Encore.setPublicPath('/assets')
+Encore.setPublicPath("/assets");
 
 /*
 |--------------------------------------------------------------------------
@@ -45,8 +46,8 @@ Encore.setPublicPath('/assets')
 | entrypoints.
 |
 */
-Encore.addEntry('app', './resources/js/app.js')
-Encore.addEntry('app_css', './resources/scss/app.scss')
+Encore.addEntry("app", "./resources/js/app.js");
+Encore.addEntry("app_css", "./resources/scss/app.scss");
 
 /*
 |--------------------------------------------------------------------------
@@ -85,7 +86,7 @@ Encore.addEntry('app_css', './resources/scss/app.scss')
 | Treat each entry point and its dependencies as its own isolated module.
 |
 */
-Encore.disableSingleRuntimeChunk()
+Encore.disableSingleRuntimeChunk();
 
 /*
 |--------------------------------------------------------------------------
@@ -96,7 +97,7 @@ Encore.disableSingleRuntimeChunk()
 | will ensure that all unused files from the previous build are removed.
 |
 */
-Encore.cleanupOutputBeforeBuild()
+Encore.cleanupOutputBeforeBuild();
 
 /*
 |--------------------------------------------------------------------------
@@ -106,7 +107,7 @@ Encore.cleanupOutputBeforeBuild()
 | Enable source maps in production
 |
 */
-Encore.enableSourceMaps(!Encore.isProduction())
+Encore.enableSourceMaps(!Encore.isProduction());
 
 /*
 |--------------------------------------------------------------------------
@@ -116,7 +117,7 @@ Encore.enableSourceMaps(!Encore.isProduction())
 | Enable assets versioning to leverage lifetime browser and CDN cache
 |
 */
-Encore.enableVersioning(Encore.isProduction())
+Encore.enableVersioning(Encore.isProduction());
 
 /*
 |--------------------------------------------------------------------------
@@ -133,20 +134,20 @@ Encore.configureDevServerOptions((options) => {
    * Normalize "options.static" property to an array
    */
   if (!options.static) {
-    options.static = []
+    options.static = [];
   } else if (!Array.isArray(options.static)) {
-    options.static = [options.static]
+    options.static = [options.static];
   }
 
   /**
    * Enable live reload and add views directory
    */
-  options.liveReload = true
+  options.liveReload = true;
   options.static.push({
-    directory: join(__dirname, './resources/views'),
-    watch: true,
-  })
-})
+    directory: join(__dirname, "./resources/views"),
+    watch: true
+  });
+});
 
 /*
 |--------------------------------------------------------------------------
@@ -157,7 +158,7 @@ Encore.configureDevServerOptions((options) => {
 | favorite CSS precompiler
 |
 */
-Encore.enableSassLoader()
+Encore.enableSassLoader();
 // Encore.enableLessLoader()
 // Encore.enableStylusLoader()
 
@@ -198,11 +199,17 @@ Encore.enableSassLoader()
 | the level to "info".
 |
 */
-const config = Encore.getWebpackConfig()
+Encore.addPlugin(
+  new Dotenv({
+    path: ".env"
+  })
+);
+
+const config = Encore.getWebpackConfig();
 config.infrastructureLogging = {
-  level: 'warn',
-}
-config.stats = 'errors-warnings'
+  level: "warn"
+};
+config.stats = "errors-warnings";
 
 /*
 |--------------------------------------------------------------------------
@@ -212,4 +219,4 @@ config.stats = 'errors-warnings'
 | Export config for webpack to do its job
 |
 */
-module.exports = config
+module.exports = config;

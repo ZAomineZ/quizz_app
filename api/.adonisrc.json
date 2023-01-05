@@ -15,7 +15,9 @@
   },
   "preloads": [
     "./start/routes",
-    "./start/kernel"
+    "./start/kernel",
+    "./start/events",
+    "./start/view"
   ],
   "providers": [
     "./providers/AppProvider",
@@ -25,7 +27,8 @@
     "@adonisjs/shield",
     "@adonisjs/lucid",
     "@adonisjs/auth",
-    "@adonisjs/lucid-slugify"
+    "@adonisjs/lucid-slugify",
+    "@setten/mercure"
   ],
   "metaFiles": [
     {

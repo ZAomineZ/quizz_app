@@ -68,9 +68,9 @@ Route.resource("category", "Admin/CategoriesController")
   .as("category")
   .middleware({ "*": ["auth", "adminRole"] });
 // Routes notifications
-Route.get('/notifications', "Admin/NotificationsController.index")
-.as('notifications')
-.middleware(["auth:web", "adminRole"])
+Route.get("/notifications", "Admin/NotificationsController.index")
+  .as("notifications")
+  .middleware(["auth:web", "adminRole"]);
 // API ROUTES
 Route.post("/api/question/:quizID/create", "Admin/QuestionsController.create")
   .as("question.create")
@@ -145,3 +145,12 @@ Route.get(
   "Api/RankingController.participations"
 );
 Route.get("/api/ranking/publications", "Api/RankingController.publications");
+// ROUTES API NOTIFICATIONS
+// Route.get(
+//   "/api/notification/latest",
+//   "Api/NotificationController.latest"
+// ).middleware("auth:web");
+Route.get(
+  "/api/notification/read",
+  "Api/NotificationController.read"
+).middleware(["auth:web", "adminRole"]);

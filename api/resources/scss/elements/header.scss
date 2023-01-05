@@ -132,6 +132,19 @@
   padding: 0 !important;
 }
 
+.nav_item .nav_link .header_badge {
+  display: block !important;
+  position: absolute;
+  border-radius: 50px;
+  font-size: 10px;
+  line-height: 1.1;
+  padding: 3px 5px !important;
+  top: 0;
+  right: 0;
+  color: #ffffff;
+  z-index: 9999;
+}
+
 .main_profile_menu .profile_user img {
   border-radius: 50%;
   height: 37px;

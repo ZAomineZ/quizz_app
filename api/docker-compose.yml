@@ -12,6 +12,24 @@ services:
       POSTGRES_DB: '${PG_DB_NAME}'
     ports:
       - "5345:5432"
+  mercure:
+    image: dunglas/mercure
+    restart: unless-stopped
+    environment:
+      # Uncomment the following line to disable HTTPS
+      SERVER_NAME: ':1440'
+      MERCURE_PUBLISHER_JWT_KEY: "${MERCURE_JWT_SECRET}"
+      MERCURE_SUBSCRIBER_JWT_KEY: "${MERCURE_JWT_SECRET}"
+      MERCURE_EXTRA_DIRECTIVES: |-
+        cors_origins "http://127.0.0.1:3333"
+        anonymous
+    ports:
+      - "1440:1440"
+    volumes:
+      - mercure_data:/data
+      - mercure_config:/config
 
 volumes:
   postgres_volume:
+  mercure_data:
+  mercure_config:

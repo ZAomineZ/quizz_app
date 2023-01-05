@@ -99,7 +99,7 @@ export default class Quiz extends BaseModel {
           Database.raw("EXTRACT(MONTH FROM created_at) as month")
         )
         .where("user_id", relatedAdmin ? "=" : "!=", userID)
-        .groupBy("id", "month");
+        .groupBy("month");
     }
   );
 
