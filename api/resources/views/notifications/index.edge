@@ -31,7 +31,7 @@
                                     @each(notification in notifications)
                                         <div class="main_notification_item">
                                             <div class="main_img_user">
-                                                <img src="https://react.spruko.com/nowa-ts/preview/static/media/5.ebc150c6d2b62aad6831.jpg" alt="">
+                                                <img src="{{ notification.fromUser.image }}" alt="">
                                             </div>
                                             <div class="main_notification_body">
                                                 <div class="main_notification_from">{{ notification.fromUser.username }}</div>

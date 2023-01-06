@@ -12,6 +12,9 @@ export default class GlobalView {
     if (user) {
       // Notifications
       let notifications = await Notification.query()
+        .preload("fromUser", (builder) => {
+          builder.select("image");
+        })
         .orderBy("created_at", "desc")
         .limit(5);
       let notificationsUnread = await Notification.query()

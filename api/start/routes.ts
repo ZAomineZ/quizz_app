@@ -111,6 +111,10 @@ Route.get(
   "/api/category/:categorySlug/quizzes",
   "Api/QuizController.byCategory"
 );
+// ROUTES API CREATOR
+Route.get("/api/creator", "Api/CreatorController.list");
+Route.get("/api/creator/:id", "Api/CreatorController.show");
+Route.get("/api/creator/:id/quizzes", "Api/CreatorController.quizzes");
 // ROUTES API VIEWS
 Route.get(
   "/api/category/:slug/view",

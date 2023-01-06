@@ -8,7 +8,7 @@ export default class NotificationsController {
     let limit = qs?.page ?? 10;
     const notifications = await Notification.query()
       .preload("fromUser", (builder) => {
-        builder.select("username");
+        builder.select("username", "image");
       })
       .orderBy("created_at", "desc")
       .paginate(page, limit);

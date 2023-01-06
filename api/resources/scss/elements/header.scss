@@ -218,7 +218,6 @@
   .avatar_md {
     font-size: 15px !important;
     height: 40px !important;
-    width: 40px !important;
   }
 
   .list a {
@@ -270,8 +269,8 @@
 }
 
 .sidebar_animate {
-  transition: -webkit-transform .3s ease;
-  transition: transform .3s ease,-webkit-transform .3s ease;
+  transition: -webkit-transform 0.3s ease;
+  transition: transform 0.3s ease, -webkit-transform 0.3s ease;
 }
 
 .sidebar_mini {

@@ -25,6 +25,9 @@
                           <NuxtLink href="/category">Categories</NuxtLink>
                         </li>
                         <li class="sidenav__menu_item">
+                          <NuxtLink href="/creator">Créateurs</NuxtLink>
+                        </li>
+                        <li class="sidenav__menu_item">
                           <NuxtLink href="/ranking">Classement</NuxtLink>
                         </li>
                       </ul>
