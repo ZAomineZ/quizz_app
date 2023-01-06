@@ -3,8 +3,14 @@ import ChangeCredentialValidator from "../../Validators/ChangeCredentialValidato
 import User from "../../Models/User";
 import Hash from "@ioc:Adonis/Core/Hash";
 import ChangePasswordValidator from "../../Validators/ChangePasswordValidator";
+import ChangeImageValidator from "../../Validators/ChangeImageValidator";
+import { inject } from "@adonisjs/fold";
+import UploadImage from "../../Services/UploadImage";
 
+@inject(["Upload/UserImage"])
 export default class SettingsController {
+  constructor(protected uploadUserService: UploadImage) {}
+
   public async changeCredentialsView({ view, auth }: HttpContextContract) {
     const user = auth?.user;
 
@@ -15,6 +21,14 @@ export default class SettingsController {
     const user = auth?.user;
 
     return view.render("settings/change_password", { user });
+  }
+
+  public async changeImageView({ view, auth }: HttpContextContract) {
+    let user = auth?.user;
+    // Find user
+    user = (await User.query().where("id", "=", user?.id).first()) as User;
+
+    return view.render("settings/change_image", { user });
   }
 
   public async changeCredentials({
@@ -76,6 +90,37 @@ export default class SettingsController {
     // Change password
     user.password = payload.new_password;
     await user.save();
+
+    session.flash("success", "You have changed your password with success !");
+    return response.redirect().back();
+  }
+
+  public async changeImage({
+    request,
+    response,
+    session,
+    auth
+  }: HttpContextContract) {
+    const payload = await request.validate(ChangeImageValidator);
+
+    let authUser = auth?.user;
+    let user = (await User.query()
+      .where("id", "=", authUser?.id)
+      .first()) as User | null;
+
+    // Upload new image
+    if (payload.image_upload) {
+      if (user?.image) await this.uploadUserService.delete(user?.image);
+
+      payload["image"] = await this.uploadUserService.uploadResize(
+        payload.image_upload
+      );
+    }
+    // @ts-ignore
+    delete payload["image_upload"];
+    // Update user
+    await user?.merge({ image: payload["image"] });
+    await user?.save();
 
     session.flash("success", "You have changed your password with success !");
     return response.redirect().back();

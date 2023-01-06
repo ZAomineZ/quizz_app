@@ -1,0 +1,43 @@
+@layout('layouts/main')
+
+@section('body')
+    @component('components/setting/menu')
+        <div class="col_xl_9 col_lg_8">
+            <div class="card">
+                <div class="card_body">
+                    <form action="{{ route('settings.changeImage') }}" method="POST" enctype="multipart/form-data" class="form_horizontal">
+                        {{ csrfField() }}
+
+                        <div class="mb_4 main_content_label">Image</div>
+                        <div class="form_group">
+                            <div class="row">
+                                <div class="col_md_12">
+                                    <label for="#" class="form_label">Image</label>
+                                    <input type="file" name="image_upload" class="form_control">
+                                    @if (flashMessages.has('errors.image_upload'))
+                                        <div class="invalid_feedback">{{ flashMessages.get('errors.image_upload') }}</div>
+                                    @endif
+                                </div>
+                                @if (user.image)
+                                    <div class="col_md_12 mb_2">
+                                        <div class="file_image file_image_lg">
+                                            <div>
+                                                <a href="{{ user.image }}" target="_blank">
+                                                    <img src="{{ user.image }}" alt="" class="br_5">
+                                                </a>
+                                            </div>
+                                            <span class="file_name">{{ user.nameImage() }}</span>
+                                        </div>
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="float_end">
+                            <button type="submit" class="btn btn_success">Save Changes</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    @end
+@end

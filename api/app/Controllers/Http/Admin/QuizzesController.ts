@@ -10,12 +10,18 @@ import UploadQuizImage from "../../../Services/UploadQuizImage";
 export default class QuizzesController {
   public constructor(protected uploadQuizService: UploadQuizImage) {}
 
-  public async index({ view }: HttpContextContract) {
+  public async index({ request, view }: HttpContextContract) {
+    const qs = request?.qs();
+
+    let limit = 10;
+    let page = qs.page ? parseInt(qs.page) : 1;
+
     const quizzes = await Quiz.query()
       .preload("category")
-      .orderBy("created_at");
+      .orderBy("created_at")
+      .paginate(page, limit);
 
-    return view.render("quiz/index", { quizzes });
+    return view.render("quiz/index", { quizzes, page });
   }
 
   public async create({ view }: HttpContextContract) {

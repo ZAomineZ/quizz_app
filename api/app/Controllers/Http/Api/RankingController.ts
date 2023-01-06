@@ -13,6 +13,7 @@ export default class RankingController {
 
     let quizSessions = await QuizzesSessions.query()
       .select("id", "user_id")
+      .where("score", ">", 0)
       .sum("score as scoreTotal")
       .preload("user", (builder) => {
         builder.select("username");
@@ -39,6 +40,7 @@ export default class RankingController {
         Database.raw("COUNT(DISTINCT user_id) as count_participations"),
         "user_id"
       )
+      .where("score", ">", 0)
       .preload("user", (builder) => {
         builder.select("username");
       })

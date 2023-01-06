@@ -45,6 +45,9 @@ Route.get(
 Route.get("/settings/change-password", "SettingsController.changePasswordView")
   .as("settings.changePasswordView")
   .middleware(["auth:web", "adminRole"]);
+Route.get("/settings/change-image", "SettingsController.changeImageView")
+  .as("settings.changeImageView")
+  .middleware(["auth:web", "adminRole"]);
 Route.post(
   "/settings/change-credentials",
   "SettingsController.changeCredentials"
@@ -53,6 +56,9 @@ Route.post(
   .middleware(["auth:web", "adminRole"]);
 Route.post("/settings/change-password", "SettingsController.changePassword")
   .as("settings.changePassword")
+  .middleware(["auth:web", "adminRole"]);
+Route.post("/settings/change-image", "SettingsController.changeImage")
+  .as("settings.changeImage")
   .middleware(["auth:web", "adminRole"]);
 // Routes Dashboard
 Route.get("/dashboard", "Admin/DashboardController.index")

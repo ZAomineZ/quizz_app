@@ -27,8 +27,11 @@ declare module "@ioc:Adonis/Core/Event" {
   */
   // @ts-ignore
   import Quiz from "../app/Models/Quiz";
+  // @ts-ignore
+  import { Question } from "../app/Models/Question";
 
   interface EventsList {
     "notification:quiz_submitted": { quiz: Quiz };
+    "notification:quiz_question_submitted": { quiz: Quiz; question: Question };
   }
 }

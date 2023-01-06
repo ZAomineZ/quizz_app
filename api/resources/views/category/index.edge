@@ -84,11 +84,15 @@
                                     <div class="d_block d_sm_flex mt_4">
                                         <span>
                                             Page
-                                            <strong>1 of 1</strong>
+                                            <strong>{{ page }} of {{ categories?.lastPage }}</strong>
                                         </span>
                                         <span class="ml_sm_auto">
-                                            <button type="button" disabled class="btn btn_default mr_2 table_button d_sm_inline d_block my_1">Previous</button>
-                                            <button type="button" disabled class="btn btn_default mr_2 table_button d_sm_inline d_block my_1">Next</button>
+                                            @if(page !== 1)
+                                              <a href="{{ route('category.index', {qs: {page: page - 1}}) }}" type="button" class="btn btn_default mr_2 table_button d_sm_inline d_block my_1">Previous</a>
+                                            @endif
+                                            @if (categories?.hasMorePages)
+                                              <a href="{{ route('category.index', {qs: {page: page + 1}}) }}" type="button" class="btn btn_default mr_2 table_button d_sm_inline d_block my_1">Next</a>
+                                            @endif
                                         </span>
                                     </div>
                                 </div>

@@ -49,26 +49,21 @@
                         </div>
                     </div>
                     <div class="row">
-                        <ul class="pagination ms_auto float_end">
-                            <li class="page_item page_prev disabled page_item">
-                                <a href="#" class="page_link" role="button" tabindex="0">Prev</a>
-                            </li>
-                            <li class="page_item active">
-                                <a href="#" role="button" class="page_link">1</a>
-                            </li>
-                            <li class="page_item">
-                                <a href="#" class="page_link" role="button">2</a>
-                            </li>
-                            <li class="page_item">
-                                <a href="#" class="page_link" role="button">3</a>
-                            </li>
-                            <li class="page_item">
-                                <a href="#" class="page_link" role="button">4</a>
-                            </li>
-                            <li class="page_item page_next">
-                                <a href="#" class="page_link" role="button">Next</a>
-                            </li>
-                        </ul>
+                        @if(notifications.lastPage !== 1)
+                            <ul class="pagination ms_auto float_end">
+                                <li class="page_item page_prev {{ page === 1 ? 'disable': '' }} page_item">
+                                    <a href="?page={{ page - 1 }}" class="page_link" role="button" tabindex="0">Prev</a>
+                                </li>
+                                @each(page in range(1, notifications.lastPage))
+                                    <li class="page_item">
+                                        <a href="?page={{ page }}" role="button" class="page_link">{{ page }}</a>
+                                    </li>
+                                @end
+                                <li class="page_item page_next {{ !notifications.hasMorePages ? 'active' : '' }}">
+                                    <a href="?page={{ page + 1 }}" class="page_link" role="button">Next</a>
+                                </li>
+                            </ul>
+                        @endif
                     </div>
                 </div>
             </div>

@@ -67,7 +67,13 @@ export default class QuizSubmitController {
 
     const payload = await request.validate(QuestionValidator);
     // Create question on current quiz
-    await Question.create({ ...payload, quiz_id: quiz?.id });
+    const question = await Question.create({ ...payload, quiz_id: quiz?.id });
+
+    // Add notification for quiz submitted
+    await Event.emit("notification:quiz_question_submitted", {
+      quiz,
+      question
+    });
 
     return response.json({
       success: true,

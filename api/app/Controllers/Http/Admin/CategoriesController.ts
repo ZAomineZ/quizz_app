@@ -8,10 +8,17 @@ import UploadCategoryImage from "../../../Services/UploadCategoryImage";
 export default class CategoriesController {
   public constructor(protected uploadCategoryService: UploadCategoryImage) {}
 
-  public async index({ view }: HttpContextContract) {
-    const categories = await Category.query().orderBy("created_at");
+  public async index({ request, view }: HttpContextContract) {
+    const qs = request?.qs();
 
-    return view.render("category.index", { categories });
+    let limit = 10;
+    let page = qs.page ? parseInt(qs.page) : 1;
+
+    const categories = await Category.query()
+      .orderBy("created_at")
+      .paginate(page, limit);
+
+    return view.render("category.index", { categories, page });
   }
 
   public async create({ view }: HttpContextContract) {

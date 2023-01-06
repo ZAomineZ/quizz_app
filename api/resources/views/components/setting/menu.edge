@@ -16,10 +16,13 @@
                                     <label for="#" class="main_content_label main_content_label_sm form_label">Settings</label>
                                     <div class="nav main_nav_column">
                                         <div class="nav_item">
-                                            <a href="{{ route('settings.changeCredentialsView') }}" role="button" class="nav_link active">Email Settings</a>
+                                            <a href="{{ route('settings.changeCredentialsView') }}" role="button" class="nav_link {{ request.matchesRoute('settings.changeCredentialsView') ? 'active' : '' }}">Email Settings</a>
                                         </div>
                                         <div class="nav_item">
-                                            <a href="{{ route('settings.changePasswordView') }}" role="button" class="nav_link">Password Settings</a>
+                                            <a href="{{ route('settings.changeImageView') }}" role="button" class="nav_link {{ request.matchesRoute('settings.changeImageView') ? 'active' : '' }}">Image Settings</a>
+                                        </div>
+                                        <div class="nav_item">
+                                            <a href="{{ route('settings.changePasswordView') }}" role="button" class="nav_link {{ request.matchesRoute('settings.changePasswordView') ? 'active' : Rankin'' }}">Password Settings</a>
                                         </div>
                                     </div>
                                 </div>

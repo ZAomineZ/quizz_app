@@ -10,3 +10,7 @@
 import Event from "@ioc:Adonis/Core/Event";
 
 Event.on("notification:quiz_submitted", "QuizSubmitted.onAddNotification");
+Event.on(
+  "notification:quiz_question_submitted",
+  "QuizQuestionSubmitted.onAddNotification"
+);

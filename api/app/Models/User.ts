@@ -67,4 +67,11 @@ export default class User extends BaseModel {
       user.password = await Hash.make(user.password);
     }
   }
+
+  public nameImage(): string {
+    let image = this.image;
+    let imageParts = image?.split("/") ?? [];
+
+    return imageParts[imageParts.length - 1] ?? "";
+  }
 }
