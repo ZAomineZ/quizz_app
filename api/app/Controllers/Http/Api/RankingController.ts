@@ -3,6 +3,7 @@ import QuizzesSessions from "../../../Models/QuizzesSessions";
 import Database from "@ioc:Adonis/Lucid/Database";
 import Quiz from "../../../Models/Quiz";
 import { QuizState } from "../../../enums/QuizState";
+import { serializeRanking } from "../../../Serializer/RankingSerialize";
 
 export default class RankingController {
   public async scores({ response, request }: HttpContextContract) {
@@ -20,7 +21,7 @@ export default class RankingController {
       .groupBy("id")
       .paginate(page, limit);
 
-    let quizSessionsSerialize = quizSessions.serialize(this.serialize());
+    let quizSessionsSerialize = quizSessions.serialize(serializeRanking);
 
     return response.json({
       success: true,
@@ -44,7 +45,7 @@ export default class RankingController {
       .groupBy("user_id")
       .paginate(page, limit);
 
-    let quizSessionsSerialize = quizSessions.serialize(this.serialize());
+    let quizSessionsSerialize = quizSessions.serialize(serializeRanking);
 
     return response.json({
       success: true,
@@ -69,24 +70,11 @@ export default class RankingController {
       .where("is_public", "=", QuizState.IS_PUBLIC)
       .paginate(page, limit);
 
-    let quizzesSerialize = quizzes.serialize(this.serialize());
+    let quizzesSerialize = quizzes.serialize(serializeRanking);
 
     return response.json({
       success: true,
       rankings: quizzesSerialize
     });
-  }
-
-  private serialize() {
-    return {
-      fields: {
-        pick: []
-      },
-      relations: {
-        user: {
-          fields: ["username", "id"]
-        }
-      }
-    };
   }
 }

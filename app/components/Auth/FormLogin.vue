@@ -74,13 +74,11 @@
 <script setup lang="ts">
 import Input from "~/components/Form/Input.vue";
 import { reactive, ref } from "vue";
-import { useRouter } from "nuxt/app";
 import { useAuth } from "~/composables/auth/useAuth";
 import Alert from "~/components/Message/Alert.vue";
 import { IValidationError } from "~/types/Error";
 import { navigateTo } from "#app";
 
-const router = useRouter();
 const { login } = useAuth();
 
 const credentials = reactive({

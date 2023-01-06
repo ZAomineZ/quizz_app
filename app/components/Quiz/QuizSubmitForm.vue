@@ -68,9 +68,6 @@
           />
         </div>
       </div>
-      <div class="form__bottom_links">
-        <NuxtLink to="/register">Register | Lost your password ?</NuxtLink>
-      </div>
     </form>
   </div>
 </template>

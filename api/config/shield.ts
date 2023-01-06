@@ -96,7 +96,9 @@ export const csrf: ShieldConfig["csrf"] = {
     "/api/register",
     "/api/logout",
     "/api/quiz/submit",
-    "/api/quiz/:id/submit-question"
+    "/api/quiz/:id/submit-question",
+    "/api/setting/change-credentials",
+    "/api/setting/change-passwords"
   ],
 
   /*

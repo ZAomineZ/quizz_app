@@ -12,6 +12,26 @@
           </div>
         </div>
       </div>
+      <div class="col">
+        <div class="col_12 py-2">
+          <div class="my_3">
+            <div class="row">
+              <div class="col_12">
+                <div class="my_3 text_center">
+                  <Pagination
+                    :totalPages="pagination?.last_page"
+                    :currentPage="pagination?.current_page"
+                    :handle-page="handlePage"
+                    :next-page="nextPage"
+                    :prev-page="prevPage"
+                    v-if="pagination?.last_page !== 1"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </AppLayout>
 </template>
@@ -24,17 +44,20 @@ import { Category as CategoryType } from "~/types/Category";
 import { useRoute } from "nuxt/app";
 import { Quiz as QuizType } from "~/types/Quiz";
 import ViewCategory from "~/utils/api/View/ViewCategory";
+import { PaginationType } from "~/types/Pagination";
 
 const route = useRoute();
 const params = route.params;
+let categorySlug = params?.id as string;
+
 const categoryAPI = new Category();
 const viewCategoryAPI = new ViewCategory();
 
 const categoryCurrent = ref<CategoryType | null>(null);
 const quizzes = ref<QuizType[]>([]);
+const pagination = ref<PaginationType | null>(null);
 
 onMounted(async () => {
-  let categorySlug = params?.id as string;
   // Add views
   await viewCategoryAPI.addView(categorySlug);
 
@@ -43,9 +66,27 @@ onMounted(async () => {
   categoryCurrent.value = categoryBySlug.category;
 
   // Get all quizzes for the current category
-  const quizzesByCategorySlug = await categoryAPI.quizzes(categorySlug);
-  quizzes.value = quizzesByCategorySlug.quizzes.data;
+  await list(1);
 });
+
+// Methods
+const list = async (page: number) => {
+  const quizzesByCategorySlug = await categoryAPI.quizzes(categorySlug, page);
+  quizzes.value = quizzesByCategorySlug.quizzes.data;
+  pagination.value = quizzesByCategorySlug.quizzes.meta;
+};
+
+const handlePage = async (page: number) => {
+  await list(page);
+};
+
+const nextPage = async (page: number) => {
+  await list(page);
+};
+
+const prevPage = async (page: number) => {
+  await list(page);
+};
 </script>
 
 <style scoped></style>

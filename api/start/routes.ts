@@ -145,6 +145,15 @@ Route.get(
   "Api/RankingController.participations"
 );
 Route.get("/api/ranking/publications", "Api/RankingController.publications");
+// ROUTES API SETTING
+Route.post(
+  "/api/setting/change-credentials",
+  "Api/SettingController.changeCredentials"
+).middleware("auth:api");
+Route.post(
+  "/api/setting/change-passwords",
+  "Api/SettingController.changePasswords"
+).middleware("auth:api");
 // ROUTES API NOTIFICATIONS
 // Route.get(
 //   "/api/notification/latest",

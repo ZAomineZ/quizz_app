@@ -49,6 +49,10 @@
                   <i class="fas fa-sign-in-alt mr_2"></i>
                   Login
                 </DropdownItem>
+                <DropdownItem href="/settings" v-if="currentUser">
+                  <i class="fa fa-thin fa-user"></i>
+                  Paramètres
+                </DropdownItem>
                 <DropdownItem
                   href="/logout"
                   v-if="currentUser"

@@ -36,7 +36,14 @@
             <div class="row">
               <div class="col_12">
                 <div class="my_3 text_center">
-                  <Pagination />
+                  <Pagination
+                    :totalPages="pagination?.last_page"
+                    :currentPage="pagination?.current_page"
+                    :handle-page="handlePage"
+                    :next-page="nextPage"
+                    :prev-page="prevPage"
+                    v-if="pagination?.last_page !== 1"
+                  />
                 </div>
               </div>
             </div>
@@ -48,23 +55,42 @@
 </template>
 
 <script lang="ts" setup>
-import Lists from "~/components/Lists/Lists.vue";
 import { onMounted, ref } from "vue";
 import { Category as CategoryType } from "~/types/Category";
 import Category from "~/utils/api/Category/Category";
 import { useRuntimeConfig } from "#app";
+import { PaginationType } from "~/types/Pagination";
 
 const categoryAPI = new Category();
 
 const categories = ref<CategoryType[]>([]);
+const pagination = ref<PaginationType | null>(null);
 
 const runtimeConfig = useRuntimeConfig();
 
 onMounted(async () => {
-  const categoriesList = await categoryAPI.list();
-
-  categories.value = categoriesList.categories;
+  await list(1);
 });
+
+// Methods
+const list = async (page: number) => {
+  const categoriesList = await categoryAPI.list(page);
+
+  categories.value = categoriesList.categories.data;
+  pagination.value = categoriesList.categories.meta;
+};
+
+const handlePage = async (page: number) => {
+  await list(page);
+};
+
+const nextPage = async (page: number) => {
+  await list(page);
+};
+
+const prevPage = async (page: number) => {
+  await list(page);
+};
 </script>
 
 <style scoped></style>

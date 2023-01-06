@@ -11,8 +11,10 @@ export default class AuthController {
       expiresIn: "1 days"
     });
 
+    let userSerialize = await this?.serializeUser(token.user as User);
+
     return response.ok({
-      user: { ...token.user, token: token.token }
+      user: { ...userSerialize, token: token.token }
     });
   }
 
@@ -23,16 +25,27 @@ export default class AuthController {
     // Create a user record with the validated payload
     const newUser = await User.create(payload);
 
-    return response.created(newUser);
+    return response.created({ user: newUser.serialize() });
   }
 
   public async logout({ auth, response }: HttpContextContract) {
     await auth.use("api").logout();
+    await auth.use("api").revoke();
 
     return response.ok({});
   }
 
   public async me({ auth, response }: HttpContextContract) {
-    return response.ok({ user: auth.user ?? null });
+    let user = auth?.user as User;
+    return response.ok({ user: await this.serializeUser(user) });
+  }
+
+  private async serializeUser(user: User) {
+    return {
+      username: user?.username,
+      email: user?.email,
+      first_name: user?.first_name,
+      last_name: user?.last_name
+    };
   }
 }

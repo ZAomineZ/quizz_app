@@ -52,7 +52,7 @@ const quizID = ref<number | null>(null);
 const quizSubmitFormState = ref<boolean>(true);
 
 onMounted(async () => {
-  const response = await categoryAPI.list();
+  const response = await categoryAPI.list(1);
   categories.value = response.categories;
 });
 
