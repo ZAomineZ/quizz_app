@@ -154,6 +154,10 @@ Route.post(
   "/api/setting/change-passwords",
   "Api/SettingController.changePasswords"
 ).middleware("auth:api");
+Route.post(
+  "/api/setting/change-image",
+  "Api/SettingController.changeImage"
+).middleware("auth:api");
 // ROUTES API NOTIFICATIONS
 // Route.get(
 //   "/api/notification/latest",

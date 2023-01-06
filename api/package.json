@@ -45,6 +45,7 @@
     "reflect-metadata": "^0.1.13",
     "sass": "^1.57.1",
     "sass-loader": "^13.2.0",
+    "sharp": "^0.31.3",
     "source-map-support": "^0.5.21",
     "toastify-js": "^1.12.0",
     "uuid": "^9.0.0"

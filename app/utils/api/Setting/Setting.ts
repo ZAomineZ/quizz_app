@@ -28,4 +28,14 @@ export default class Setting {
       true
     );
   }
+
+  public async changeImage(body: FormData) {
+    const { token } = useAuth();
+    return postAPI(
+      `${this.runtimeConfig.public.apiURL}/api/setting/change-image`,
+      body,
+      token.value,
+      true
+    );
+  }
 }

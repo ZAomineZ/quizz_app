@@ -22,6 +22,11 @@
                           :active="changeCredentialsTabActive"
                         />
                         <TabItem
+                          title="Change image"
+                          @click="handleClickChangeImageTab"
+                          :active="changeImageTabActive"
+                        />
+                        <TabItem
                           title="Change passwords"
                           @click="handleClickChangePasswordsTab"
                           :active="changePasswordsTabActive"
@@ -29,6 +34,9 @@
                       </TabMenu>
                       <TabContent v-if="changeCredentialsTabActive">
                         <SettingFormCredentials />
+                      </TabContent>
+                      <TabContent v-if="changeImageTabActive">
+                        <SettingFormImage />
                       </TabContent>
                       <TabContent v-if="changePasswordsTabActive">
                         <SettingFormPasswords />
@@ -48,6 +56,7 @@
 <script setup lang="ts">
 import SettingFormCredentials from "~/components/Setting/SettingFormCredentials.vue";
 import SettingFormPasswords from "~/components/Setting/SettingFormPasswords.vue";
+import SettingFormImage from "~/components/Setting/SettingFormImage.vue";
 import { definePageMeta } from "#imports";
 import { ref } from "vue";
 
@@ -56,16 +65,25 @@ definePageMeta({
 });
 
 const changeCredentialsTabActive = ref<boolean>(true);
+const changeImageTabActive = ref<boolean>(false);
 const changePasswordsTabActive = ref<boolean>(false);
 
 // Methods
 const handleClickChangeCredentialsTab = () => {
   changeCredentialsTabActive.value = true;
+  changeImageTabActive.value = false;
+  changePasswordsTabActive.value = false;
+};
+
+const handleClickChangeImageTab = () => {
+  changeCredentialsTabActive.value = false;
+  changeImageTabActive.value = true;
   changePasswordsTabActive.value = false;
 };
 
 const handleClickChangePasswordsTab = () => {
   changeCredentialsTabActive.value = false;
+  changeImageTabActive.value = false;
   changePasswordsTabActive.value = true;
 };
 </script>
