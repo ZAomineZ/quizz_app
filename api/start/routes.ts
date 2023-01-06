@@ -90,6 +90,7 @@ Route.get(
   "/api/quiz/mostViewTwoCategory",
   "Api/Views/QuizViewController.mostViewTwoCategory"
 );
+Route.get("/api/quizzes/me", "Api/QuizController.me").middleware("auth:api");
 Route.get("/api/quiz/sort", "Api/QuizSortController.index");
 Route.get("/api/quiz/:slug", "Api/QuizController.show");
 Route.get("/api/quiz/:slug/questions", "Api/QuizController.questions");

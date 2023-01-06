@@ -1,5 +1,6 @@
 import { getAPI } from "~/utils/api/Fetch";
 import { useRuntimeConfig } from "#app";
+import { useAuth } from "~/composables/auth";
 
 export default class Quiz {
   private runtimeConfig;
@@ -32,6 +33,17 @@ export default class Quiz {
     uri += `${query}`;
 
     return await getAPI(uri);
+  }
+
+  public async me(page: number = 1) {
+    const { token } = useAuth();
+
+    let uri = `${this.runtimeConfig.public.apiURL}/api/quizzes/me`;
+    if (page > 1) {
+      uri += `?page=${page}`;
+    }
+
+    return await getAPI(uri, token.value);
   }
 
   public async show(slug: string) {

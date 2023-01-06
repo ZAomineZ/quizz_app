@@ -13,6 +13,7 @@ export interface Quiz {
   title: string;
   slug: string;
   difficulty: QuizDifficulty;
+  is_public: boolean;
   description: string;
   image: string;
   category?: Category;

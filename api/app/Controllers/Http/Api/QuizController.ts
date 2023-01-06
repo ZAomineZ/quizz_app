@@ -19,9 +19,11 @@ export default class QuizController {
     });
   }
 
-  public async byCategory({ response, params }: HttpContextContract) {
-    let limit = params?.limit ?? 18;
-    let page = params?.page ?? 1;
+  public async byCategory({ response, request, params }: HttpContextContract) {
+    const qs = request.qs();
+    let limit = qs?.limit ?? 18;
+    let page = qs?.page ?? 1;
+
     let categorySlug = params?.categorySlug;
 
     let category = (await Category.query()
@@ -30,6 +32,35 @@ export default class QuizController {
     let quizzes = await Quiz.query()
       .where("category_id", "=", category?.id)
       .where("is_public", "=", QuizState.IS_PUBLIC)
+      .paginate(page, limit);
+
+    return response.json({
+      success: true,
+      quizzes
+    });
+  }
+
+  public async me({ request, response, auth }: HttpContextContract) {
+    const qs = request.qs();
+    let limit = qs?.limit ?? 18;
+    let page = qs?.page ?? 1;
+
+    let user = auth?.user;
+
+    let quizzes = await Quiz.query()
+      .select(
+        "title",
+        "slug",
+        "description",
+        "difficulty",
+        "is_public",
+        "category_id"
+      )
+      .preload("category", (builder) => {
+        builder.select("name", "slug");
+      })
+      .where("user_id", "=", user?.id)
+      .orderBy("created_at", "desc")
       .paginate(page, limit);
 
     return response.json({

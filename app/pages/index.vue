@@ -91,13 +91,13 @@ const categories = ref<CategoryType[]>([]);
 
 onMounted(async () => {
   let quizzesLatest = await Quiz.latest();
-  let categoriesList = await Category.list();
+  let categoriesList = await Category.list(1);
   let quizzesMostViews = await Quiz.mostViews();
   let categoriesMostViews = await Category.mostViews();
   let quizzesTwoCategoryMostViews = await Quiz.mostViewTwoCategory();
 
   quizzes.value = quizzesLatest.quizzes;
-  categories.value = categoriesList.categories;
+  categories.value = categoriesList.categories.data;
   quizzesViews.value = quizzesMostViews.quizzes;
   categoriesViews.value = categoriesMostViews.categories;
   quizzesViewsFirstCategory.value =
