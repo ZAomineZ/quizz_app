@@ -1,0 +1,75 @@
+@layout('layouts/main')
+
+@section('body')
+<div class="main_content">
+    <div class="content">
+        <div class="container_fluid">
+            <div>
+                <div class="justify_content_between ">
+                    <div class="left_content">
+                        <span class="main_content_title mb_0">Edit User</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col_lg_12 col_md_12">
+                                    <div id="quiz_tab" role="tabpanel" class="fade show active tab_body tab_pane">
+                                        <div class="card">
+                                            <div class="card_header">
+                                                <h3 class="card_title">User</h3>
+                                            </div>
+                                            <div class="card_body">
+                                                <form action="{{ route('user.update', {id: user.id}, {qs: {_method: 'PUT'}}) }}" class="row was_validated needs__validation" method="POST" enctype="multipart/form-data">
+                                                    {{ csrfField() }}
+
+                                                    <div class="col_md_6">
+                                                        <label for="#" class="form_label">Username</label>
+                                                        <input type="text" class="form_control" required placeholder="Your username..." name="username" value="{{ flashMessages.get('errors.username') ?? user.username }}">
+                                                        @if (flashMessages.has('errors.username'))
+                                                            <div class="invalid_feedback">{{ flashMessages.get('errors.username') }}</div>
+                                                        @endif
+                                                    </div>
+                                                    <div class="col_md_6">
+                                                        <label for="#" class="form_label">Email</label>
+                                                        <input type="text" class="form_control" required placeholder="Your email..." name="email" value="{{ flashMessages.get('errors.email') ?? user.email }}">
+                                                        @if (flashMessages.has('errors.email'))
+                                                            <div class="invalid_feedback">{{ flashMessages.get('errors.email') }}</div>
+                                                        @endif
+                                                    </div>
+                                                    <div class="col_md_6">
+                                                        <label for="#" class="form_label">First Name</label>
+                                                        <input type="text" class="form_control" required placeholder="Your first name..." name="first_name" value="{{ flashMessages.get('errors.first_name') ?? user.first_name }}">
+                                                        @if (flashMessages.has('errors.first_name'))
+                                                            <div class="invalid_feedback">{{ flashMessages.get('errors.first_name') }}</div>
+                                                        @endif
+                                                    </div>
+                                                    <div class="col_md_6">
+                                                        <label for="#" class="form_label">Last Name</label>
+                                                        <input type="text" class="form_control" required placeholder="Your last name..." name="last_name" value="{{ flashMessages.get('errors.last_name') ?? user.last_name }}">
+                                                        @if (flashMessages.has('errors.last_name'))
+                                                            <div class="invalid_feedback">{{ flashMessages.get('errors.last_name') }}</div>
+                                                        @endif
+                                                    </div>
+                                                    <div class="col_md_6 mb_2">
+                                                        <label for="#" class="form_label">Choose Role</label>
+                                                        <select class="form_control" name="role">
+                                                            <option value="1" {{ user.role_id === 1 ? 'selected' : ''}}>User</option>
+                                                            <option value="2" {{ user.role_id === 2 ? 'selected' : ''}}>Admin</option>
+                                                        </select>
+                                                        @if (flashMessages.has('errors.role'))
+                                                            <div class="invalid_feedback">{{ flashMessages.get('errors.role') }}</div>
+                                                        @endif
+                                                    </div>
+                                                    <div class="col_md_12">
+                                                        <button type="submit" class="btn btn_primary mt_0 mb_0">Submit</button>
+                                                    </div>
+                                                </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@end

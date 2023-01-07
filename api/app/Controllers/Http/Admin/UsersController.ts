@@ -5,6 +5,7 @@ import UploadUserImage from "../../../Services/UploadUserImage";
 import Quiz from "../../../Models/Quiz";
 import Database from "@ioc:Adonis/Lucid/Database";
 import { Question } from "../../../Models/Question";
+import UserUpdateValidator from "../../../Validators/UserUpdateValidator";
 
 @inject(["Upload/UserImage"])
 export default class UsersController {
@@ -28,6 +29,41 @@ export default class UsersController {
     return view.render("user/index", { users, page, limit, search });
   }
 
+  public async edit({ view, params }: HttpContextContract) {
+    let userID = params?.id;
+
+    let user = await User.query().where("id", "=", userID).first();
+
+    return view.render("user/edit", { user });
+  }
+
+  public async update({
+    request,
+    response,
+    params,
+    session
+  }: HttpContextContract) {
+    let userID = params?.id;
+
+    let user = await User.query().where("id", "=", userID).first();
+
+    const payload = await request.validate(UserUpdateValidator);
+
+    // Update user
+    let role = payload.role;
+    // @ts-ignore
+    delete payload["role"];
+    await user?.merge({ ...payload, role_id: parseInt(role) });
+    await user?.save();
+
+    session.flash(
+      "success",
+      `You have changed credentials to ${user?.username} with success !`
+    );
+
+    return response.redirect().back();
+  }
+
   public async show({ params, view, response }: HttpContextContract) {
     let userID = params?.id;
 
@@ -46,9 +82,14 @@ export default class UsersController {
     // Count stats
     let quizzesCount = await Quiz.query()
       .select(Database.raw("COUNT(*) as count"))
+      .where("user_id", "=", userID)
       .first();
     let questionsCount = await Question.query()
-      .select(Database.raw("COUNT(*) as count"))
+      .select(Database.raw("COUNT(*) as count"), "quiz_id")
+      .whereHas("quiz", (builder) => {
+        builder.where("user_id", "=", userID);
+      })
+      .groupBy("questions.quiz_id")
       .first();
 
     let chartQuizMonthsPublic = user.statistic.chart_quiz_month_public;
@@ -63,7 +104,7 @@ export default class UsersController {
     });
   }
 
-  public async destroy({ params, response }: HttpContextContract) {
+  public async destroy({ params, response, session }: HttpContextContract) {
     let id = params?.id;
 
     let user = await User.findOrFail(id);
@@ -71,6 +112,11 @@ export default class UsersController {
 
     // Delete file
     if (user.image) this.uploadUserService.delete(user.image);
+
+    session.flash(
+      "success",
+      `You have deleted "${user?.username}" user with success !`
+    );
 
     return response.redirect("/quiz");
   }

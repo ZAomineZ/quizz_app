@@ -11,12 +11,14 @@ export default class AuthController {
     return view.render("auth/register");
   }
 
-  public async register({ request, response }: HttpContextContract) {
+  public async register({ request, response, session }: HttpContextContract) {
     // if validation fails the request will be automatically redirected back to the form
     const payload = await request.validate(RegisterValidator);
 
     // Create a user record with the validated payload
     await User.create(payload);
+
+    session.flash("success", "You have create your account !");
 
     // Redirect to login page
     return response.redirect("/login");
@@ -39,12 +41,16 @@ export default class AuthController {
       return response.redirect().back();
     }
 
+    session.flash("success", "You are connected !");
+
     return response.redirect("/dashboard");
   }
 
-  public async logout({ response, auth }: HttpContextContract) {
+  public async logout({ response, auth, session }: HttpContextContract) {
     // Logout the user current
     await auth.logout();
+
+    session.flash("success", "You are deconnected !");
 
     // redirect to login page
     return response.redirect().toRoute("loginView");

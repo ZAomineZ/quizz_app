@@ -75,6 +75,7 @@ Route.resource("category", "Admin/CategoriesController")
   .middleware({ "*": ["auth", "adminRole"] });
 // Routes user
 Route.resource("user", "Admin/UsersController")
+  .except(["create", "store"])
   .as("user")
   .middleware({ "*": ["auth", "adminRole"] });
 // Routes notifications

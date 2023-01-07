@@ -24,7 +24,9 @@ export class Question extends BaseModel {
   @column()
   public quiz_id: number;
 
-  @belongsTo(() => Quiz)
+  @belongsTo(() => Quiz, {
+    foreignKey: "quiz_id"
+  })
   public quiz: BelongsTo<typeof Quiz>;
 
   @column.dateTime({ autoCreate: true })

@@ -30,7 +30,7 @@ export default class CategoriesController {
     return view.render("category.create");
   }
 
-  public async store({ request, response }: HttpContextContract) {
+  public async store({ request, response, session }: HttpContextContract) {
     const payload = await request.validate(CategoryValidator);
 
     // Image upload
@@ -38,6 +38,8 @@ export default class CategoriesController {
     // @ts-ignore
     delete payload["image_upload"];
     await Category.create(payload);
+
+    session.flash("success", "You have created a new category !");
 
     return response.redirect("/category");
   }
@@ -52,7 +54,12 @@ export default class CategoriesController {
     return view.render("category.edit", { category });
   }
 
-  public async update({ params, request, response }: HttpContextContract) {
+  public async update({
+    params,
+    request,
+    response,
+    session
+  }: HttpContextContract) {
     const id = params?.id;
 
     let category = await Category.findOrFail(id);
@@ -69,10 +76,15 @@ export default class CategoriesController {
     await category.merge(payload);
     await category.save();
 
+    session.flash(
+      "success",
+      `You have edited "${category.name}" category with success !`
+    );
+
     return response.redirect(`/category/${id}/edit`);
   }
 
-  public async destroy({ params, response }: HttpContextContract) {
+  public async destroy({ params, response, session }: HttpContextContract) {
     let id = params?.id;
 
     let category = await Category.findOrFail(id);
@@ -80,6 +92,11 @@ export default class CategoriesController {
 
     // Delete file
     this.uploadCategoryService.delete(category.image);
+
+    session.flash(
+      "success",
+      `You have deleted "${category.name}" category with success !`
+    );
 
     return response.redirect("/category");
   }

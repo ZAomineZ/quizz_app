@@ -34,7 +34,12 @@ export default class QuizzesController {
     return view.render("quiz/create", { categories });
   }
 
-  public async store({ request, response, auth }: HttpContextContract) {
+  public async store({
+    request,
+    response,
+    auth,
+    session
+  }: HttpContextContract) {
     const payload = await request.validate(QuizValidator);
 
     const category = await Category.query()
@@ -66,6 +71,8 @@ export default class QuizzesController {
       quiz_id: quiz.id
     });
 
+    session.flash("success", "You have created a new quiz with success !");
+
     return response.redirect(`/quiz/${quiz.id}/edit`);
   }
 
@@ -81,7 +88,12 @@ export default class QuizzesController {
     return view.render("quiz/edit", { quiz, categories, questions });
   }
 
-  public async update({ params, request, response }: HttpContextContract) {
+  public async update({
+    params,
+    request,
+    response,
+    session
+  }: HttpContextContract) {
     let id = params?.id;
 
     let quiz = await Quiz?.findOrFail(id);
@@ -98,10 +110,15 @@ export default class QuizzesController {
     await quiz.merge({ ...payload, is_public: payload.is_public === "on" });
     await quiz.save();
 
+    session.flash(
+      "success",
+      `You have edited "${quiz.title} quiz with success !"`
+    );
+
     return response.redirect(`/quiz/${id}/edit`);
   }
 
-  public async destroy({ params, response }: HttpContextContract) {
+  public async destroy({ params, response, session }: HttpContextContract) {
     let id = params?.id;
 
     let quiz = await Quiz.findOrFail(id);
@@ -109,6 +126,11 @@ export default class QuizzesController {
 
     // Delete file
     this.uploadQuizService.delete(quiz.image);
+
+    session.flash(
+      "success",
+      `You have deleted "${quiz.title}" quiz with success !`
+    );
 
     return response.redirect("/quiz");
   }

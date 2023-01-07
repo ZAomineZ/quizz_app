@@ -109,12 +109,6 @@
                                     <span class="side_menu__label">Listing</span>
                                 </a>
                             </li>
-                            <li class="slide">
-                                <a href="{{ route('user.create') }}" class="side_menu__item is_expanded">
-                                    @include('../icons/pencil-solid-icon.edge')
-                                    <span class="side_menu__label">Create</span>
-                                </a>
-                            </li>
                             <li class="side_item side_item_category">Quiz</li>
                             <li class="slide">
                                 <a href="{{ route('quiz.index') }}" class="side_menu__item is_expanded">
@@ -231,6 +225,35 @@
             body.classList.remove('dark_theme')
             localStorage.removeItem('isDarkMode')
         })
+    </script>
+    <script>
+        // Flash message
+        let flashError = "{{ flashMessages.has('error') }}"
+        let flashSuccess = "{{ flashMessages.has('success') }}"
+
+        if (flashSuccess === "true") {
+             // Add messages flash
+             Toastify({
+                text: "{{ flashMessages.get('success') }}",
+                backgroundColor: "#07bc0c",
+                duration: 2000,
+                close: true,
+                gravity: "top",
+                position: "right"
+            }).showToast()
+        }
+
+        if (flashError === "true") {
+            // Add messages flash
+            Toastify({
+                text: "{{ flashMessages.get('error') }}",
+                backgroundColor: "#f34343",
+                duration: 2000,
+                close: true,
+                gravity: "top",
+                position: "right"
+            }).showToast()
+        }
     </script>
     @!section('scripts')
 </body>
