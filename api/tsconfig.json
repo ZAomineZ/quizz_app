@@ -35,7 +35,8 @@
       "@adonisjs/lucid",
       "@adonisjs/auth",
       "@adonisjs/lucid-slugify",
-      "@setten/mercure"
+      "@setten/mercure",
+      "adonis5-scheduler"
     ]
   }
 }

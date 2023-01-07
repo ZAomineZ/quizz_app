@@ -11,14 +11,19 @@ export default class CategoriesController {
   public async index({ request, view }: HttpContextContract) {
     const qs = request?.qs();
 
-    let limit = 10;
+    let limit = qs.limit ? parseInt(qs.limit) : 10;
     let page = qs.page ? parseInt(qs.page) : 1;
+    let search = qs.s ?? null;
 
-    const categories = await Category.query()
-      .orderBy("created_at")
-      .paginate(page, limit);
+    let query = Category.query().orderBy("created_at");
 
-    return view.render("category.index", { categories, page });
+    if (search) {
+      query = query?.whereRaw(`LOWER(name) LIKE ?`, [`%${search}%`]);
+    }
+
+    let categories = await query.paginate(page, limit);
+
+    return view.render("category.index", { categories, page, limit, search });
   }
 
   public async create({ view }: HttpContextContract) {

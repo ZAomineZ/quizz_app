@@ -103,6 +103,15 @@ export default class Quiz extends BaseModel {
     }
   );
 
+  public static groupMyMonthsWithoutConditionUser = scope((query) => {
+    query
+      .select(
+        Database.raw("COUNT(*) as count"),
+        Database.raw("EXTRACT(MONTH FROM created_at) as month")
+      )
+      .groupBy("month");
+  });
+
   public static groupByCategories = scope(
     (query, userID: number, relatedAdmin: boolean = true) => {
       query
@@ -111,7 +120,16 @@ export default class Quiz extends BaseModel {
         .join("categories", "categories.id", "quizzes.category_id")
         .select(Database.raw("COUNT(*) as count"), "quizzes.category_id")
         .where("user_id", relatedAdmin ? "=" : "!=", userID)
-        .groupBy("quizzes.id", "categories.id", "categories.name");
+        .groupBy("quizzes.category_id");
     }
   );
+
+  public static groupByCategoriesWithoutConditionUser = scope((query) => {
+    query
+      // @ts-ignore
+      .preload("category")
+      .join("categories", "categories.id", "quizzes.category_id")
+      .select(Database.raw("COUNT(*) as count"), "quizzes.category_id")
+      .groupBy("quizzes.category_id");
+  });
 }

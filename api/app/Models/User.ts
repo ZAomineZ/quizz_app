@@ -8,11 +8,14 @@ import {
   belongsTo,
   computed,
   HasMany,
-  hasMany
+  hasMany,
+  HasOne,
+  hasOne
 } from "@ioc:Adonis/Lucid/Orm";
 import Role from "./Role";
 import { UserRole } from "../enums/UserRole";
 import Quiz from "./Quiz";
+import Statistic from "./Statistic";
 
 export default class User extends BaseModel {
   @column({ isPrimary: true })
@@ -55,6 +58,11 @@ export default class User extends BaseModel {
     foreignKey: "user_id"
   })
   public quizzes: HasMany<typeof Quiz>;
+
+  @hasOne(() => Statistic, {
+    foreignKey: "user_id"
+  })
+  public statistic: HasOne<typeof Statistic>;
 
   @computed()
   public get isAdmin() {

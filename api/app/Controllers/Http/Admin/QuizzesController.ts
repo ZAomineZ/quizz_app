@@ -13,15 +13,19 @@ export default class QuizzesController {
   public async index({ request, view }: HttpContextContract) {
     const qs = request?.qs();
 
-    let limit = 10;
+    let limit = qs.limit ? parseInt(qs.limit) : 10;
     let page = qs.page ? parseInt(qs.page) : 1;
+    let search = qs.s ?? null;
 
-    const quizzes = await Quiz.query()
-      .preload("category")
-      .orderBy("created_at")
-      .paginate(page, limit);
+    let query = Quiz.query().preload("category").orderBy("created_at");
 
-    return view.render("quiz/index", { quizzes, page });
+    if (search) {
+      query = query?.whereRaw(`LOWER(title) LIKE ?`, [`%${search}%`]);
+    }
+
+    let quizzes = await query.paginate(page, limit);
+
+    return view.render("quiz/index", { quizzes, page, limit, search });
   }
 
   public async create({ view }: HttpContextContract) {

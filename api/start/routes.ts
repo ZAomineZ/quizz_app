@@ -73,6 +73,10 @@ Route.resource("quiz", "Admin/QuizzesController")
 Route.resource("category", "Admin/CategoriesController")
   .as("category")
   .middleware({ "*": ["auth", "adminRole"] });
+// Routes user
+Route.resource("user", "Admin/UsersController")
+  .as("user")
+  .middleware({ "*": ["auth", "adminRole"] });
 // Routes notifications
 Route.get("/notifications", "Admin/NotificationsController.index")
   .as("notifications")

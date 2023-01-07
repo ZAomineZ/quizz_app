@@ -1,0 +1,166 @@
+@layout('layouts/main')
+
+@section('body')
+<div class="main_content">
+    <div class="content">
+        <div class="container_fluid">
+            <div>
+                <div class="justify_content_between">
+                    <div class="left_content">
+                        <span class="main_content_title mb_0">Statistics "{{ user?.username }}"
+                        </span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col_xl_12 col_lg_12 col_md_12 col_sm_12">
+                        <div class="px_0 col_xl_12 col_lg_12 col_md_12 col_sm_12">
+                            <div class="px_3 pl_4 card">
+                                <div class="row" id="stats">
+                                    <div class="col_xxl_6 col_xl_6 col_lg_6 col_md_6 col_sm_6">
+                                        <div class="row border_end p_3">
+                                            <div class="col_3 d_flex justify_content_center align_items_center">
+                                                <div class="circle_icon text_center bg_primary shadow overflow_hidden align_self_center">
+                                                    <i class="fa fa-thin fa-bag-shopping tx_15 text_white"></i>
+                                                </div>
+                                            </div>
+                                            <div class="col_9 py_0">
+                                                <div class="pt_4 pb_3">
+                                                    <div class="d_flex">
+                                                        <h6 class="mb_2 tx_12">Quizzes</h6>
+                                                    </div>
+                                                    <div class="pb_0 mt_0">
+                                                        <div class="d_flex">
+                                                            <h4 class="tx_18 mb_0 font_semibold">{{ quizzesCount.$extras.count }}</h4>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col_xxl_6 col_xl_6 col_lg_6 col_md_6 col_sm_6">
+                                        <div class="row border_end p_3">
+                                            <div class="col_3 d_flex justify_content_center align_items_center">
+                                                <div class="circle_icon text_center bg_primary shadow overflow_hidden align_self_center">
+                                                    <i class="fa fa-thin fa-bag-shopping tx_15 text_white"></i>
+                                                </div>
+                                            </div>
+                                            <div class="col_9 py_0">
+                                                <div class="pt_4 pb_3">
+                                                    <div class="d_flex">
+                                                        <h6 class="mb_2 tx_12">Questions</h6>
+                                                    </div>
+                                                    <div class="pb_0 mt_0">
+                                                        <div class="d_flex">
+                                                            <h4 class="tx_18 mb_0 font_semibold">{{ questionsCount.$extras.count }}</h4>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col_12 col_sm_6">
+                        <div class="card">
+                            <div class="card_header">
+                                <h4 class="card_title">Chart Quiz by month</h4>
+                            </div>
+                            <div class="card_body">
+                                <div id="chart_quiz_month"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col_12 col_sm_6">
+                        <div class="card">
+                            <div class="card_header">
+                                <h4 class="card_title">Chart Quiz by category</h4>
+                            </div>
+                            <div class="card_body">
+                                <div id="chart_quiz_category"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@end
+
+@section('scripts')
+    <script type="text/javascript">
+        let charQuizMonthsPublic = {{{ chartQuizMonthsPublic }}}
+        let chartQuizCategoryPublic = {{{ chartQuizCategoryPublic }}}
+
+        function generateOptions (quizPublicData, quizNoPublicData, categoriesData)
+        {
+            return {
+                series: [
+                    {name: "Public Quizzes", data: quizPublicData},
+                    {name: "No Public Quizzes", data: quizNoPublicData}
+                ],
+                chart: {
+                    type: "bar",
+                    height: 280
+                },
+                plotOptions: {
+                    bar: {
+                        horizontal: false,
+                        columnWidth: '20%',
+                        endingShape: 'rounded'
+                    },
+                },
+                legend: {
+                    position: "top"
+                },
+                dataLabels: {
+                    enabled: false
+                },
+                stroke: {
+                    show: true,
+                    width: 2,
+                    colors: ['transparent']
+                },
+                xaxis: {
+                    categories: categoriesData
+                },
+                colors: ["var(--primary-bg-color)", "rgb(228, 231, 237)"],
+                yaxis: {
+                    title: {
+                        text: 'Count Quizzes'
+                    }
+                },
+                fill: {
+                    opacity: 1
+                },
+                tooltip: {
+                    y: {
+                        formatter: function (val) {
+                            return val + " quizzes"
+                        }
+                    }
+                }
+            }
+        }
+
+        // Gengerate quizzes by month chart
+        let optionsChartQuizMonths = generateOptions(
+            charQuizMonthsPublic.quizPublicData,
+            charQuizMonthsPublic.quizNoPublicData,
+            charQuizMonthsPublic.months
+        )
+        new window.Apexchart(document.querySelector('#chart_quiz_month'), optionsChartQuizMonths).render()
+
+        // Gengerate quizzes by category chart
+        let optionsChartQuizCategory = generateOptions(
+            chartQuizCategoryPublic.quizzesPublicData,
+            chartQuizCategoryPublic.quizzesNoPublicData,
+            chartQuizCategoryPublic.categoryLabels
+        )
+        new window.Apexchart(document.querySelector('#chart_quiz_category'), optionsChartQuizCategory).render()
+    </script>
+@end

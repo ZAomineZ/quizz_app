@@ -102,6 +102,19 @@
                                     <span class="side_menu__label">Dashboard</span>
                                 </a>
                             </li>
+                            <li class="side_item side_item_category">User</li>
+                            <li class="slide">
+                                <a href="{{ route('user.index') }}" class="side_menu__item is_expanded">
+                                    @include('../icons/list-icon.edge')
+                                    <span class="side_menu__label">Listing</span>
+                                </a>
+                            </li>
+                            <li class="slide">
+                                <a href="{{ route('user.create') }}" class="side_menu__item is_expanded">
+                                    @include('../icons/pencil-solid-icon.edge')
+                                    <span class="side_menu__label">Create</span>
+                                </a>
+                            </li>
                             <li class="side_item side_item_category">Quiz</li>
                             <li class="slide">
                                 <a href="{{ route('quiz.index') }}" class="side_menu__item is_expanded">

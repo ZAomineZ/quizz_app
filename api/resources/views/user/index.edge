@@ -5,28 +5,28 @@
     <div class="content">
         <div class="container_fluid">
             <div>
-                <div class="justify_content_between ">
+                <div class="justify_content_between">
                     <div class="left_content">
-                        <span class="main_content_title mb_0">All categories</span>
+                        <span class="main_content_title mb_0">Users</span>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col_12 col_sm_12">
                         <div class="card">
                             <div class="card_header">
-                                <h4 class="card_title">Category</h4>
+                                <h4 class="card_title">User</h4>
                             </div>
                             <div class="card_body pt_0">
                                 <div class="table_responsive">
                                     <div class="d_flex">
-                                        <select class="mb_4 mr_1 border" id="limit_categories">
+                                        <select class="mb_4 mr_1 border" id="limit_users">
                                             <option value="10" {{ limit === 10 ? "selected" : "" }}>Show 10</option>
                                             <option value="25" {{ limit === 25 ? "selected" : "" }}>Show 25</option>
                                             <option value="50" {{ limit === 50 ? "selected" : "" }}>Show 50</option>
                                         </select>
                                         <span class="d_flex ml_auto">
-                                            <form action="{{ route('category.index') }}" method="GET">
-                                                <input type="text"  name="s" placeholder="Search..." class="form_control mb_4" value="{{ search ?? "" }}">
+                                            <form action="{{ route('quiz.index') }}">
+                                                <input type="text" name="s" placeholder="Search..." class="form_control mb_4" value="{{ search ?? "" }}">
                                             </form>
                                         </span>
                                     </div>
@@ -34,42 +34,50 @@
                                         <thead>
                                             <tr role="row">
                                                 <th colspan="1" role="columnheader" class="text_center">
-                                                    <span>Category ID</span>
+                                                    <span>ID</span>
                                                     <span></span>
                                                 </th>
                                                 <th colspan="1" role="columnheader" class="text_center">
-                                                    <span>Category name</span>
+                                                    <span>Username</span>
                                                     <span></span>
                                                 </th>
                                                 <th colspan="1" role="columnheader" class="text_center">
-                                                    <span>Category slug</span>
+                                                    <span>Email</span>
                                                     <span></span>
                                                 </th>
                                                 <th colspan="1" role="columnheader" class="text_center">
-                                                    <span>Category description</span>
+                                                    <span>First Name</span>
                                                     <span></span>
                                                 </th>
                                                 <th colspan="1" role="columnheader" class="text_center">
-                                                    <span>Actions</span>
+                                                    <span>Last Name</span>
+                                                    <span></span>
+                                                </th>
+                                                <th colspan="1" role="columnheader" class="text_center">
+                                                    <span>Action</span>
                                                     <span></span>
                                                 </th>
                                             </tr>
                                         </thead>
                                         <tbody role="rowgroup">
-                                            @each(category in categories)
+                                            @each(user in users)
                                                 <tr class="text_center" role="row">
-                                                    <td role="cell">{{ category.id }}</td>
-                                                    <td role="cell">{{ category.name }}</td>
-                                                    <td role="cell">{{ category.slug }}</td>
-                                                    <td role="cell">{{ category.description }}</td>
+                                                    <td role="cell">#{{ user.id }}</td>
+                                                    <td role="cell">{{ user.username }}</td>
+                                                    <td role="cell">{{ user.email }}</td>
+                                                    <td role="cell">{{ user.first_name }}</td>
+                                                    <td role="cell">{{ user.last_name }}</td>
                                                     <td role="cell">
                                                         <span>
-                                                            <a href="{{ route('category.edit', {id: category.id}) }}" class="btn btn_primary btn_sm mr_2">
+                                                            <a href="{{ route('user.edit', {id: user.id}) }}" class="btn btn_primary btn_sm mr_2">
                                                                 <i>
                                                                     @include('../icons/pencil-icon.edge')
                                                                 </i>
                                                             </a>
-                                                            <form action="{{ route('category.destroy', {id: category.id}, {qs: {_method: 'DELETE'}}) }}" method="POST" class="d_inline_block">
+                                                            <a href="{{ route('user.show', {id: user.id}) }}" class="btn btn_info btn_sm mr_2">
+                                                                <i class="fa fa-regular fa-eye"></i>
+                                                            </a>
+                                                            <form action="{{ route('user.destroy', {id: user.id}, {qs: {_method: 'DELETE'}}) }}" method="POST" class="d_inline_block">
                                                                 {{ csrfField() }}
                                                                 <button type="submit" class="btn btn_danger btn_sm">
                                                                     <i>
@@ -86,14 +94,14 @@
                                     <div class="d_block d_sm_flex mt_4">
                                         <span>
                                             Page
-                                            <strong>{{ page }} of {{ categories?.lastPage }}</strong>
+                                            <strong>{{ page }} of {{ users?.lastPage }}</strong>
                                         </span>
                                         <span class="ml_sm_auto">
                                             @if(page !== 1)
-                                              <a href="{{ route('category.index', {qs: {page: page - 1}}) }}" type="button" class="btn btn_default mr_2 table_button d_sm_inline d_block my_1">Previous</a>
+                                               <a href="{{ route('user.index', {qs: {page: page - 1}}) }}" type="button" class="btn btn_default mr_2 table_button d_sm_inline d_block my_1">Previous</a>
                                             @endif
-                                            @if (categories?.hasMorePages)
-                                              <a href="{{ route('category.index', {qs: {page: page + 1}}) }}" type="button" class="btn btn_default mr_2 table_button d_sm_inline d_block my_1">Next</a>
+                                            @if (users?.hasMorePages)
+                                               <a href="{{ route('user.index', {qs: {page: page + 1}}) }}" type="button" class="btn btn_default mr_2 table_button d_sm_inline d_block my_1">Next</a>
                                             @endif
                                         </span>
                                     </div>
@@ -111,11 +119,11 @@
 @section('scripts')
     <script>
         let page = {{ page }}
-        const limitCategories = document.querySelector('#limit_categories')
-        if (limitCategories) {
-            limitCategories.addEventListener('click', () => {
-                let value = parseInt(limitCategories.value)
-                window.location.href = `/category?page=${page}&limit=${value}`
+        const limitUsers = document.querySelector('#limit_users')
+        if (limitUsers) {
+            limitUsers.addEventListener('click', () => {
+                let value = parseInt(limitUsers.value)
+                window.location.href = `/user?page=${page}&limit=${value}`
             })
         }
     </script>

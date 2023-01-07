@@ -5,7 +5,7 @@
     <div class="content">
         <div class="container_fluid">
             <div>
-                <div class="justify_content_between ">
+                <div class="justify_content_between">
                     <div class="left_content">
                         <span class="main_content_title mb_0">All quiz</span>
                     </div>
@@ -19,13 +19,15 @@
                             <div class="card_body pt_0">
                                 <div class="table_responsive">
                                     <div class="d_flex">
-                                        <select class="mb_4 mr_1 border">
-                                            <option value="10">Show 10</option>
-                                            <option value="25">Show 25</option>
-                                            <option value="50">Show 50</option>
+                                        <select class="mb_4 mr_1 border" id="limit_quizzes">
+                                            <option value="10" {{ limit === 10 ? "selected" : "" }}>Show 10</option>
+                                            <option value="25" {{ limit === 25 ? "selected" : "" }}>Show 25</option>
+                                            <option value="50" {{ limit === 50 ? "selected" : "" }}>Show 50</option>
                                         </select>
                                         <span class="d_flex ml_auto">
-                                            <input type="text" placeholder="Search..." class="form_control mb_4">
+                                            <form action="{{ route('quiz.index') }}" method="GET">
+                                                <input type="text" name="s" placeholder="Search..." class="form_control mb_4" value="{{ search ?? "" }}">
+                                            </form>
                                         </span>
                                     </div>
                                     <table role="table" class="table table_bordered text_nowrap mb_0">
@@ -114,4 +116,17 @@
         </div>
     </div>
 </div>
+@end
+
+@section('scripts')
+    <script>
+        let page = {{ page }}
+        const limitQuizzes = document.querySelector('#limit_quizzes')
+        if (limitQuizzes) {
+            limitQuizzes.addEventListener('click', () => {
+                let value = parseInt(limitQuizzes.value)
+                window.location.href = `/quiz?page=${page}&limit=${value}`
+            })
+        }
+    </script>
 @end

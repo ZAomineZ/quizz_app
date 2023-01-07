@@ -17,7 +17,7 @@
                                     <div>
                                         <ul class="notification_pagination">
                                             <li>
-                                                <span>1-50 to 235</span>
+                                                <span>{{ page === 1 ? 1 : (limit * (page - 1) + 1) }}-{{ page === 1 ? limit : page * limit }} to {{ limit * parseInt(notifications?.lastPage) }}</span>
                                             </li>
                                             <li class="mt_1">
                                                 <a href="#" class="btn btn_np">
