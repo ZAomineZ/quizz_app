@@ -10,10 +10,23 @@
             <Input
               type="text"
               placeholder="Question"
-              className="form_control form__field"
+              :class="`form_control form__field${
+                errorsValidation.find((error) => error.field === 'question')
+                  ? ' form_invalid'
+                  : ''
+              }`"
               v-model="credentials.question"
             />
             <i class="fa fa-regular fa-face-smile"></i>
+          </div>
+          <div
+            class="invalid_feedback"
+            v-if="errorsValidation.find((error) => error.field === 'question')"
+          >
+            {{
+              errorsValidation.find((error) => error.field === "question")
+                .message
+            }}
           </div>
         </div>
         <div class="form__field_wrap">
@@ -21,10 +34,25 @@
             <Input
               type="text"
               placeholder="Bonne Réponse"
-              className="form_control form__field"
+              :class="`form_control form__field${
+                errorsValidation.find((error) => error.field === 'good_answer')
+                  ? ' form_invalid'
+                  : ''
+              }`"
               v-model="credentials.good_answer"
             />
             <i class="fa fa-solid fa-eye"></i>
+          </div>
+          <div
+            class="invalid_feedback"
+            v-if="
+              errorsValidation.find((error) => error.field === 'good_answer')
+            "
+          >
+            {{
+              errorsValidation.find((error) => error.field === "good_answer")
+                .message
+            }}
           </div>
         </div>
         <div class="form__field_wrap">
@@ -32,10 +60,25 @@
             <Input
               type="text"
               placeholder="Mauvaise Réponse (1)"
-              className="form_control form__field"
+              :class="`form_control form__field${
+                errorsValidation.find((error) => error.field === 'bad_answer_1')
+                  ? ' form_invalid'
+                  : ''
+              }`"
               v-model="credentials.bad_answer_1"
             />
             <i class="fa fa-solid fa-eye"></i>
+          </div>
+          <div
+            class="invalid_feedback"
+            v-if="
+              errorsValidation.find((error) => error.field === 'bad_answer_1')
+            "
+          >
+            {{
+              errorsValidation.find((error) => error.field === "bad_answer_1")
+                .message
+            }}
           </div>
         </div>
         <div class="form__field_wrap">
@@ -43,10 +86,25 @@
             <Input
               type="text"
               placeholder="Mauvaise Réponse (2)"
-              className="form_control form__field"
+              :class="`form_control form__field${
+                errorsValidation.find((error) => error.field === 'bad_answer_2')
+                  ? ' form_invalid'
+                  : ''
+              }`"
               v-model="credentials.bad_answer_2"
             />
             <i class="fa fa-solid fa-eye"></i>
+          </div>
+          <div
+            class="invalid_feedback"
+            v-if="
+              errorsValidation.find((error) => error.field === 'bad_answer_2')
+            "
+          >
+            {{
+              errorsValidation.find((error) => error.field === "bad_answer_2")
+                .message
+            }}
           </div>
         </div>
         <div class="form__field_wrap">
@@ -54,10 +112,25 @@
             <Input
               type="text"
               placeholder="Mauvaise Réponse (3)"
-              className="form_control form__field"
+              :class="`form_control form__field${
+                errorsValidation.find((error) => error.field === 'bad_answer_3')
+                  ? ' form_invalid'
+                  : ''
+              }`"
               v-model="credentials.bad_answer_3"
             />
             <i class="fa fa-solid fa-eye"></i>
+          </div>
+          <div
+            class="invalid_feedback"
+            v-if="
+              errorsValidation.find((error) => error.field === 'bad_answer_3')
+            "
+          >
+            {{
+              errorsValidation.find((error) => error.field === "bad_answer_3")
+                .message
+            }}
           </div>
         </div>
         <div class="form__field_button_wrap">
@@ -77,6 +150,7 @@ import Input from "~/components/Form/Input.vue";
 import { reactive, ref } from "vue";
 import QuizSubmit from "~/utils/api/Quiz/QuizSubmit";
 import Alert from "~/components/Message/Alert.vue";
+import { IValidationError } from "~/types/Error";
 
 interface Props {
   quizID: number;
@@ -95,12 +169,19 @@ const credentials = reactive({
 });
 const message = ref<string | null>(null);
 const messageError = ref<string | null>(null);
+const errorsValidation = ref<IValidationError[]>([]);
 
 const handleSubmit = async () => {
   const response = await quizSubmitAPI.submitQuestion(
     props.quizID,
     credentials
   );
+
+  if (response.errors) {
+    // ERRORS VALIDATION
+    errorsValidation.value = response.errors;
+    return;
+  }
 
   if (response.success) {
     message.value = response.message;

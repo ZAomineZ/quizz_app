@@ -73,24 +73,6 @@
                           >
                         </td>
                       </tr>
-                      <tr>
-                        <th scope="row">Author</th>
-                        <td>
-                          <a
-                            href="https://demo.ramsthemes.com/projects/animace/manga_authors/takehiko-inoue/"
-                            >Takehiko Inoue</a
-                          >
-                        </td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Author</th>
-                        <td>
-                          <a
-                            href="https://demo.ramsthemes.com/projects/animace/manga_authors/takehiko-inoue/"
-                            >Takehiko Inoue</a
-                          >
-                        </td>
-                      </tr>
                     </Table>
                   </CardBody>
                 </Card>

@@ -15,10 +15,22 @@
             <Input
               type="text"
               placeholder="Nom du quiz"
-              className="form_control form__field"
+              :class="`form_control form__field${
+                errorsValidation.find((error) => error.field === 'title')
+                  ? ' form_invalid'
+                  : ''
+              }`"
               v-model="credentials.title"
             />
             <i class="fa fa-regular fa-face-smile"></i>
+          </div>
+          <div
+            class="invalid_feedback"
+            v-if="errorsValidation.find((error) => error.field === 'title')"
+          >
+            {{
+              errorsValidation.find((error) => error.field === "title").message
+            }}
           </div>
         </div>
         <div class="form__field_wrap">
@@ -26,38 +38,102 @@
             <Input
               type="text"
               placeholder="Description du quiz"
-              className="form_control form__field"
+              :class="`form_control form__field${
+                errorsValidation.find((error) => error.field === 'description')
+                  ? ' form_invalid'
+                  : ''
+              }`"
               v-model="credentials.description"
             />
             <i class="fa fa-solid fa-eye"></i>
           </div>
+          <div
+            class="invalid_feedback"
+            v-if="
+              errorsValidation.find((error) => error.field === 'description')
+            "
+          >
+            {{
+              errorsValidation.find((error) => error.field === "description")
+                .message
+            }}
+          </div>
         </div>
         <div class="form__field_wrap">
           <div class="form_field_input">
-            <Select v-model="credentials.difficulty">
+            <Select
+              v-model="credentials.difficulty"
+              :class="`form_control form__field${
+                errorsValidation.find((error) => error.field === 'difficulty')
+                  ? ' form_invalid'
+                  : ''
+              }`"
+            >
               <option value="">Choisissez</option>
               <option value="Facile">Facile</option>
               <option value="Moyen">Moyen</option>
               <option value="Difficile">Difficile</option>
             </Select>
           </div>
+          <div
+            class="invalid_feedback"
+            v-if="
+              errorsValidation.find((error) => error.field === 'difficulty')
+            "
+          >
+            {{
+              errorsValidation.find((error) => error.field === "difficulty")
+                .message
+            }}
+          </div>
         </div>
         <div class="form__field_wrap">
           <div class="form_field_input">
-            <Select v-model="credentials.category">
+            <Select
+              v-model="credentials.category"
+              :class="`form_control form__field${
+                errorsValidation.find((error) => error.field === 'category')
+                  ? ' form_invalid'
+                  : ''
+              }`"
+            >
               <option value="">Choisissez une catégorie</option>
               <option :value="category.slug" v-for="category in categories">
                 {{ category.name }}
               </option>
             </Select>
           </div>
+          <div
+            class="invalid_feedback"
+            v-if="errorsValidation.find((error) => error.field === 'category')"
+          >
+            {{
+              errorsValidation.find((error) => error.field === "category")
+                .message
+            }}
+          </div>
         </div>
         <div class="form__field_wrap">
           <div class="form_field_input">
             <InputFile
               @change="handleFileUpload"
-              className="form_control form__field"
+              :class="`form_control form__field${
+                errorsValidation.find((error) => error.field === 'file_upload')
+                  ? ' form_invalid'
+                  : ''
+              }`"
             />
+          </div>
+          <div
+            class="invalid_feedback"
+            v-if="
+              errorsValidation.find((error) => error.field === 'file_upload')
+            "
+          >
+            {{
+              errorsValidation.find((error) => error.field === "file_upload")
+                .message
+            }}
           </div>
         </div>
         <div class="form__field_button_wrap">
@@ -80,6 +156,7 @@ import { Category as CategoryType } from "~/types/Category";
 import QuizSubmit from "~/utils/api/Quiz/QuizSubmit";
 import Alert from "~/components/Message/Alert.vue";
 import InputFile from "~/components/Form/InputFile.vue";
+import { IValidationError } from "~/types/Error";
 
 interface Props {
   categories: CategoryType[];
@@ -100,6 +177,7 @@ const credentials = reactive({
 const file = ref(null);
 const message = ref<string | null>(null);
 const messageError = ref<string | null>(null);
+const errorsValidation = ref<IValidationError[]>([]);
 
 // Methods
 const handleFileUpload = (e: any) => {
@@ -115,6 +193,12 @@ const handleSubmit = async () => {
   formData.append("image_upload", file.value ?? "");
 
   const response = await quizSubmitAPI.submit(formData);
+
+  if (response.errors) {
+    // ERRORS VALIDATION
+    errorsValidation.value = response.errors;
+    return;
+  }
 
   if (response.success) {
     message.value = response.message;

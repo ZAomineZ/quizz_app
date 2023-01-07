@@ -211,8 +211,8 @@ const difficultyField = ref<QuizDifficulty | string>("");
 
 onMounted(async () => {
   // Get category list
-  const categoriesList = await category.list();
-  categories.value = categoriesList.categories;
+  const categoriesList = await category.list(1);
+  categories.value = categoriesList.categories.data;
 
   await sort(1, true);
 });
