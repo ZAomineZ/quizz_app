@@ -48,6 +48,9 @@ export default class User extends BaseModel {
   public emailToken: string | null;
 
   @column()
+  public emailTokenCreatedAt: DateTime;
+
+  @column()
   public image: string | null;
 
   @column()

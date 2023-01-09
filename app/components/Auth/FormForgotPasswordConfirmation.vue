@@ -1,5 +1,6 @@
 <template>
   <div class="form__container">
+    <Alert :message="messageError" v-if="messageError" />
     <form action="#" method="POST" @submit.prevent="handleSubmit">
       <div class="form__wrapper">
         <div class="form__wrapper_headline">Forgot Password ?</div>
@@ -78,6 +79,7 @@ import { reactive, ref } from "vue";
 import { IValidationError } from "~/types/Error";
 import { useRoute } from "nuxt/app";
 import Input from "~/components/Form/Input.vue";
+import Alert from "~/components/Message/Alert.vue";
 import { navigateTo } from "#imports";
 
 let route = useRoute();
@@ -107,13 +109,14 @@ const handleSubmit = async (e: SubmitEvent) => {
     errorsValidation.value = response.errors;
     return;
   }
-  if (response.message) {
+  if (response.message && !response.success) {
     // MESSAGE ERROR
     messageError.value = response.message;
     return;
   }
-
-  await navigateTo("/login");
+  if (response.success) {
+    await navigateTo("/login");
+  }
 };
 </script>
 

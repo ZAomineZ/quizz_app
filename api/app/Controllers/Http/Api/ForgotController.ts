@@ -5,6 +5,7 @@ import { generateToken } from "../../../utils/Token";
 import Mail from "@ioc:Adonis/Addons/Mail";
 import ForgotPasswordConfirmValidator from "../../../Validators/ForgotPasswordConfirmValidator";
 import Env from "@ioc:Adonis/Core/Env";
+import { DateTime } from "luxon";
 
 export default class ForgotController {
   public async store({ request, response }: HttpContextContract) {
@@ -21,6 +22,7 @@ export default class ForgotController {
     }
 
     // Update emailToken to current user
+    user.emailTokenCreatedAt = new Date();
     user.emailToken = generateToken(32);
     await user.save();
 
@@ -61,10 +63,20 @@ export default class ForgotController {
       });
     }
 
+    // checking if token is still valid (48 hour period)
+    let dateNow = DateTime.now();
+    const dateExpired = DateTime.local().plus({ days: 2 });
+    if (dateExpired < dateNow) {
+      return response
+        .status(401)
+        .json({ success: false, message: "This token was expired !" });
+    }
+
     // Save new password
     const payload = await request.validate(ForgotPasswordConfirmValidator);
     user.password = payload.new_password;
     user.emailToken = null;
+    user.emailTokenCreatedAt = null;
     await user.save();
 
     return response.json({
