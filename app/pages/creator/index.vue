@@ -23,7 +23,7 @@
               <div class="col">
                 <div class="py_3">
                   <h6>{{ creator.username }}</h6>
-                  8 results
+                  {{ creator?.meta?.quizzes_count }} results
                 </div>
               </div>
             </div>

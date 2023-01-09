@@ -5,4 +5,7 @@ export type User = {
   first_name?: string;
   last_name?: string;
   image: string | null;
+  meta?: {
+    quizzes_count?: string | number;
+  };
 };

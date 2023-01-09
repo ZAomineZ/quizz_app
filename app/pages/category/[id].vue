@@ -38,7 +38,7 @@
 
 <script setup lang="ts">
 import Category from "~/utils/api/Category/Category";
-import { onMounted } from "#imports";
+import { navigateTo, onMounted } from "#imports";
 import { ref } from "vue";
 import { Category as CategoryType } from "~/types/Category";
 import { useRoute } from "nuxt/app";
@@ -58,12 +58,16 @@ const quizzes = ref<QuizType[]>([]);
 const pagination = ref<PaginationType | null>(null);
 
 onMounted(async () => {
+  // Get category current
+  try {
+    const categoryBySlug = await categoryAPI.showSlug(categorySlug);
+    categoryCurrent.value = categoryBySlug.category;
+  } catch (err) {
+    return navigateTo("/category");
+  }
+
   // Add views
   await viewCategoryAPI.addView(categorySlug);
-
-  // Get category current
-  const categoryBySlug = await categoryAPI.showSlug(categorySlug);
-  categoryCurrent.value = categoryBySlug.category;
 
   // Get all quizzes for the current category
   await list(1);

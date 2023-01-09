@@ -13,7 +13,10 @@ export default class QuizQuestionSubmitted {
 
     let user = await User.query().where("username", "=", "Admin").first();
 
-    await Update.send(`/notifications/${user?.id}`, { message });
+    await Update.send(`/notifications/${user?.id}`, {
+      message,
+      imageUser: user?.image as string
+    });
     // Create notification model
     await Notification.create({
       message,

@@ -43,6 +43,7 @@ import { onMounted, ref } from "vue";
 import { User as UserType } from "~/types/User";
 import { Quiz as QuizType } from "~/types/Quiz";
 import { PaginationType } from "~/types/Pagination";
+import { navigateTo } from "#imports";
 
 const route = useRoute();
 const params = route.params;
@@ -56,8 +57,12 @@ const pagination = ref<PaginationType | null>(null);
 
 onMounted(async () => {
   // Get creator current
-  const creatorResponse = await creatorAPI.show(creatorID);
-  creatorCurrent.value = creatorResponse.creator;
+  try {
+    const creatorResponse = await creatorAPI.show(creatorID);
+    creatorCurrent.value = creatorResponse.creator;
+  } catch (err) {
+    navigateTo("/creator");
+  }
 
   // Get all quizzes for the current creator
   await list(1);

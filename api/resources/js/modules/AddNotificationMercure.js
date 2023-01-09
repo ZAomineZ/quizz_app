@@ -3,10 +3,10 @@ export default class AddNotificationMercure {
     this.mercureEndpoint = process.env.MERCURE_ENDPOINT;
   }
 
-  notificationElement(message) {
+  notificationElement(message, imageUser) {
     return `<div class="list d_flex align_items_center border_bottom p_3">
         <div>
-            <span class="avatar bg_primary br_round avatar_md">CH</span>
+            <img class="avatar bg_primary br_round avatar_md" src="${imageUser}"/>
         </div>
         <a href="#" class="wrapper w_100 ms_3">
             <p class="mb_0 d_flex">
@@ -55,7 +55,8 @@ export default class AddNotificationMercure {
         }
         // Add new notification element
         this.notifications.innerHTML =
-          this.notificationElement(data.message) + this.notifications.innerHTML;
+          this.notificationElement(data.message, data?.imageUser) +
+          this.notifications.innerHTML;
       };
     });
   }

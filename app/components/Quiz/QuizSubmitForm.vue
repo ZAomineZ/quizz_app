@@ -35,8 +35,7 @@
         </div>
         <div class="form__field_wrap">
           <div class="form_field_input">
-            <Input
-              type="text"
+            <textarea
               placeholder="Description du quiz"
               :class="`form_control form__field${
                 errorsValidation.find((error) => error.field === 'description')
@@ -44,8 +43,7 @@
                   : ''
               }`"
               v-model="credentials.description"
-            />
-            <i class="fa fa-solid fa-eye"></i>
+            ></textarea>
           </div>
           <div
             class="invalid_feedback"

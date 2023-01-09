@@ -18,6 +18,11 @@ import Quiz from "./Quiz";
 import Statistic from "./Statistic";
 
 export default class User extends BaseModel {
+  /**
+   * Serialize the `$extras` object as it is
+   */
+  public serializeExtras = true;
+
   @column({ isPrimary: true })
   public id: number;
 

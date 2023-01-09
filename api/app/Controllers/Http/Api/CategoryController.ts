@@ -28,7 +28,7 @@ export default class CategoryController {
     // Find category
     let category = await Category.query()
       .where("slug", "=", categorySlug)
-      .first();
+      .firstOrFail();
 
     return response.json({
       success: true,

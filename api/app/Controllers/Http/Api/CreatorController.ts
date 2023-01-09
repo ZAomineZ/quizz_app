@@ -15,6 +15,9 @@ export default class CreatorController {
       .whereHas("quizzes", (builder) => {
         builder.where("is_public", "=", QuizState.IS_PUBLIC);
       })
+      .withCount("quizzes", (builder) => {
+        builder.where("is_public", "=", QuizState.IS_PUBLIC);
+      })
       .has("quizzes", ">=", 1)
       .groupBy("id", "username")
       .paginate(page, limit);
@@ -32,7 +35,7 @@ export default class CreatorController {
     let creator = await User.query()
       .select("id", "username", "image")
       .where("id", "=", creatorID)
-      .first();
+      .firstOrFail();
 
     return response.json({
       success: true,

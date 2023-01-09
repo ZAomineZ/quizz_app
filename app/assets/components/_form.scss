@@ -33,6 +33,10 @@
   }
 }
 
+textarea.form_control {
+  height: 90px !important;
+}
+
 .form_control_sm {
   height: calc(1.5em + .5rem + 2px);
   padding: .25rem .5rem;
