@@ -45,6 +45,9 @@ export default class User extends BaseModel {
   public rememberMeToken: string | null;
 
   @column()
+  public emailToken: string | null;
+
+  @column()
   public image: string | null;
 
   @column()

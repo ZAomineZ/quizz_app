@@ -24,7 +24,11 @@
     <div class="container__general">
       <div class="wrapper">
         <SidebarContent
-          v-if="route.name !== 'login' && route.name !== 'register'"
+          v-if="
+            route.name !== 'login' &&
+            route.name !== 'register' &&
+            route.name !== 'forgot-password'
+          "
         />
         <slot />
       </div>

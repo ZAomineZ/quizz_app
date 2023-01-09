@@ -163,6 +163,10 @@ textarea.form_control {
     text-align: center;
     border-bottom: none !important;
   }
+
+  .form__bottom_links a:not(:last-child) {
+    margin-right: 3px;
+  }
 }
 
 .invalid_feedback {

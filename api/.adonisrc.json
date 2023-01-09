@@ -5,7 +5,8 @@
     "@adonisjs/core/build/commands/index.js",
     "@adonisjs/repl/build/commands",
     "@adonisjs/lucid/build/commands",
-    "adonis5-scheduler/build/commands"
+    "adonis5-scheduler/build/commands",
+    "@adonisjs/mail/build/commands"
   ],
   "exceptionHandlerNamespace": "App/Exceptions/Handler",
   "aliases": {
@@ -30,7 +31,8 @@
     "@adonisjs/auth",
     "@adonisjs/lucid-slugify",
     "@setten/mercure",
-    "adonis5-scheduler"
+    "adonis5-scheduler",
+    "@adonisjs/mail"
   ],
   "metaFiles": [
     {

@@ -92,6 +92,12 @@ Route.put("/api/:id/question", "Admin/QuestionsController.update")
 // ROUTES API AUTH
 Route.post("/api/register", "Api/AuthController.register");
 Route.post("/api/login", "Api/AuthController.login");
+Route.post("/api/forgot-password", "Api/ForgotController.store");
+Route.put("/api/forgot-password/:email/:token", "Api/ForgotController.update");
+Route.post(
+  "/api/forgot-password/confirm/:token",
+  "Api/ForgotController.confirm"
+);
 Route.post("/api/logout", "Api/AuthController.logout");
 Route.get("/api/me", "Api/AuthController.me").middleware("auth:api");
 // ROUTES API QUIZ
