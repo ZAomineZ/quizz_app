@@ -2,8 +2,14 @@ import { DateTime } from "luxon";
 import { column, BaseModel, HasMany, scope } from "@ioc:Adonis/Lucid/Orm";
 import ViewsCategory from "./ViewsCategory";
 import { hasMany } from "@adonisjs/lucid/build/src/Orm/Decorators";
+import Quiz from "./Quiz";
 
 export default class Category extends BaseModel {
+  /**
+   * Serialize the `$extras` object as it is
+   */
+  public serializeExtras = true;
+
   @column({ isPrimary: true })
   public id: number;
 
@@ -24,6 +30,11 @@ export default class Category extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime;
+
+  @hasMany(() => Quiz, {
+    foreignKey: "category_id"
+  })
+  public quizzes: HasMany<typeof Quiz>;
 
   @hasMany(() => ViewsCategory, {
     foreignKey: "category_id"

@@ -1,6 +1,7 @@
 <template>
   <div class="form__container">
     <Alert :message="messageError" v-if="messageError" />
+    <Alert :message="messageSuccess" v-if="messageSuccess" status="success" />
     <form
       action="#"
       method="POST"
@@ -57,6 +58,7 @@ import Input from "~/components/Form/Input.vue";
 const forgotPasswordAPI = new ForgotPassword();
 const email = ref<string>("");
 const messageError = ref<string | null>(null);
+const messageSuccess = ref<string | null>(null);
 const errorsValidation = ref<IValidationError[]>([]);
 
 // Methods
@@ -69,10 +71,14 @@ const handleSubmit = async (e: SubmitEvent) => {
     errorsValidation.value = response.errors;
     return;
   }
-  if (response.message) {
+  if (response.message && !response.status) {
     // MESSAGE ERROR
     messageError.value = response.message;
     return;
+  }
+  if (response.message && response.status) {
+    // MESSAGE SUCCESS
+    messageSuccess.value = response.message;
   }
 };
 </script>

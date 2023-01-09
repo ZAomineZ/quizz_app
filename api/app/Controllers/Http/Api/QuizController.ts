@@ -49,6 +49,7 @@ export default class QuizController {
 
     let quizzes = await Quiz.query()
       .select(
+        "id",
         "title",
         "slug",
         "description",
@@ -60,7 +61,7 @@ export default class QuizController {
         builder.select("name", "slug");
       })
       .where("user_id", "=", user?.id)
-      .orderBy("created_at", "desc")
+      .orderBy("is_public", "desc")
       .paginate(page, limit);
 
     return response.json({

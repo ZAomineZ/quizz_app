@@ -1,14 +1,16 @@
 <template>
-  <div class="message__danger">{{ message }}</div>
+  <div :class="`message__${status}`">{{ message }}</div>
 </template>
 
 <script lang="ts" setup>
 interface Props {
   message: string;
+  status: "danger" | "success";
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  message: ""
+  message: "",
+  status: "danger"
 });
 </script>
 

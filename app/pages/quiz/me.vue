@@ -9,7 +9,7 @@
                 <CardBody class-name="p_3">
                   <Table class-name="table_bordered">
                     <tr>
-                      <th>#</th>
+                      <th>ID</th>
                       <th>Name</th>
                       <th>Category</th>
                       <th>Description</th>
@@ -18,14 +18,19 @@
                       <th>Lien</th>
                     </tr>
                     <tr v-for="(quiz, index) in quizzes">
-                      <th>{{ index }}</th>
+                      <th>{{ quiz?.id }}</th>
                       <th>{{ quiz.title }}</th>
                       <th>{{ quiz?.category?.name }}</th>
                       <th>{{ quiz?.description }}</th>
                       <th>{{ quiz?.difficulty }}</th>
                       <th>{{ quiz?.is_public ? "Oui" : "Non" }}</th>
                       <th>
-                        <NuxtLink :to="`/quiz/${quiz.slug}`">Lien</NuxtLink>
+                        <NuxtLink
+                          :to="`/quiz/${quiz.slug}`"
+                          v-if="quiz?.is_public"
+                          >Lien</NuxtLink
+                        >
+                        <p v-if="!quiz?.is_public">No</p>
                       </th>
                     </tr>
                   </Table>

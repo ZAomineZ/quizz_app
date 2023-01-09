@@ -50,7 +50,7 @@
                     <div class="input_group_search">
                       <InputCheckbox
                         :label="category.name"
-                        count="20"
+                        :count="category?.meta?.quizzes_count"
                         v-for="category in categories"
                         :checked="category.id.toString() === categoryField"
                         @click="handleCategory(category.id.toString())"

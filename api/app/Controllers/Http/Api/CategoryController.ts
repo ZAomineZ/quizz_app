@@ -1,5 +1,6 @@
 import { HttpContextContract } from "@ioc:Adonis/Core/HttpContext";
 import Category from "../../../Models/Category";
+import { QuizState } from "../../../enums/QuizState";
 
 export default class CategoryController {
   public async all({ response }: HttpContextContract) {
@@ -14,6 +15,9 @@ export default class CategoryController {
     let page = qs?.page ?? 1;
 
     let categories = await Category.query()
+      .withCount("quizzes", (builder) => {
+        builder.where("is_public", "=", QuizState.IS_PUBLIC);
+      })
       .orderBy("created_at")
       .paginate(page, limit);
     return response.json({

@@ -4,4 +4,7 @@ export interface Category {
   slug: string;
   description: string;
   image: string;
+  meta?: {
+    quizzes_count?: string | number;
+  };
 }

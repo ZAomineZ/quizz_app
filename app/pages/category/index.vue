@@ -23,7 +23,7 @@
               <div class="col">
                 <div class="py_3">
                   <h6>{{ category.name }}</h6>
-                  8 results
+                  {{ category?.meta?.quizzes_count }} results
                 </div>
               </div>
             </div>
