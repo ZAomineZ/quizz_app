@@ -19,11 +19,13 @@
                                             <li>
                                                 <span>{{ page === 1 ? 1 : (limit * (page - 1) + 1) }}-{{ page === 1 ? limit : page * limit }} to {{ limit * parseInt(notifications?.lastPage) }}</span>
                                             </li>
-                                            <li class="mt_1">
-                                                <a href="#" class="btn btn_np">
+                                            @if (notifications.lastPage !== 1 && notifications.hasMorePages)
+                                                <li class="mt_1">
+                                                  <a href="?page={{ page + 1 }}" class="btn btn_np">
                                                     <i class="fa fa-thin fa-chevron-right"></i>
-                                                </a>
-                                            </li>
+                                                  </a>
+                                                </li>
+                                            @endif
                                         </ul>
                                     </div>
                                 </div>

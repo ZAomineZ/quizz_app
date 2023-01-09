@@ -4,7 +4,7 @@ export const serializeRanking = {
   },
   relations: {
     user: {
-      fields: ["username", "id"]
+      fields: ["username", "id", "image"]
     }
   }
 };

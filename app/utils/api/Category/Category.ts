@@ -8,6 +8,10 @@ export default class Category {
     this.runtimeConfig = useRuntimeConfig();
   }
 
+  public async all() {
+    return getAPI(`${this.runtimeConfig.public.apiURL}/api/category/all`);
+  }
+
   public async list(page: number) {
     let url = `${this.runtimeConfig.public.apiURL}/api/category`;
     if (page > 1) {

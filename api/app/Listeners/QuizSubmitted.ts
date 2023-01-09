@@ -9,9 +9,11 @@ export default class QuizSubmitted {
   }: EventsList["notification:quiz_submitted"]) {
     // Send on topic notifications
     const message = `New quiz proposed with the name '${quiz.title}' !`;
-    await Update.send("/notifications", { message });
-    // Create notification model
+
     let user = await User.query().where("username", "=", "Admin").first();
+
+    await Update.send(`/notifications/${user?.id}`, { message });
+    // Create notification model
     await Notification.create({
       message,
       type: "New proposition quiz",

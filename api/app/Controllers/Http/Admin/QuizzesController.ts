@@ -17,7 +17,10 @@ export default class QuizzesController {
     let page = qs.page ? parseInt(qs.page) : 1;
     let search = qs.s ?? null;
 
-    let query = Quiz.query().preload("category").orderBy("created_at");
+    let query = Quiz.query()
+      .preload("category")
+      .withCount("questions")
+      .orderBy("created_at");
 
     if (search) {
       query = query?.whereRaw(`LOWER(title) LIKE ?`, [`%${search}%`]);

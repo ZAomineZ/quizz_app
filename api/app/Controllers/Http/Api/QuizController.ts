@@ -80,6 +80,7 @@ export default class QuizController {
       .preload("user", (builder) => {
         builder.select("username");
       })
+      .where("is_public", "=", QuizState.IS_PUBLIC)
       .firstOrFail();
 
     return response.json({

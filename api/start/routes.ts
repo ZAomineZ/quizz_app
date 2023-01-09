@@ -114,6 +114,7 @@ Route.post(
 ).middleware("auth:api");
 // ROUTES API CATEGORY
 Route.get("/api/category", "Api/CategoryController.list");
+Route.get("/api/category/all", "Api/CategoryController.all");
 Route.get(
   "/api/category/mostViews",
   "Api/Views/CategoryViewController.mostViews"

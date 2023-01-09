@@ -11,7 +11,7 @@ import Statistic from "../Models/Statistic";
 
 export default class StatisticDashboard extends BaseTask {
   public static get schedule() {
-    return "*/1 * * * *";
+    return "*/10 * * * *";
   }
   /**
    * Set enable use .lock file for block run retry task

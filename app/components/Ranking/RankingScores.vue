@@ -10,7 +10,13 @@
               <th>Score</th>
             </tr>
             <tr v-for="ranking in rankings">
-              <th>LOL</th>
+              <th>
+                <img
+                  class="img__res img__wrap img__res_avatar"
+                  :src="`${runtimeConfig.public.apiURL}${ranking?.user?.image}`"
+                  alt=""
+                />
+              </th>
               <th>{{ ranking?.user?.username }}</th>
               <th>{{ ranking.meta.scoreTotal }}</th>
             </tr>
@@ -25,8 +31,11 @@
 import Ranking from "~/utils/api/Ranking/Ranking";
 import { onMounted, ref } from "vue";
 import { RankingScores } from "~/types/Ranking";
+import { useRuntimeConfig } from "#app";
 
 const rankingAPI = new Ranking();
+
+const runtimeConfig = useRuntimeConfig();
 
 const rankings = ref<RankingScores[]>([]);
 

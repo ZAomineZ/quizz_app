@@ -171,7 +171,7 @@
                             </div>
                             <div class="tab_content">
                                 <div role="tabpanel" class="fade tab_pane active show">
-                                    <div id="notifications">
+                                    <div id="notifications" data-user="{{ auth?.user?.id }}">
                                         @each(notification in notificationsSidebar)
                                             <div class="list d_flex align_items_center border_bottom p_3">
                                                 <div>

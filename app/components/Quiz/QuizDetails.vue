@@ -26,6 +26,7 @@
                 <ButtonBadge
                   label="Commencer le quiz"
                   @click.prevent="startQuiz"
+                  v-if="isLoggedIn"
                 />
               </div>
             </div>
@@ -99,6 +100,7 @@ import { Quiz } from "~/types/Quiz";
 import { useRoute, useRouter } from "nuxt/app";
 import { useRuntimeConfig } from "#app";
 import QuizSessions from "~/utils/api/Quiz/QuizSessions";
+import { useAuth } from "~/composables/auth";
 
 interface Props {
   quiz?: Quiz;
@@ -107,6 +109,7 @@ interface Props {
 const route = useRoute();
 const router = useRouter();
 const quizSessionsAPI = new QuizSessions();
+const { isLoggedIn } = useAuth();
 
 const props = withDefaults(defineProps<Props>(), {});
 

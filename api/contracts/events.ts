@@ -32,6 +32,9 @@ declare module "@ioc:Adonis/Core/Event" {
 
   interface EventsList {
     "notification:quiz_submitted": { quiz: Quiz };
-    "notification:quiz_question_submitted": { quiz: Quiz; question: Question };
+    "notification:quiz_question_submitted": {
+      quiz: Quiz;
+      question: Question;
+    };
   }
 }

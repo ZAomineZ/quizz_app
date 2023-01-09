@@ -33,10 +33,11 @@ export default class AddNotificationMercure {
       );
 
       // Listen topic notifications
+      const userID = this.notifications.dataset.user;
       const url = new URL(this.mercureEndpoint);
-      url.searchParams.append("topic", "/notifications");
+      url.searchParams.append("topic", `/notifications/${userID}`);
 
-      const eventSource = new EventSource(url);
+      const eventSource = new EventSource(url, { withCredentials: true });
       let { origin } = window?.location;
       eventSource.onmessage = async (event) => {
         let data = JSON.parse(event.data);

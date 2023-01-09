@@ -33,10 +33,11 @@ export default class QuizSubmitController {
     // @ts-ignore
     delete payload["image_upload"];
     // Create quiz
+    let userID = user?.id;
     const quiz = await Quiz.create({
       ...payload,
       category_id: category.id,
-      user_id: user?.id
+      user_id: userID
     });
 
     // Add notification for quiz submitted

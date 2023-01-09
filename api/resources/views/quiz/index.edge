@@ -58,6 +58,14 @@
                                                     <span></span>
                                                 </th>
                                                 <th colspan="1" role="columnheader" class="text_center">
+                                                  <span>Quiz Questions</span>
+                                                  <span></span>
+                                                </th>
+                                                <th colspan="1" role="columnheader" class="text_center">
+                                                  <span>Quiz Public (?)</span>
+                                                  <span></span>
+                                                </th>
+                                                <th colspan="1" role="columnheader" class="text_center">
                                                     <span>Action</span>
                                                     <span></span>
                                                 </th>
@@ -72,6 +80,8 @@
                                                     <td role="cell">{{ quiz.description }}</td>
                                                     <td role="cell">{{ quiz.difficulty }}</td>
                                                     <td role="cell">{{ quiz.category?.name }}</td>
+                                                    <td role="cell">{{ quiz.$extras.questions_count }}</td>
+                                                    <td role="cell">{{ quiz.is_public ? 'Yes' : 'No'}}</td>
                                                     <td role="cell">
                                                         <span>
                                                             <a href="{{ route('quiz.edit', {id: quiz.id}) }}" class="btn btn_primary btn_sm mr_2">

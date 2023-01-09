@@ -16,7 +16,7 @@ export default class RankingController {
       .where("score", ">", 0)
       .sum("score as scoreTotal")
       .preload("user", (builder) => {
-        builder.select("username");
+        builder.select("username", "image");
       })
       .orderBy("scoreTotal", "desc")
       .groupBy("id")
@@ -42,7 +42,7 @@ export default class RankingController {
       )
       .where("score", ">", 0)
       .preload("user", (builder) => {
-        builder.select("username");
+        builder.select("username", "image");
       })
       .groupBy("user_id")
       .paginate(page, limit);
@@ -66,7 +66,7 @@ export default class RankingController {
         "user_id"
       )
       .preload("user", (builder) => {
-        builder.select("username");
+        builder.select("username", "image");
       })
       .groupBy("user_id")
       .where("is_public", "=", QuizState.IS_PUBLIC)

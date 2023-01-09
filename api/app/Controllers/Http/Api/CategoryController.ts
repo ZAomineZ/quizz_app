@@ -2,6 +2,12 @@ import { HttpContextContract } from "@ioc:Adonis/Core/HttpContext";
 import Category from "../../../Models/Category";
 
 export default class CategoryController {
+  public async all({ response }: HttpContextContract) {
+    let categories = await Category.query().orderBy("name", "asc");
+
+    return response.json({ success: true, categories });
+  }
+
   public async list({ request, response }: HttpContextContract) {
     let qs = request?.qs();
     let limit = qs?.limit ?? 12;
