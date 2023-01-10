@@ -78,9 +78,10 @@ import { reactive, ref } from "vue";
 import { useAuth } from "~/composables/auth/useAuth";
 import Alert from "~/components/Message/Alert.vue";
 import { IValidationError } from "~/types/Error";
-import { navigateTo } from "#app";
+import { navigateTo, useNuxtApp } from "#app";
 
 const { login } = useAuth();
+const { $showToast } = useNuxtApp();
 
 const credentials = reactive({
   email: "",
@@ -104,6 +105,8 @@ const handleSubmit = async (e: SubmitEvent) => {
     messageError.value = response.message;
     return;
   }
+
+  $showToast("You are connected !", "success", 2000);
   await navigateTo("/");
 };
 </script>

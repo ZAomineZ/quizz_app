@@ -19,7 +19,7 @@
 </template>
 
 <script lang="ts" setup>
-import { definePageMeta, onMounted } from "#imports";
+import { definePageMeta, navigateTo, onMounted } from "#imports";
 import { useRoute, useRouter } from "nuxt/app";
 import QuizSessions from "~/utils/api/Quiz/QuizSessions";
 import { ref } from "vue";
@@ -27,13 +27,15 @@ import {
   Quiz as QuizType,
   QuizSessions as QuizSessionsType
 } from "~/types/Quiz";
+import { useNuxtApp } from "#app";
 
 definePageMeta({
   middleware: ["auth"]
 });
 
 const route = useRoute();
-const router = useRouter();
+const { $showToast } = useNuxtApp();
+
 const quizSessionsAPI = new QuizSessions();
 
 const quiz = ref<QuizType | null>(null);
@@ -44,7 +46,8 @@ onMounted(async () => {
   // Check authorization
   const checkEndedResponse = await quizSessionsAPI.checkEnded(quizSlug);
   if (!checkEndedResponse.success) {
-    return await router.push(`/quiz/${quizSlug}`);
+    $showToast(checkEndedResponse.message, "error", 2000);
+    return navigateTo(`/quiz/${quizSlug}`);
   }
   quiz.value = checkEndedResponse.quiz;
   quizSession.value = checkEndedResponse.quizSession;

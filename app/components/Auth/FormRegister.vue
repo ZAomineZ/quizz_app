@@ -150,11 +150,11 @@ import Input from "~/components/Form/Input.vue";
 import { reactive, ref } from "vue";
 import Auth from "~/utils/api/Auth/Auth";
 import Alert from "~/components/Message/Alert.vue";
-import { useRouter } from "nuxt/app";
 import { IValidationError } from "~/types/Error";
+import { navigateTo, useNuxtApp } from "#app";
 
 const userAPI = new Auth();
-const router = useRouter();
+const { $showToast } = useNuxtApp();
 
 const credentials = reactive({
   username: "",
@@ -181,7 +181,8 @@ const handleSubmit = async (e: SubmitEvent) => {
     messageError.value = response.message;
     return;
   }
-  await router.push("/login");
+  $showToast(response.message, "success", 2000);
+  await navigateTo("/login");
 };
 </script>
 

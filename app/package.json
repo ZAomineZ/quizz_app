@@ -12,5 +12,8 @@
     "prettier": "2.8.1",
     "sass": "^1.57.0",
     "sass-loader": "^13.2.0"
+  },
+  "dependencies": {
+    "vue-toastification": "2.0.0-rc.5"
   }
 }

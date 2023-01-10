@@ -104,12 +104,15 @@ import { shuffle } from "~/utils/array/Array";
 import { Question } from "~/types/Question";
 import { useRoute, useRouter } from "nuxt/app";
 import QuizSessions from "~/utils/api/Quiz/QuizSessions";
+import { navigateTo } from "#imports";
+import { useNuxtApp } from "#app";
 
 interface Props {
   quiz: Quiz;
 }
 
 const router = useRouter();
+const { $showToast } = useNuxtApp();
 const route = useRoute();
 let quizSlug = route.params.id as string;
 
@@ -158,7 +161,8 @@ const createAnswers = async (quiz: Quiz, currentQuestion: number) => {
   }
   answersData = answersData.filter((answer) => answer.length !== 0);
   if (answersData.length === 0 && currentQuestion === 1) {
-    return await router.push(`/quiz/${quizSlug}`);
+    $showToast("Ce quiz ne possède pas de questions !", "error", 2000);
+    return navigateTo(`/quiz/${quizSlug}`);
   }
   answers.value = shuffle<string>(answersData as string[]);
 };
@@ -211,7 +215,7 @@ const endQuiz = async () => {
   let fullPath = router.currentRoute.value.fullPath;
   // Add end quiz api
   await quizSessions.end(quizSlug);
-  await router.push(fullPath.replace("start", "end"));
+  await navigateTo(fullPath.replace("start", "end"));
 };
 </script>
 

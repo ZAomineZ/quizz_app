@@ -97,17 +97,17 @@
 <script lang="ts" setup>
 import Card from "../Card/Card.vue";
 import { Quiz } from "~/types/Quiz";
-import { useRoute, useRouter } from "nuxt/app";
+import { useRoute } from "nuxt/app";
 import { useRuntimeConfig } from "#app";
 import QuizSessions from "~/utils/api/Quiz/QuizSessions";
 import { useAuth } from "~/composables/auth";
+import { navigateTo } from "#imports";
 
 interface Props {
   quiz?: Quiz;
 }
 
 const route = useRoute();
-const router = useRouter();
 const quizSessionsAPI = new QuizSessions();
 const { isLoggedIn } = useAuth();
 
@@ -120,7 +120,7 @@ const startQuiz = async () => {
   let quizSlug = route.params.id as string;
   const response = await quizSessionsAPI.start(quizSlug);
   if (response.success) {
-    await router.push(`/quiz/${quizSlug}/start`);
+    await navigateTo(`/quiz/${quizSlug}/start`);
   }
 };
 </script>

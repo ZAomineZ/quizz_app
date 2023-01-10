@@ -20,8 +20,11 @@ import Quiz from "~/utils/api/Quiz/Quiz";
 import { useRoute } from "nuxt/app";
 import ViewQuiz from "~/utils/api/View/ViewQuiz";
 import { navigateTo } from "#imports";
+import { useNuxtApp } from "#app";
 
 const route = useRoute();
+const { $showToast } = useNuxtApp();
+
 const QuizAPI = new Quiz();
 const viewQuizAPI = new ViewQuiz();
 
@@ -33,6 +36,7 @@ onMounted(async () => {
     const quizCurrent = await QuizAPI.show(quizID);
     quiz.value = quizCurrent.quiz;
   } catch (err) {
+    $showToast("Ce quiz n'éxiste pas notre base de donnée !", "error", 2000);
     return navigateTo("/");
   }
 

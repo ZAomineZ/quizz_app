@@ -31,9 +31,7 @@ import {
   Quiz as QuizType,
   QuizSessions as QuizSessionsType
 } from "~/types/Quiz";
-import { useRouter } from "nuxt/app";
-
-const router = useRouter();
+import { navigateTo } from "#imports";
 
 interface Props {
   quiz: QuizType;
@@ -44,7 +42,7 @@ const props = withDefaults(defineProps<Props>(), {});
 
 // Methods
 const backHome = async () => {
-  await router.push("/");
+  await navigateTo("/");
 };
 </script>
 

@@ -86,13 +86,13 @@ import ButtonSwitch from "~/components/Button/ButtonSwitch.vue";
 import DropdownToggle from "~/components/Dropdown/DropdownToggle.vue";
 import DropdownItem from "~/components/Dropdown/DropdownItem.vue";
 import { useAuth, useAuthUser } from "~/composables/auth";
-import { useRouter } from "nuxt/app";
 import { ref } from "vue";
-import { onMounted } from "#imports";
+import { navigateTo, onMounted } from "#imports";
+import { useNuxtApp } from "#app";
 
-const router = useRouter();
 const currentUser = useAuthUser();
 const { logout } = useAuth();
+const { $showToast } = useNuxtApp();
 
 const searchValue = ref<string>("");
 const darkMode = ref<boolean>(false);
@@ -115,11 +115,12 @@ const handleModeDark = () => {
 
 const handleLogout = async () => {
   await logout();
-  await router.push("/login");
+  $showToast("You are deconnected !", "success", 2000);
+  await navigateTo("/login");
 };
 
 const handleSubmitSearch = () => {
-  router.push(`/quiz/search?s=${searchValue.value}`);
+  navigateTo(`/quiz/search?s=${searchValue.value}`);
 };
 
 onMounted(() => {
