@@ -9,7 +9,7 @@ import Statistic from "../Models/Statistic";
 
 export default class StatisticUser extends BaseTask {
   public static get schedule() {
-    return "*/10 * * * *";
+    return "*/1 * * * *";
   }
   /**
    * Set enable use .lock file for block run retry task

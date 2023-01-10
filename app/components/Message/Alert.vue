@@ -15,7 +15,8 @@ const props = withDefaults(defineProps<Props>(), {
 </script>
 
 <style scoped>
-.message__danger {
+.message__danger,
+.message__success {
   padding: 10px;
   margin: 10px 0;
   max-width: 100%;
@@ -26,6 +27,11 @@ const props = withDefaults(defineProps<Props>(), {
   vertical-align: middle;
   line-height: 1.471;
   background-color: #e74c3c;
+  color: #ffffff;
+}
+
+.message__success {
+  background-color: var(--color-primary);
   color: #ffffff;
 }
 </style>

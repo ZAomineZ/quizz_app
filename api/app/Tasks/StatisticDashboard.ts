@@ -8,10 +8,11 @@ import QuizByMonthsPercentage from "../Services/Chart/QuizByMonthsPercentage";
 import QuizByCategoryPercentage from "../Services/Chart/QuizByCategoryPercentage";
 import Database from "@ioc:Adonis/Lucid/Database";
 import Statistic from "../Models/Statistic";
+import QuizByMonths from "../Services/Chart/QuizByMonths";
 
 export default class StatisticDashboard extends BaseTask {
   public static get schedule() {
-    return "*/10 * * * *";
+    return "*/1 * * * *";
   }
   /**
    * Set enable use .lock file for block run retry task
@@ -30,6 +31,7 @@ export default class StatisticDashboard extends BaseTask {
 
     const quizCreateUsers = new QuizCreateUsers();
     const quizByCategory = new QuizByCategory();
+    const quizByMonths = new QuizByMonths();
     const quizByMonthsPercentage = new QuizByMonthsPercentage();
     const quizByCategoryPercentage = new QuizByCategoryPercentage();
 
@@ -88,6 +90,12 @@ export default class StatisticDashboard extends BaseTask {
       monthsString
     );
 
+    // Chart count Quizzes
+    let chartQuizByMonths = quizByMonths.createData(
+      quizzesCountByMonths,
+      monthsString
+    );
+
     // Chart quizzes percentage by category
     let quizzesCountByCategory = await Quiz.query().withScopes((scopes) => {
       scopes.groupByCategoriesWithoutConditionUser();
@@ -108,6 +116,7 @@ export default class StatisticDashboard extends BaseTask {
       chart_quiz_by_months_percentage: JSON.stringify(
         chartQuizByMonthsPercentage
       ),
+      chart_quiz_by_months: JSON.stringify(chartQuizByMonths),
       chart_quiz_by_category_percentage: JSON.stringify(
         chartQuizByCategoryPercentage
       ),

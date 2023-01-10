@@ -42,6 +42,7 @@ export default class DashboardController {
       statistic?.chart_quiz_by_months_percentage;
     let chartQuizByCategoryPercentage =
       statistic?.chart_quiz_by_category_percentage;
+    let chartQuizMonth = statistic?.chart_quiz_by_months;
 
     return view.render("dashboard/index", {
       quizzes,
@@ -51,6 +52,7 @@ export default class DashboardController {
       usersCount,
       questionsCount,
       chartQuizMonthUsers,
+      chartQuizMonth,
       chartQuizByCategoryUsers,
       chartQuizByMonthsPercentage,
       chartQuizByCategoryPercentage

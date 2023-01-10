@@ -19,6 +19,9 @@ export default class Statistic extends BaseModel {
   public chart_quiz_by_category_users: string;
 
   @column()
+  public chart_quiz_by_months: string;
+
+  @column()
   public chart_quiz_by_months_percentage: string;
 
   @column()

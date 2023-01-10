@@ -40,7 +40,7 @@
                                             <div class="row border_end p_3">
                                                 <div class="col_3 d_flex justify_content_center align_items_center">
                                                     <div class="circle_icon text_center bg_primary shadow overflow_hidden align_self_center">
-                                                        <i class="fa fa-thin fa-bag-shopping tx_15 text_white"></i>
+                                                        <i class="fa fa-thin fa-heart tx_15 text_white"></i>
                                                     </div>
                                                 </div>
                                                 <div class="col_9 py_0">
@@ -61,7 +61,7 @@
                                             <div class="row border_end p_3">
                                                 <div class="col_3 d_flex justify_content_center align_items_center">
                                                     <div class="circle_icon text_center bg_primary shadow overflow_hidden align_self_center">
-                                                        <i class="fa fa-thin fa-bag-shopping tx_15 text_white"></i>
+                                                        <i class="fa fa-thin fa-question tx_15 text_white"></i>
                                                     </div>
                                                 </div>
                                                 <div class="col_9 py_0">
@@ -82,7 +82,7 @@
                                             <div class="row p_3">
                                                 <div class="col_3 d_flex justify_content_center align_items_center">
                                                     <div class="circle_icon text_center bg_primary shadow overflow_hidden align_self_center">
-                                                        <i class="fa fa-thin fa-bag-shopping tx_15 text_white"></i>
+                                                        <i class="fa fa-thin fa-user tx_15 text_white"></i>
                                                     </div>
                                                 </div>
                                                 <div class="col_9">
@@ -100,6 +100,18 @@
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col_12 col_sm_12">
+                            <div class="card">
+                                <div class="card_header">
+                                    <h4 class="card_title">Chart Quiz by Month</h4>
+                                </div>
+                                <div class="card_body">
+                                    <div id="chart_quiz_count_by_month_data"></div>
                                 </div>
                             </div>
                         </div>
@@ -305,15 +317,13 @@
 @section('scripts')
     <script type="text/javascript">
         let chartQuizMonthUsers = {{{ chartQuizMonthUsers }}}
+        let chartQuizMonths = {{{ chartQuizMonth }}}
         let chartQuizByCategoryUsers = {{{ chartQuizByCategoryUsers }}}
 
-        function generateOptions (adminData, usersData, categoriesData)
+        function generateOptions (series, categoriesData)
         {
             return {
-                series: [
-                    {name: "Admin Quizzes", data: adminData},
-                    {name: "Users Quizzes", data: usersData}
-                ],
+                series,
                 chart: {
                     type: "bar",
                     height: 280
@@ -359,19 +369,32 @@
         }
 
         let optionsChartQuizMonths = generateOptions(
-            chartQuizMonthUsers.adminData,
-            chartQuizMonthUsers.usersData,
+            [
+                {name: "Admin Quizzes", data: chartQuizMonthUsers.adminData},
+                {name: "Users Quizzes", data: chartQuizMonthUsers.usersData}
+            ],
             chartQuizMonthUsers.months
         )
         new window.Apexchart(document.querySelector('#chart_quiz_data'), optionsChartQuizMonths).render()
 
         // Generate quizzes by category chart
         let optionsChartQuizByCategory = generateOptions(
-            chartQuizByCategoryUsers.adminData,
-            chartQuizByCategoryUsers.usersData,
+            [
+                {name: "Admin Quizzes", data: chartQuizByCategoryUsers.adminData},
+                {name: "Users Quizzes", data: chartQuizByCategoryUsers.usersData}
+            ],
             chartQuizByCategoryUsers.categoryLabels
         )
         new window.Apexchart(document.querySelector('#chart_quiz_by_category_data'), optionsChartQuizByCategory).render()
+
+        // Generate quizzes by month chart
+        let optionChartQuizByMonth = generateOptions(
+            [
+                {name: "Quizzes", data: chartQuizMonths.quizData},
+            ],
+            chartQuizMonths.months
+        )
+        new window.Apexchart(document.querySelector('#chart_quiz_count_by_month_data'), optionChartQuizByMonth).render()
     </script>
     <script type="text/javascript">
         let chartQuizByMonthsPercentage = {{{ chartQuizByMonthsPercentage }}}
